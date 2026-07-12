@@ -1,298 +1,1098 @@
-.admin-dashboard {
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
-  background-color: #f8fafc;
-  min-height: 100vh;
+
+/* ==========================================================
+   ADMIN DASHBOARD - PART 1
+   Global + Background + Sidebar + Main Layout
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+html,
+body,
+#root{
+    width:100%;
+    min-height:100%;
+    background:#020617;
+    overflow-x:hidden;
+}
+
+/* ===============================
+   DASHBOARD
+================================ */
+
+.admin-dashboard{
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at top left,
+    rgba(124,58,237,.22),
+    transparent 35%),
+
+    radial-gradient(circle at bottom right,
+    rgba(37,99,235,.18),
+    transparent 40%),
+
+    #020617;
+
+    color:#fff;
+}
+
+/* ===============================
+   SIDEBAR
+================================ */
+
+.admin-sidebar{
+
+    min-height:100vh;
+
+    padding:28px 22px;
+
+    position:sticky;
+    top:0;
+
+    background:
+    rgba(255,255,255,.03);
+
+    border-right:
+    1px solid rgba(139,92,246,.25);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:
+    0 0 25px rgba(139,92,246,.10);
+}
+
+/* ===============================
+   TITLE
+================================ */
+
+.admin-sidebar-title{
+
+    color:#fff;
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-bottom:35px;
+
+    letter-spacing:1px;
+}
+
+.admin-sidebar-title::after{
+
+    content:"";
+
+    display:block;
+
+    width:70px;
+    height:3px;
+
+    margin:12px auto 0;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #9333ea,
+    #2563eb);
+}
+
+/* ===============================
+   NAVIGATION
+================================ */
+
+.admin-nav{
+
+    list-style:none;
+}
+
+.admin-nav-item{
+
+    margin-bottom:14px;
+}
+
+.admin-nav-btn{
+
+    width:100%;
+
+    padding:14px 18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    background:transparent;
+
+    color:#cbd5e1;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    font-size:15px;
+
+    transition:.35s;
+}
+
+.admin-nav-btn:hover{
+
+    color:#fff;
+
+    background:
+    rgba(139,92,246,.18);
+
+    transform:translateX(5px);
+
+    box-shadow:
+    0 0 18px rgba(139,92,246,.20);
+}
+
+.admin-nav-btn.active{
+
+    color:#fff;
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(147,51,234,.35),
+    rgba(37,99,235,.35));
+
+    border:
+    1px solid rgba(139,92,246,.30);
+
+    box-shadow:
+    0 0 20px rgba(139,92,246,.25);
+}
+
+/* ===============================
+   MAIN CONTENT
+================================ */
+
+.admin-main{
+
+    padding:35px;
+}
+
+/* ===============================
+   PAGE TITLE
+================================ */
+
+.admin-section-title{
+
+    color:#fff;
+
+    font-size:34px;
+
+    font-weight:700;
+
+    margin-bottom:35px;
+
+    position:relative;
+}
+
+.admin-section-title::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-10px;
+
+    width:90px;
+    height:4px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #9333ea,
+    #2563eb);
 }
 
 
-.admin-sidebar {
-  background: linear-gradient(180deg, #2c3e50 0%, #1a2530 100%);
-  color: white;
-  padding: 2rem 1.5rem;
-  min-height: 100vh;
-  position: sticky;
-  top: 0;
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+/* ==========================================================
+   ADMIN DASHBOARD - PART 2
+   Stats Cards + Progress Cards
+========================================================== */
+
+/* ===============================
+   STATS GRID
+================================ */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+
+    gap:24px;
+
+    margin-bottom:35px;
 }
 
-.admin-sidebar-title {
-  color: #fff;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(52, 152, 219, 0.3);
-  position: relative;
+/* ===============================
+   STAT CARD
+================================ */
+
+.stat-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:28px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(139,92,246,.22);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 0 18px rgba(139,92,246,.12);
+
+    transition:.35s;
 }
 
-.admin-sidebar-title::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background-color: #3498db;
+.stat-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(147,51,234,.08),
+    rgba(37,99,235,.05));
+
+    pointer-events:none;
 }
 
-.admin-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.stat-card:hover{
+
+    transform:
+    translateY(-8px);
+
+    box-shadow:
+    0 15px 35px rgba(139,92,246,.20);
 }
 
-.admin-nav-item {
-  margin-bottom: 0.8rem;
+/* ===============================
+   TOP BORDER COLORS
+================================ */
+
+.stat-card.books{
+
+    border-top:
+    4px solid #3b82f6;
 }
 
-.admin-nav-btn {
-  background: transparent;
-  border: none;
-  color: #bdc3c7;
-  width: 100%;
-  text-align: left;
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  font-size: 0.95rem;
-  position: relative;
-  overflow: hidden;
+.stat-card.users{
+
+    border-top:
+    4px solid #22c55e;
 }
 
-.admin-nav-btn:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: white;
-  transform: translateX(5px);
+.stat-card.librarians{
+
+    border-top:
+    4px solid #f59e0b;
 }
 
-.admin-nav-btn.active {
-  background-color: rgba(52, 152, 219, 0.2);
-  color: white;
-  font-weight: 500;
-  box-shadow: inset 3px 0 0 #3498db;
+.stat-card.borrowed{
+
+    border-top:
+    4px solid #ef4444;
 }
 
+/* ===============================
+   STAT TEXT
+================================ */
 
-.admin-main {
-  padding: 2rem;
-  background-color: #f8fafc;
+.stat-card h3{
+
+    color:#cbd5e1;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    margin-bottom:14px;
 }
 
-.admin-section-title {
-  color: #2c3e50;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  font-size: 1.8rem;
-  position: relative;
-  padding-bottom: 0.8rem;
+.stat-card p{
+
+    color:#fff;
+
+    font-size:36px;
+
+    font-weight:700;
 }
 
-.admin-section-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #3498db, #9b59b6);
-  border-radius: 2px;
+/* ===============================
+   PROGRESS GRID
+================================ */
+
+.progress-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:24px;
+
+    margin-bottom:35px;
 }
 
-/* Stats Cards */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+/* ===============================
+   PROGRESS CARD
+================================ */
+
+.progress-card{
+
+    padding:26px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(139,92,246,.22);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 0 18px rgba(139,92,246,.10);
+
+    transition:.35s;
 }
 
-.stat-card {
-  background-color: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  text-align: center;
-  border-left: 4px solid;
+.progress-card:hover{
+
+    transform:
+    translateY(-5px);
+
+    box-shadow:
+    0 12px 30px rgba(139,92,246,.18);
 }
 
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+.progress-card h3{
+
+    color:#fff;
+
+    margin-bottom:18px;
+
+    font-size:18px;
+
+    font-weight:600;
 }
 
-.stat-card.books {
-  border-color: #3498db;
+/* ===============================
+   PROGRESS BAR
+================================ */
+
+.progress-container{
+
+    width:100%;
+
+    height:18px;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    background:
+    rgba(255,255,255,.08);
 }
 
-.stat-card.users {
-  border-color: #2ecc71;
-}
+.progress-bar{
 
-.stat-card.librarians {
-  border-color: #f39c12;
-}
+    height:100%;
 
-.stat-card.borrowed {
-  border-color: #e74c3c;
-}
+    display:flex;
 
-.stat-card h3 {
-  color: #7f8c8d;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
+    align-items:center;
 
-.stat-card p {
-  color: #2c3e50;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-}
+    justify-content:flex-end;
 
+    padding-right:12px;
 
-.progress-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
+    border-radius:30px;
 
-.progress-card {
-  background-color: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
+    color:#fff;
 
-.progress-card h3 {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
+    font-size:12px;
 
-.progress-container {
-  height: 16px;
-  background-color: #e2e8f0;
-  border-radius: 5px;
-  overflow: hidden;
-}
+    font-weight:600;
 
-.progress-bar {
-  height: 100%;
-  border-radius: 5px;
-  background: linear-gradient(90deg, #3498db, #9b59b6);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 10px;
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 600;
-}
+    background:
+    linear-gradient(
+    90deg,
+    #9333ea,
+    #2563eb);
 
+    box-shadow:
+    0 0 18px rgba(139,92,246,.35);
 
-.chart-activity-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.chart-card, .activity-card {
-  background-color: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  height: 100%;
-}
-
-.chart-card h3, .activity-card h3 {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-}
-
-
-.admin-table-container {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-}
-
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.admin-table thead {
-  background: linear-gradient(90deg, #3498db, #2980b9);
-  color: white;
-}
-
-.admin-table th {
-  color: black;
-  padding: 1rem;
-  text-align: left;
-  font-weight: 500;
-}
-
-.admin-table td {
-  padding: 0.8rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-  color: #4a5568;
-}
-
-.admin-table tr:last-child td {
-  border-bottom: none;
-}
-
-.admin-table tr:hover td {
-  background-color: #f8fafc;
+    transition:width .8s ease;
 }
 
 
-@media (max-width: 992px) {
-  .admin-sidebar {
-    min-height: auto;
-    position: static;
-  }
-  
-  .admin-main {
-    padding: 1.5rem;
-  }
+/* ==========================================================
+   ADMIN DASHBOARD - PART 3
+   Charts + Activity + Tables
+========================================================== */
+
+
+/* ===============================
+   CHART GRID
+================================ */
+
+.chart-activity-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(330px,1fr));
+
+    gap:24px;
+
+    margin-bottom:35px;
 }
 
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .progress-grid {
-    grid-template-columns: 1fr;
-  }
+
+/* ===============================
+   CHART CARD
+================================ */
+
+.chart-card{
+
+    padding:28px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(139,92,246,.22);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 0 20px rgba(139,92,246,.10);
+
+    transition:.35s;
 }
 
-@media (max-width: 576px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .admin-section-title {
-    font-size: 1.5rem;
-  }
-  
-  .admin-table th, .admin-table td {
-    padding: 0.6rem;
-    font-size: 0.9rem;
-  }
+.chart-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 18px 35px rgba(139,92,246,.18);
+}
+
+.chart-card h3{
+
+    color:#fff;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+}
+
+
+/* ===============================
+   ACTIVITY CARD
+================================ */
+
+.activity-card{
+
+    padding:28px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(139,92,246,.22);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 0 20px rgba(139,92,246,.10);
+
+    transition:.35s;
+}
+
+.activity-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 18px 35px rgba(139,92,246,.18);
+}
+
+.activity-card h3{
+
+    color:#fff;
+
+    font-size:20px;
+
+    margin-bottom:20px;
+}
+
+
+/* ===============================
+   ACTIVITY LIST
+================================ */
+
+.activity-list{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:0;
+}
+
+.activity-item{
+
+    padding:14px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+    color:#cbd5e1;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.activity-item:last-child{
+
+    border-bottom:none;
+}
+
+.activity-item strong{
+
+    color:#fff;
+}
+
+
+/* ===============================
+   TABLE CONTAINER
+================================ */
+
+.admin-table-container{
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(139,92,246,.22);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 0 20px rgba(139,92,246,.10);
+
+    margin-top:20px;
+}
+
+
+/* ===============================
+   TABLE
+================================ */
+
+.admin-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+
+/* ===============================
+   TABLE HEADER
+================================ */
+
+.admin-table thead{
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(147,51,234,.80),
+    rgba(37,99,235,.80));
+}
+
+.admin-table th{
+
+    color:#fff;
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+}
+
+
+/* ===============================
+   TABLE BODY
+================================ */
+
+.admin-table td{
+
+    padding:16px 18px;
+
+    color:#e2e8f0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.05);
+
+    transition:.3s;
+}
+
+.admin-table tbody tr{
+
+    transition:.3s;
+}
+
+.admin-table tbody tr:hover{
+
+    background:
+    rgba(139,92,246,.08);
+}
+
+.admin-table tbody tr:hover td{
+
+    color:#fff;
+}
+
+
+/* ===============================
+   STATUS BADGES
+================================ */
+
+.status{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:50px;
+
+    font-size:12px;
+
+    font-weight:600;
+}
+
+.status.active{
+
+    background:
+    rgba(34,197,94,.15);
+
+    color:#22c55e;
+}
+
+.status.pending{
+
+    background:
+    rgba(245,158,11,.15);
+
+    color:#f59e0b;
+}
+
+.status.inactive{
+
+    background:
+    rgba(239,68,68,.15);
+
+    color:#ef4444;
+}
+
+
+/* ==========================================================
+   ADMIN DASHBOARD - PART 4
+   Buttons + Scrollbar + Animations + Responsive
+========================================================== */
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.admin-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#fff;
+
+    background:
+    linear-gradient(
+    90deg,
+    #9333ea,
+    #2563eb);
+
+    transition:.35s;
+}
+
+.admin-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 25px rgba(139,92,246,.35);
+}
+
+.admin-btn:active{
+
+    transform:scale(.97);
+}
+
+
+/* ===============================
+   SMALL BUTTON
+================================ */
+
+.admin-btn-sm{
+
+    padding:8px 14px;
+
+    border-radius:10px;
+
+    font-size:13px;
+}
+
+
+/* ===============================
+   DELETE BUTTON
+================================ */
+
+.admin-btn-danger{
+
+    background:
+    linear-gradient(
+    90deg,
+    #ef4444,
+    #dc2626);
+}
+
+.admin-btn-danger:hover{
+
+    box-shadow:
+    0 12px 22px rgba(239,68,68,.35);
+}
+
+
+/* ===============================
+   SUCCESS BUTTON
+================================ */
+
+.admin-btn-success{
+
+    background:
+    linear-gradient(
+    90deg,
+    #10b981,
+    #22c55e);
+}
+
+.admin-btn-success:hover{
+
+    box-shadow:
+    0 12px 22px rgba(34,197,94,.35);
+}
+
+
+/* ===============================
+   GLASS INPUT
+================================ */
+
+.admin-input{
+
+    width:100%;
+
+    height:50px;
+
+    padding:0 16px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:
+    rgba(255,255,255,.04);
+
+    color:#fff;
+
+    outline:none;
+
+    transition:.3s;
+}
+
+.admin-input::placeholder{
+
+    color:#94a3b8;
+}
+
+.admin-input:focus{
+
+    border-color:
+    rgba(139,92,246,.5);
+
+    box-shadow:
+    0 0 18px rgba(139,92,246,.20);
+}
+
+
+/* ===============================
+   CUSTOM SCROLLBAR
+================================ */
+
+::-webkit-scrollbar{
+
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:#020617;
+}
+
+::-webkit-scrollbar-thumb{
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+    180deg,
+    #9333ea,
+    #2563eb);
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+    linear-gradient(
+    180deg,
+    #a855f7,
+    #3b82f6);
+}
+
+
+/* ===============================
+   FADE ANIMATION
+================================ */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(30px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+    }
+}
+
+.stat-card,
+.progress-card,
+.chart-card,
+.activity-card,
+.admin-table-container{
+
+    animation:
+    fadeUp .6s ease both;
+}
+
+
+/* ===============================
+   CARD HOVER GLOW
+================================ */
+
+.stat-card:hover,
+.progress-card:hover,
+.chart-card:hover,
+.activity-card:hover,
+.admin-table-container:hover{
+
+    border-color:
+    rgba(139,92,246,.35);
+
+    box-shadow:
+    0 18px 40px rgba(139,92,246,.18);
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media(max-width:1200px){
+
+    .admin-main{
+
+        padding:28px;
+    }
+}
+
+@media(max-width:992px){
+
+    .admin-sidebar{
+
+        min-height:auto;
+
+        position:relative;
+    }
+
+    .chart-activity-grid,
+    .progress-grid{
+
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:768px){
+
+    .admin-main{
+
+        padding:20px;
+    }
+
+    .stats-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .admin-section-title{
+
+        font-size:28px;
+    }
+
+    .admin-sidebar-title{
+
+        font-size:22px;
+    }
+
+    .admin-nav-btn{
+
+        font-size:14px;
+    }
+
+    .admin-table{
+
+        display:block;
+
+        overflow-x:auto;
+
+        white-space:nowrap;
+    }
+}
+
+@media(max-width:576px){
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .admin-main{
+
+        padding:15px;
+    }
+
+    .admin-section-title{
+
+        font-size:24px;
+    }
+
+    .admin-sidebar{
+
+        padding:18px;
+    }
+
+    .admin-btn{
+
+        width:100%;
+    }
+
+    .admin-input{
+
+        height:48px;
+    }
 }

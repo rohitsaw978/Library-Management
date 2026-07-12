@@ -1,90 +1,184 @@
-import React,{useState} from "react";
-import {Link,useNavigate} from "react-router-dom";
-export default function Navbar(){
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-    const [menuOpen, setMenuOpen] = useState(false);
+import "./navbar.css";
+import logo from "../assets/axlib-logo.png";
+
+export default function Navbar() {
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const token = localStorage.getItem("authToken");
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
+
     localStorage.removeItem("authToken");
+    localStorage.removeItem("role");
+
     navigate("/login");
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
-    return(
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
-    <div className="container">
-      
-      <Link className="navbar-brand fw-bold" to="/">
-        📚 AGC Library
-      </Link>
+  const handleNavClick = () => {
 
-      
-      <button
-        className="navbar-toggler"
-        type="button"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
+    closeMenu();
 
- 
-      <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
-        <ul className="navbar-nav me-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/books">Books</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/category">Category</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/aboutus">About</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/contactus">Contact</Link>
-          </li>
-        </ul>
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  };
 
-    
-        <ul className="navbar-nav">
-          {token ? (
-            <li className="nav-item dropdown">
-              <button
-                className="btn btn-light dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                👤 Profile
-              </button>
-              <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <Link className="dropdown-item" to="/user">My Profile</Link>
-                </li>
-                <li><hr className="dropdown-divider" /></li>
-                <li>
-                  <button className="dropdown-item" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            </li>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link className="btn btn-light me-2" to="/login">Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="btn btn-outline-light" to="/register">Signup</Link>
-              </li>
-            </>
-          )}
-        </ul>
+  return (
+
+    <nav className="navbar">
+
+      <div className="navbar-container">
+
+        {/* LOGO */}
+
+        <Link
+          className="navbar-brand"
+          to="/"
+          onClick={handleNavClick}
+        >
+
+          <img
+            src={logo}
+            alt="AXLIB Logo"
+            className="navbar-logo"
+          />
+
+          <div className="brand-text">
+            <h2>
+              <span className="logo-a">A</span>XLIB
+            </h2>
+          </div>
+
+        </Link>
+
+        {/* MOBILE TOGGLE */}
+
+        <button
+          className={`navbar-toggle ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
+
+        </button>
+
+        {/* NAVIGATION */}
+
+        <div
+          className={`navbar-links ${
+            menuOpen ? "show" : ""
+          }`}
+        >
+
+          <Link
+            className="nav-link"
+            to="/"
+            onClick={handleNavClick}
+          >
+            Home
+          </Link>
+
+          <Link
+            className="nav-link"
+            to="/books"
+            onClick={handleNavClick}
+          >
+            Books
+          </Link>
+
+          <Link
+            className="nav-link"
+            to="/category"
+            onClick={handleNavClick}
+          >
+            Category
+          </Link>
+
+          <Link
+            className="nav-link"
+            to="/aboutus"
+            onClick={handleNavClick}
+          >
+            About
+          </Link>
+
+          <Link
+            className="nav-link"
+            to="/contactus"
+            onClick={handleNavClick}
+          >
+            Contact
+          </Link>
+
+          {/* AUTH BUTTONS */}
+
+          <div className="auth-section">
+
+            {token ? (
+              <>
+
+                <Link
+                  className="login-btn"
+                  to="/user"
+                  onClick={handleNavClick}
+                >
+                  👤 Profile
+                </Link>
+
+                <button
+                  className="logout-btn"
+                  onClick={() => {
+                    closeMenu();
+                    handleLogout();
+                  }}
+                >
+                  Logout
+                </button>
+
+              </>
+            ) : (
+              <>
+
+                <Link
+                  className="login-btn"
+                  to="/login"
+                  onClick={handleNavClick}
+                >
+                  Login
+                </Link>
+
+                <Link
+                  className="signup-btn"
+                  to="/register"
+                  onClick={handleNavClick}
+                >
+                  Signup
+                </Link>
+
+              </>
+            )}
+
+          </div>
+
+        </div>
+
       </div>
-    </div>
-  </nav>
-    )
+
+    </nav>
+
+  );
 }

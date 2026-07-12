@@ -17,6 +17,7 @@ const AdminDashboard = () => {
   const [borrowedBooks, setBorrowedBooks] = useState(0);
   const [occupancyPercent, setOccupancyPercent] = useState(0);
   const [issueRequest, setIssueRequest] = useState(0);
+  const [feedback, setFeedback] = useState([]);
   const [categoryData, setCategoryData] = useState({
     labels: [],
     datasets: [
@@ -35,6 +36,16 @@ const AdminDashboard = () => {
 
   const token = localStorage.getItem("authToken");
   const role = localStorage.getItem("role");
+
+  const getFeedback = async () => {
+    try {
+      const res = await axios.get(Server_URL + "contact");
+      setFeedback(res.data.feedback);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   async function getUsers() {
     try {
@@ -56,6 +67,28 @@ const AdminDashboard = () => {
       console.error("Error fetching users:", error);
     }
   }
+
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`${Server_URL}users/${id}`);
+      getUsers();
+      alert("User Removed Successfully");
+    } catch (err) {
+      console.log(err);
+      alert("Failed to remove user");
+    }
+  };
+
+  const deleteLibrarian = async (id) => {
+    try {
+      await axios.delete(`${Server_URL}users/${id}`);
+      getUsers();
+      alert("Librarian Removed Successfully");
+    } catch (err) {
+      console.log(err);
+      alert("Failed to remove librarian");
+    }
+  };
 
   async function getBooks() {
     try {
@@ -132,6 +165,7 @@ const AdminDashboard = () => {
     getUsers();
     getBooks();
     getLatestBooks();
+    getFeedback();
   }, []);
 
   return (
@@ -184,6 +218,16 @@ const AdminDashboard = () => {
                 onClick={() => handleSectionChange("books")}
               >
                 📖 Books
+              </button>
+            </li>
+            <li className="admin-nav-item">
+              <button
+                className={`admin-nav-btn ${
+                  selectedSection === "feedback" ? "active" : ""
+                }`}
+                onClick={() => handleSectionChange("feedback")}
+              >
+                💬 Feedback
               </button>
             </li>
           </ul>
@@ -279,6 +323,7 @@ const AdminDashboard = () => {
                       <th>Name</th>
                       <th>Email</th>
                       <th>Stream</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -288,6 +333,14 @@ const AdminDashboard = () => {
                         <td>{data.name}</td>
                         <td>{data.email}</td>
                         <td>{data.stream}</td>
+                        <td>
+                          <button
+                            className="admin-btn admin-btn-danger admin-btn-sm"
+                            onClick={() => deleteUser(data._id)}
+                          >
+                            Remove
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -307,6 +360,7 @@ const AdminDashboard = () => {
                       <th>Name</th>
                       <th>Email</th>
                       <th>Role</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -316,6 +370,14 @@ const AdminDashboard = () => {
                         <td>{data.name}</td>
                         <td>{data.email}</td>
                         <td>{data.role}</td>
+                        <td>
+                          <button
+                            className="admin-btn admin-btn-danger admin-btn-sm"
+                            onClick={() => deleteLibrarian(data._id)}
+                          >
+                            Remove
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -355,7 +417,38 @@ const AdminDashboard = () => {
               </div>
             </>
           )}
-        </main>
+          {selectedSection === "feedback" && (
+            <>
+              <h2 className="admin-section-title">
+                💬 Feedback Messages
+              </h2>
+              <div className="admin-table-container">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Subject</th>
+                      <th>Message</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {feedback.map((item,index)=>(
+                      <tr key={item._id}>
+                        <td>{index+1}</td>
+                        <td>{item.name}</td>
+                        <td>{item.email}</td>
+                        <td>{item.subject}</td>
+                        <td>{item.message}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+      </main>
       </div>
     </div>
   );

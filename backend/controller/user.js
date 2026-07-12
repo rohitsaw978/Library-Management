@@ -1,3 +1,4 @@
+
 const  {UserModel} = require("../model/UserModel");
 const  {ContactModel} = require("../model/ContactModel");
 const nodemailer = require("nodemailer");
@@ -19,11 +20,11 @@ userController.userRegistration = async (req, res) => {
 
         const user = new UserModel({
             name,
-      email,
-      password: hashedPassword,
-      stream,
-      year,
-      role
+            email,
+            password: hashedPassword,
+            stream,
+            year,
+            role
         });
 // console.log(user);
         await user.save();
@@ -180,6 +181,84 @@ userController.resetPassword = async (req, res) => {
     res.json({ message: "Password reset successful" });
   } catch (err) {
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Delete User / Librarian
+userController.deleteUser = async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndDelete(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "User Not Found",
+      });
+    }
+
+    res.status(200).json({
+      error: false,
+      message: "User Deleted Successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: true,
+      message: err.message,
+    });
+  }
+};
+
+
+
+// Save Feedback
+userController.addFeedback = async (req, res) => {
+  try {
+    const feedback = await ContactModel.create(req.body);
+
+    res.status(201).json({
+      error: false,
+      message: "Feedback Sent",
+      feedback,
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: true,
+      message: err.message,
+    });
+  }
+};
+
+// Get All Feedback
+userController.getFeedback = async (req, res) => {
+  try {
+    const feedback = await ContactModel.find().sort({ createdAt: -1 });
+
+    res.json({
+      error: false,
+      feedback,
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: true,
+      message: err.message,
+    });
+  }
+};
+
+// Delete Feedback
+userController.deleteFeedback = async (req, res) => {
+  try {
+    await ContactModel.findByIdAndDelete(req.params.id);
+
+    res.json({
+      error: false,
+      message: "Feedback Deleted",
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: true,
+      message: err.message,
+    });
   }
 };
 

@@ -70,7 +70,7 @@ const Footer = () => {
             <ul className="footer-contact-info">
               <li className="contact-item">
                 <FiMapPin className="contact-icon" />
-                <span>123 College Avenue, Academic City, AC 12345</span>
+                <span>Guru Nanak College, Bank More, Dhanbad, Jharkhand - 826001</span>
               </li>
               <li className="contact-item">
                 <FiMail className="contact-icon" />
@@ -78,7 +78,7 @@ const Footer = () => {
               </li>
               <li className="contact-item">
                 <FiPhone className="contact-icon" />
-                <span>(123) 456-7890</span>
+                <span>0326-2305070</span>
               </li>
               <li className="contact-item">
                 <FiClock className="contact-icon" />
