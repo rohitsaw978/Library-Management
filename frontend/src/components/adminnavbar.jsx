@@ -1,11 +1,15 @@
-import React,{useState} from "react";
-import {Link,useNavigate} from "react-router-dom";
-import "./adminnavbar.css"
-export default function AdminNavbar(){
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./adminnavbar.css";
+import logo from "../assets/axlib-logo.png";
 
-    const [menuOpen, setMenuOpen] = useState(false);
+export default function AdminNavbar() {
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const token = localStorage.getItem("authToken");
   const role = localStorage.getItem("role");
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -14,103 +18,188 @@ export default function AdminNavbar(){
     navigate("/login");
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
-    return(
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
-    <div className="container">
-     
-      <Link className="navbar-brand fw-bold" to="/admin">
-        📚 AGC Library
-      </Link>
+  return (
 
-    
-      <button
-        className="navbar-toggler"
-        type="button"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
+    <nav className="navbar">
 
-      {/* Navbar Links */}
-      <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
-        <ul className="navbar-nav me-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/admin">Dashboard</Link>
-          </li>
-          <li className="nav-item dropdown">
-  <Link 
-    className="nav-link dropdown-toggle" 
-    to="#" 
-    id="navbarDropdown" 
-    role="button" 
-    data-bs-toggle="dropdown" 
-    aria-expanded="false"
-  >
-    Books
-  </Link>
-  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li>
-      <Link className="dropdown-item" to="/admin/addbook">Add Book</Link>
-    </li>
-    <li>
-      <Link className="dropdown-item" to="/admin/viewbook">View Books</Link>
-    </li>
-  </ul>
-</li>
+      <div className="navbar-container">
 
-{role == "librarian"?<li className="nav-item">
-            <Link className="nav-link" to="/admin/issuerequest">Issue Request</Link>
-          </li> :null}
+        {/* Logo */}
 
-          {role == "librarian"?<li className="nav-item">
-            <Link className="nav-link" to="/admin/returnrequest">Return Request</Link>
-          </li> :null}
+        <Link
+          className="navbar-brand"
+          to="/admin"
+          onClick={closeMenu}
+        >
 
-          <li className="nav-item">
-            <Link className="nav-link" to="/admin/issued">Books Borrowed</Link>
-          </li>
+          <img
+            src={logo}
+            alt="AXLIB"
+            className="navbar-logo"
+          />
 
-          {role == "admin"?<li className="nav-item">
-            <Link className="nav-link" to="/admin/addlibrarian">Add Librarian</Link>
-          </li> :null}
-        </ul>
+          <div className="brand-text">
+            <h2>
+              <span className="logo-a">A</span>XLIB
+            </h2>
+          </div>
 
-       
-        <ul className="navbar-nav">
-          {token ? (
-            
+        </Link>
 
-            <li className="nav-item dropdown">
-              <button
-                className="btn btn-light dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+        {/* Mobile Toggle */}
+
+        <button
+          className={`navbar-toggle ${
+            menuOpen ? "open" : ""
+          }`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
+
+        </button>
+
+        {/* Navigation */}
+
+        <div
+          className={`navbar-links ${
+            menuOpen ? "show" : ""
+          }`}
+        >
+
+          <Link
+            className="nav-link"
+            to="/admin"
+            onClick={closeMenu}
+          >
+            Dashboard
+          </Link>
+                    {/* Books Dropdown */}
+
+          <div className="admin-dropdown">
+
+            <button className="admin-dropdown-btn">
+              Books ▾
+            </button>
+
+            <div className="admin-dropdown-content">
+
+              <Link
+                to="/admin/addbook"
+                onClick={closeMenu}
               >
-                👤 Profile
-              </button>
-              <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <Link className="dropdown-item" to="/admin">Dashboard</Link>
-                </li>
-                <li><hr className="dropdown-divider" /></li>
-                <li>
-                  <button className="dropdown-item" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            </li>
-          ) : (
+                ➕ Add Book
+              </Link>
+
+              <Link
+                to="/admin/viewbook"
+                onClick={closeMenu}
+              >
+                📚 View Books
+              </Link>
+
+            </div>
+
+          </div>
+
+          {/* Librarian Menu */}
+
+          {role === "librarian" && (
+
             <>
-              <li className="nav-item">
-                <Link className="btn btn-light me-2" to="/admin-login">Login</Link>
-              </li>
+
+              <Link
+                className="nav-link"
+                to="/admin/issuerequest"
+                onClick={closeMenu}
+              >
+                Issue Request
+              </Link>
+
+              <Link
+                className="nav-link"
+                to="/admin/returnrequest"
+                onClick={closeMenu}
+              >
+                Return Request
+              </Link>
+
             </>
+
           )}
-        </ul>
+
+          <Link
+            className="nav-link"
+            to="/admin/issued"
+            onClick={closeMenu}
+          >
+            Books Borrowed
+          </Link>
+
+          {role === "admin" && (
+
+            <Link
+              className="nav-link"
+              to="/admin/addlibrarian"
+              onClick={closeMenu}
+            >
+              Add Librarian
+            </Link>
+
+          )}
+                    {/* Right Side */}
+
+          <div className="auth-section">
+
+            {token ? (
+
+              <>
+
+                <Link
+                  className="login-btn"
+                  to="/admin"
+                  onClick={closeMenu}
+                >
+                  👤 Profile
+                </Link>
+
+                <button
+                  className="logout-btn"
+                  onClick={() => {
+                    closeMenu();
+                    handleLogout();
+                  }}
+                >
+                  Logout
+                </button>
+
+              </>
+
+            ) : (
+
+              <Link
+                className="login-btn"
+                to="/login"
+                onClick={closeMenu}
+              >
+                Login
+              </Link>
+
+            )}
+
+          </div>
+
+        </div>
+
       </div>
-    </div>
-  </nav>
-    )
+
+    </nav>
+
+  );
 }

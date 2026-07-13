@@ -40,56 +40,132 @@ export default function AddLibrarian() {
    
   };
   return (
-    <div className="container mt-4">
-      <h2 className="text-center">User Registration</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="p-4 border rounded shadow"
-      >
-    
-        <div className="mb-3">
-          <label className="form-label">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            {...register("name", { required: "Name is required" })}
-          />
-          {errors.name && <p className="text-danger">{errors.name.message}</p>}
+  <div
+    style={{
+      minHeight: "100vh",
+      padding: "40px 0",
+      background: `
+        radial-gradient(circle at top left, rgba(124,58,237,.22), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(37,99,235,.18), transparent 40%),
+        #020617
+      `,
+    }}
+  >
+    <div className="container">
+
+      <div className="row justify-content-center">
+
+        <div className="col-lg-8 col-xl-6">
+
+          <div
+            className="card border-0 shadow-lg rounded-4"
+            style={{
+              background: "rgba(255,255,255,.95)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+
+            <div
+              className="card-header text-white text-center py-4"
+              style={{
+                background:
+                  "linear-gradient(90deg,#7c3aed,#2563eb)",
+              }}
+            >
+              <h2 className="fw-bold mb-1">
+                👨‍💼 Add Librarian
+              </h2>
+
+              <p className="mb-0">
+                Register a new librarian account
+              </p>
+            </div>
+
+            <div className="card-body p-4">
+
+              <form onSubmit={handleSubmit(onSubmit)}>
+
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">
+                    Name
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control form-control-lg shadow-sm"
+                    placeholder="Enter Full Name"
+                    {...register("name", {
+                      required: "Name is required",
+                    })}
+                  />
+
+                  {errors.name && (
+                    <small className="text-danger">
+                      {errors.name.message}
+                    </small>
+                  )}
+                </div>
+
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">
+                    Email
+                  </label>
+
+                  <input
+                    type="email"
+                    className="form-control form-control-lg shadow-sm"
+                    placeholder="Enter Email Address"
+                    {...register("email", {
+                      required: "Email is required",
+                    })}
+                  />
+
+                  {errors.email && (
+                    <small className="text-danger">
+                      {errors.email.message}
+                    </small>
+                  )}
+                </div>
+
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">
+                    Password
+                  </label>
+
+                  <input
+                    type="password"
+                    className="form-control form-control-lg shadow-sm"
+                    placeholder="Enter Password"
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
+                  />
+
+                  {errors.password && (
+                    <small className="text-danger">
+                      {errors.password.message}
+                    </small>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-lg w-100 rounded-pill shadow"
+                >
+                  ➕ Add Librarian
+                </button>
+
+              </form>
+
+            </div>
+
+          </div>
+
         </div>
 
-        
-        <div className="mb-3">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            {...register("email", { required: "Email is required" })}
-          />
-          {errors.email && (
-            <p className="text-danger">{errors.email.message}</p>
-          )}
-        </div>
+      </div>
 
-     
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            {...register("password", { required: "Password is required" })}
-          />
-          {errors.password && (
-            <p className="text-danger">{errors.password.message}</p>
-          )}
-        </div>
-
-
-
-       
-        <button type="submit" className="btn btn-primary w-100">
-          Add
-        </button>
-      </form>
     </div>
-  );
+  </div>
+);
 }

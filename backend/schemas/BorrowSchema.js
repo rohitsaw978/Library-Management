@@ -7,7 +7,7 @@ const BorrowSchema = new Schema({
   dueDate: { type: Date, required: true },
   returnDate: { type: Date, default: null },
   fineAmount: { type: Number, default: 0 },
-  status: { type: String, enum: ["Requested","Issued","Requested Return", "Returned"], default: "Requested" },
+  status: { type: String, enum: ["Requested","Rejected","Issued","Requested Return", "Returned"], default: "Requested" },
   approvedBy: { type: Schema.Types.ObjectId, ref: "User", default: null }
 
 },{ timestamps: true })

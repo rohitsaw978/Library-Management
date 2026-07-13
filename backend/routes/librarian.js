@@ -10,7 +10,7 @@ router.get("/issuerequest",userAuth,checkRole("librarian"),librarianController.i
 router.get("/returnrequest",userAuth,checkRole("librarian"),librarianController.returnRequest)
 router.put("/approverequest/:id",userAuth,checkRole("librarian"),librarianController.approveRequest)
 router.put("/approvereturnrequest/:id",userAuth,checkRole("librarian"),librarianController.approveReturnRequest)
-
+router.put("/rejectrequest/:id",userAuth,checkRole("librarian"),librarianController.rejectRequest);
 
 
 module.exports = router

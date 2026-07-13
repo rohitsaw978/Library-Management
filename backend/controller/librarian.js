@@ -81,6 +81,41 @@ librarianController.approveRequest = async (req, res) => {
   }
 };
 
+librarianController.rejectRequest = async (req, res) => {
+  try {
+
+    const borrowRequest = await BorrowModel.findById(req.params.id);
+
+    if (!borrowRequest) {
+      return res.status(404).json({
+        error: "Borrow request not found",
+      });
+    }
+
+    borrowRequest.status = "Rejected";
+
+    borrowRequest.approvedBy = req.userInfo.id;
+
+    await borrowRequest.save();
+
+    clearCache("homeData");
+
+    return res.status(200).json({
+      message: "Request Rejected Successfully",
+      borrow: borrowRequest,
+    });
+
+  } catch (err) {
+
+    console.error("Reject Error:", err);
+
+    return res.status(500).json({
+      error: "Server Error",
+    });
+
+  }
+};
+
 librarianController.returnRequest = async (req, res) => {
   try {
     const requests = await BorrowModel.find({ status: "Requested Return" })

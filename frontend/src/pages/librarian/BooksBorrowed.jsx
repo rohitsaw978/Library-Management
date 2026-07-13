@@ -50,39 +50,125 @@ export default function BooksBorrowed() {
   
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">📚 Books Issued</h2>
+  <div
+    style={{
+      
+      padding: "40px 0",
+      background: `
+      radial-gradient(circle at top left, rgba(124,58,237,.22), transparent 35%),
+      radial-gradient(circle at bottom right, rgba(37,99,235,.18), transparent 40%),
+      #020617
+      `,
+    }}
+  >
+    <div className="container">
 
-      {requests.length === 0 ? (
-        <div className="alert alert-info">No pending requests.</div>
-      ) : (
-        <div className="table-responsive">
-          <table className="table table-bordered table-striped">
-            <thead className="table-primary">
-              <tr>
-                <th>User Name</th>
-                <th>Book Title</th>
-                <th>Issue Date</th>
-                <th>Due Date</th>
-              
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {requests.map((req) => (
-                <tr key={req._id}>
-                  <td>{req.userId?.name || "N/A"}</td>
-                  <td>{req.bookId?.title || "N/A"}</td>
-                  <td>{new Date(req.issueDate).toLocaleDateString()}</td>
-                  <td>{new Date(req.dueDate).toLocaleDateString()}</td>
-                 
-                  <td><span className="badge bg-warning">{req.status}</span></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="card border-0 shadow-lg rounded-4">
+
+        <div
+          className="card-header text-white py-4"
+          style={{
+            background:
+              "linear-gradient(90deg,#7c3aed,#2563eb)",
+          }}
+        >
+          <h2 className="fw-bold mb-1">
+            📚 Books Issued
+          </h2>
+
+          <p className="mb-0">
+            List of all issued books
+          </p>
         </div>
-      )}
+
+        <div className="card-body">
+
+          {requests.length === 0 ? (
+
+            <div className="alert alert-info text-center">
+              No Books Issued.
+            </div>
+
+          ) : (
+
+            <div className="table-responsive">
+
+              <table className="table table-hover align-middle">
+
+                <thead className="table-dark">
+
+                  <tr>
+
+                    <th>User Name</th>
+
+                    <th>Book</th>
+
+                    <th>Issue Date</th>
+
+                    <th>Due Date</th>
+
+                    <th>Status</th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  {requests.map((req) => (
+
+                    <tr key={req._id}>
+
+                      <td className="fw-semibold">
+                        {req.userId?.name || "N/A"}
+                      </td>
+
+                      <td>
+                        {req.bookId?.title || "N/A"}
+                      </td>
+
+                      <td>
+                        {new Date(req.issueDate).toLocaleDateString()}
+                      </td>
+
+                      <td>
+                        {new Date(req.dueDate).toLocaleDateString()}
+                      </td>
+
+                      <td>
+
+                        <span
+  className={`badge rounded-pill px-3 py-2 fw-bold ${
+    req.status.toLowerCase() === "issued"
+      ? "bg-success text-white"
+      : req.status.toLowerCase() === "pending"
+      ? "bg-warning text-dark"
+      : "bg-secondary text-white"
+  }`}
+>
+  {req.status}
+</span>
+
+                      </td>
+
+                    </tr>
+
+                  ))}
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          )}
+
+        </div>
+
+      </div>
+
     </div>
-  );
+
+  </div>
+);
 }
