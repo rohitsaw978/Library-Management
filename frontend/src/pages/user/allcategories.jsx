@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Server_URL } from "../../utils/config";
 import axios from "axios";
-import "./allcategories.css";
+import "./books.css";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Preloader";
 import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
@@ -58,84 +58,129 @@ export default function ViewAllCategories() {
   }, []);
 
   return (
-    <div className="all-categories-container">
-      <div className="all-categories-row">
-        {/* Sidebar */}
-        <nav className="all-categories-sidebar">
-          <h5 className="all-categories-sidebar-title">Categories</h5>
-          <ul className="all-categories-nav">
-            <li
-              className={`all-categories-nav-item ${
-                activeCategory === "All" ? "active" : ""
-              }`}
-              onClick={() => handleCategoryClick("All")}
-            >
-              All
-            </li>
-            {[...new Set(books.map((book) => book.category))].map(
-              (category, index) => (
-                <li
-                  key={index}
-                  className={`all-categories-nav-item ${
-                    activeCategory === category ? "active" : ""
-                  }`}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  {category}
-                </li>
-              )
-            )}
-          </ul>
-        </nav>
+  <div className="container-fluid books-container">
+    <div className="row">
 
-        {/* Main Content */}
-        <main className="all-categories-main">
-          <h2 className="all-categories-main-title">Explore All Categories</h2>
-          {loading ? (
-            <Loader />
-          ) : filterBooks.length > 0 ? (
-            <div className="all-categories-grid">
-              {[...new Set(filterBooks.map((book) => book.category))].map(
-                (category, index) => (
-                  <div key={index} className="all-categories-card-wrapper">
-                    <div className="all-categories-card shadow-sm">
+      {/* Sidebar */}
+      <div className="col-md-3 p-4 sidebar">
+        <h4 className="text-center mb-4">📚 Categories</h4>
+
+        <div className="category-scroll">
+          <div
+            className={`category-item ${
+              activeCategory === "All" ? "active" : ""
+            }`}
+            onClick={() => handleCategoryClick("All")}
+          >
+            All
+          </div>
+
+          {[...new Set(books.map((book) => book.category))].map(
+            (category, index) => (
+              <div
+                key={index}
+                className={`category-item ${
+                  activeCategory === category ? "active" : ""
+                }`}
+                onClick={() => handleCategoryClick(category)}
+              >
+                {category}
+              </div>
+            )
+          )}
+        </div>
+      </div>
+
+      {/* Main */}
+      <div className="col-md-9 main-content">
+
+        <div className="search-header p-3">
+          <h2 className="page-title">
+            Explore Categories
+          </h2>
+        </div>
+
+        {loading ? (
+          <Loader />
+        ) : filterBooks.length > 0 ? (
+
+          <div className="books-grid">
+
+            {[...new Set(filterBooks.map(book => book.category))].map(
+              (category, index) => {
+
+                const book = filterBooks.find(
+                  b => b.category === category
+                );
+
+                return (
+
+                  <div
+                    key={index}
+                    className="book-card"
+                  >
+
+                    <div className="card-image-container">
+
                       <img
-                        src={
-                          filterBooks.find(
-                            (b) => b.category === category
-                          )?.coverImage
-                        }
-                        className="all-categories-card-img"
+                        src={book.coverImage}
+                        className="card-image"
                         alt={category}
                         onError={(e) => {
-                          e.target.onerror = null;
                           e.target.src =
-                            "https://via.placeholder.com/300x400?text=No+Image";
+                            "https://via.placeholder.com/150x200?text=No+Cover";
                         }}
                       />
-                      <div className="all-categories-card-body">
-                        <h5 className="all-categories-card-title">
-                          {category}
-                        </h5>
-                        <p className="text-muted">
-                          Books: {categoryCounts[category] || 0}
-                        </p>
-                        <Link to="/books" className="all-categories-btn">
+
+                      <div className="book-badge">
+                        {category}
+                      </div>
+
+                    </div>
+
+                    <div className="card-body">
+
+                      <h5 className="card-title">
+                        {category}
+                      </h5>
+
+                      <p className="card-author">
+                        {categoryCounts[category]} Books
+                      </p>
+
+                      <div className="card-footer">
+
+                        <Link
+                          to={`/books?category=${category}`}
+                          className="btn btn-primary btn-sm"
+                        >
                           Explore
                         </Link>
+
                       </div>
+
                     </div>
+
                   </div>
-                )
-              )}
-            </div>
-          ) : (
-            <div className="all-categories-empty">
-              <p>No books found in this category.</p>
-            </div>
-          )}
-        </main>
+
+                );
+              }
+            )}
+
+          </div>
+
+        ) : (
+
+          <div className="no-books-found">
+            <i className="bi bi-book"></i>
+            <h4>No Categories Found</h4>
+          </div>
+
+        )}
+
       </div>
+
     </div>
-  );
+  </div>
+);
 }

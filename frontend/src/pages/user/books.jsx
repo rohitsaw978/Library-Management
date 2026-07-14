@@ -1,3 +1,4 @@
+import Preloader from "../../components/Preloader";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./books.css"
@@ -136,11 +137,7 @@ const Books = () => {
           </div>
 
           {isLoading ? (
-            <div className="loading-spinner">
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
+            <Preloader />
           ) : filteredBooks.length > 0 ? (
             <div className="books-grid">
               {filteredBooks.map((book, index) => (
