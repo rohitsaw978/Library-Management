@@ -158,11 +158,11 @@ const ContactUs = () => {
                 </div>
 
                 <div className="highlight-box">
-                  ⚡ Fast Response
+                  &#9889; Fast Response
                 </div>
 
                 <div className="highlight-box">
-                  🔒 Secure Communication
+                  &#128274; Secure Communication
                 </div>
 
               </div>

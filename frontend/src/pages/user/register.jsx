@@ -109,7 +109,7 @@ export default function Register() {
             </div>
 
             <div className="feature-card">
-              <h3>📋 Dashboard Overview</h3>
+              <h3>&#128203; Dashboard Overview</h3>
               <p>
                 Complete overview of your
                 account.
