@@ -73,7 +73,7 @@ function ProfilePage() {
 
         <div className="profile-sections">
           <div className="section-card issued-books">
-            <h2>📚 Issued Books</h2>
+            <h2>&#128218; Issued Books</h2>
             {issuedBooks.length === 0 ? (
               <p>No books currently issued.</p>
             ) : (
@@ -112,7 +112,7 @@ function ProfilePage() {
           </div>
 
           <div className="section-card issued-requests">
-            <h2>📝 Issued Requests</h2>
+            <h2>&#128221; Issued Requests</h2>
             {issuedRequests.length === 0 ? (
               <p>No pending issue requests.</p>
             ) : (
@@ -140,7 +140,7 @@ function ProfilePage() {
           </div>
 
           <div className="section-card return-requests">
-            <h2>🔄 Return Requests</h2>
+            <h2>&#128260; Return Requests</h2>
             {returnRequests.length === 0 ? (
               <p>No pending return requests.</p>
             ) : (

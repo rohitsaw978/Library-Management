@@ -154,7 +154,7 @@ const ContactUs = () => {
               <div className="contact-highlight">
 
                 <div className="highlight-box">
-                  📚 Smart Library Support
+                  &#128218; Smart Library Support
                 </div>
 
                 <div className="highlight-box">

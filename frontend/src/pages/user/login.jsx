@@ -38,7 +38,7 @@ export default function Login() {
         role === "admin" ||
         role === "librarian"
       ) {
-        navigate("/admin");
+        window.location.href = "/admin";
       } else {
         navigate("/");
       }
@@ -60,7 +60,7 @@ export default function Login() {
 
         <div className="login-header">
           <h2 className="login-title">
-            Welcome Back 👋
+            Welcome Back &#128075;
           </h2>
 
           <p className="login-subtitle">

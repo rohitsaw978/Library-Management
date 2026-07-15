@@ -73,7 +73,7 @@ export default function AddLibrarian() {
               }}
             >
               <h2 className="fw-bold mb-1">
-                👨‍💼 Add Librarian
+                &#128104;&#8205;&#128188; Add Librarian
               </h2>
 
               <p className="mb-0">
@@ -152,7 +152,7 @@ export default function AddLibrarian() {
                   type="submit"
                   className="btn btn-primary btn-lg w-100 rounded-pill shadow"
                 >
-                  ➕ Add Librarian
+                  &#10133; Add Librarian
                 </button>
 
               </form>

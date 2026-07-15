@@ -1,4 +1,4 @@
-# 📚 Library Management System (MERN Stack)
+# &#128218; Library Management System (MERN Stack)
 
 ![MERN Stack](https://img.shields.io/badge/MERN-Full%20Stack-blue)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://library-management-app-karan.vercel.app/)
@@ -16,24 +16,24 @@ Check out the live demo of the project:https://library-management-app-karan.verc
 ## ✨ Key Features
 
 ### 👨‍🎓 Student Features
-- ✅ User registration & login with JWT authentication
+- &#9989; User registration & login with JWT authentication
 - 🔍 Browse and search available books with images
 - 📥 Request book issuance
 - 📤 Submit return requests
 - ⏳ View due dates and pending fines
-- 📊 Personal dashboard with borrowing history
+- &#128202; Personal dashboard with borrowing history
 
-### 📚 Librarian Features
+### &#128218; Librarian Features
 - ✔️ Approve/reject book issue requests
 - ✔️ Manage return requests
-- ➕ Add/Edit/Remove books with image uploads (Cloudinary)
+- &#10133; Add/Edit/Remove books with image uploads (Cloudinary)
 - 👀 View all issued books
-- 📊 Dashboard for Real-time Activity & Analytics
+- &#128202; Dashboard for Real-time Activity & Analytics
 
-### 👨‍💼 Admin Features
-- 👥 Manage all user accounts
+### &#128104;&#8205;&#128188; Admin Features
+- &#128101; Manage all user accounts
 - 🛡️ Assign librarian privileges
-- 📊 System analytics dashboard
+- &#128202; System analytics dashboard
 
 
 

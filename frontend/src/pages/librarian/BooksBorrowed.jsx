@@ -73,7 +73,7 @@ export default function BooksBorrowed() {
           }}
         >
           <h2 className="fw-bold mb-1">
-            📚 Books Issued
+            &#128218; Books Issued
           </h2>
 
           <p className="mb-0">

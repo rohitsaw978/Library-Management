@@ -63,7 +63,7 @@ export default function ViewAllCategories() {
 
       {/* Sidebar */}
       <div className="col-md-3 p-4 sidebar">
-        <h4 className="text-center mb-4">📚 Categories</h4>
+        <h4 className="text-center mb-4">&#128218; Categories</h4>
 
         <div className="category-scroll">
           <div

@@ -111,7 +111,7 @@ export default function LibrarianRequests() {
           }}
         >
           <h2 className="fw-bold mb-1">
-            📚 Pending Book Requests
+            &#128218; Pending Book Requests
           </h2>
 
           <p className="mb-0">
@@ -190,14 +190,14 @@ export default function LibrarianRequests() {
       className="btn btn-success btn-sm rounded-pill px-3"
       onClick={() => approveRequest(req._id)}
     >
-      ✅ Approve
+      &#9989; Approve
     </button>
 
     <button
       className="btn btn-danger btn-sm rounded-pill px-3"
       onClick={() => rejectRequest(req._id)}
     >
-      ❌ Reject
+      &#10060; Reject
     </button>
 
   </div>

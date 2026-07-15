@@ -86,7 +86,7 @@ export default function Register() {
           <div className="feature-grid">
 
             <div className="feature-card">
-              <h3>📚 Smart Library</h3>
+              <h3>&#128218; Smart Library</h3>
               <p>
                 Access thousands of books
                 in one place.
@@ -94,14 +94,14 @@ export default function Register() {
             </div>
 
             <div className="feature-card">
-              <h3>⭐ Book Reviews</h3>
+              <h3>&#11088; Book Reviews</h3>
               <p>
                 Discover top rated books.
               </p>
             </div>
 
             <div className="feature-card">
-              <h3>📊 Analytics</h3>
+              <h3>&#128202; Analytics</h3>
               <p>
                 Track reading activity and
                 progress.
@@ -127,7 +127,7 @@ export default function Register() {
         <div className="register-card">
 
           <div className="user-circle">
-            👤
+            &#128100;
           </div>
 
           <h2>Create Account</h2>

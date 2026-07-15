@@ -173,9 +173,9 @@ const AdminDashboard = () => {
       <div className="row g-0">
         <nav className="col-md-3 col-lg-2 admin-sidebar">
           {role == "admin" ? (
-            <h4 className="admin-sidebar-title">📌 Admin Panel</h4>
+            <h4 className="admin-sidebar-title">&#128204; Admin Panel</h4>
           ) : (
-            <h4 className="admin-sidebar-title">📌 Librarian Panel</h4>
+            <h4 className="admin-sidebar-title">&#128204; Librarian Panel</h4>
           )}
           <ul className="admin-nav">
             <li className="admin-nav-item">
@@ -185,7 +185,7 @@ const AdminDashboard = () => {
                 }`}
                 onClick={() => handleSectionChange("dashboard")}
               >
-                📊 Dashboard
+                &#128202; Dashboard
               </button>
             </li>
             <li className="admin-nav-item">
@@ -195,7 +195,7 @@ const AdminDashboard = () => {
                 }`}
                 onClick={() => handleSectionChange("users")}
               >
-                👥 Users
+                &#128101; Users
               </button>
             </li>
             {role === "admin" && (
@@ -206,7 +206,7 @@ const AdminDashboard = () => {
                   }`}
                   onClick={() => handleSectionChange("librarians")}
                 >
-                  📚 Librarians
+                  &#128218; Librarians
                 </button>
               </li>
             )}
@@ -217,7 +217,7 @@ const AdminDashboard = () => {
                 }`}
                 onClick={() => handleSectionChange("books")}
               >
-                📖 Books
+                &#128214; Books
               </button>
             </li>
             <li className="admin-nav-item">
@@ -227,7 +227,7 @@ const AdminDashboard = () => {
                 }`}
                 onClick={() => handleSectionChange("feedback")}
               >
-                💬 Feedback
+                &#128172; Feedback
               </button>
             </li>
           </ul>
@@ -236,7 +236,7 @@ const AdminDashboard = () => {
         <main className="col-md-9 col-lg-10 admin-main">
           {selectedSection === "dashboard" && (
             <>
-              <h2 className="admin-section-title">📊 Dashboard Overview</h2>
+              <h2 className="admin-section-title">&#128202; Dashboard Overview</h2>
 
               <div className="stats-grid">
                 <div className="stat-card books">
@@ -300,7 +300,7 @@ const AdminDashboard = () => {
                   <div className="activity-list">
                     {latestBooks.slice(0, 4).map((book, index) => (
                       <div key={index} className="activity-item">
-                        <div className="activity-icon">📚</div>
+                        <div className="activity-icon">&#128218;</div>
                         <div className="activity-text">
                           <strong>{book.title}</strong> added by {book.addedBy?.name} 
                         </div>
@@ -314,7 +314,7 @@ const AdminDashboard = () => {
 
           {selectedSection === "users" && (
             <>
-              <h2 className="admin-section-title">👥 Users Management</h2>
+              <h2 className="admin-section-title">&#128101; Users Management</h2>
               <div className="admin-table-container">
                 <table className="admin-table">
                   <thead>
@@ -351,7 +351,7 @@ const AdminDashboard = () => {
 
           {selectedSection === "librarians" && (
             <>
-              <h2 className="admin-section-title">📚 Librarians Management</h2>
+              <h2 className="admin-section-title">&#128218; Librarians Management</h2>
               <div className="admin-table-container">
                 <table className="admin-table">
                   <thead>
@@ -388,7 +388,7 @@ const AdminDashboard = () => {
 
           {selectedSection === "books" && (
             <>
-              <h2 className="admin-section-title">📖 Books Inventory</h2>
+              <h2 className="admin-section-title">&#128214; Books Inventory</h2>
               <div className="admin-table-container">
                 <table className="admin-table">
                   <thead>
@@ -420,7 +420,7 @@ const AdminDashboard = () => {
           {selectedSection === "feedback" && (
             <>
               <h2 className="admin-section-title">
-                💬 Feedback Messages
+                &#128172; Feedback Messages
               </h2>
               <div className="admin-table-container">
                 <table className="admin-table">

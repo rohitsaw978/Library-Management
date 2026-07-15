@@ -94,14 +94,14 @@ export default function AdminNavbar() {
                 to="/admin/addbook"
                 onClick={closeMenu}
               >
-                ➕ Add Book
+                &#10133; Add Book
               </Link>
 
               <Link
                 to="/admin/viewbook"
                 onClick={closeMenu}
               >
-                📚 View Books
+                &#128218; View Books
               </Link>
 
             </div>
@@ -166,7 +166,7 @@ export default function AdminNavbar() {
                   to="/admin"
                   onClick={closeMenu}
                 >
-                  👤 Profile
+                  &#128100; Profile
                 </Link>
 
                 <button

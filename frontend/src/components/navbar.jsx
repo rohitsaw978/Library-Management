@@ -136,7 +136,7 @@ export default function Navbar() {
                   to="/user"
                   onClick={handleNavClick}
                 >
-                  👤 Profile
+                  &#128100; Profile
                 </Link>
 
                 <button

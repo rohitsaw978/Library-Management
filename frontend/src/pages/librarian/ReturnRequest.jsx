@@ -65,7 +65,7 @@ export default function ReturnRequest() {
           }}
         >
           <h2 className="fw-bold mb-1">
-            📚 Return Book Requests
+            &#128218; Return Book Requests
           </h2>
 
           <p className="mb-0">
@@ -153,7 +153,7 @@ export default function ReturnRequest() {
                           className="btn btn-success btn-sm rounded-pill px-3"
                           onClick={() => approveRequest(req._id)}
                         >
-                          ✅ Approve
+                          &#9989; Approve
                         </button>
 
                       </td>

@@ -102,7 +102,7 @@ const AddBookForm = () => {
 >
 
               <h2 className="fw-bold mb-1">
-                📚 Add New Book
+                &#128218; Add New Book
               </h2>
 
               <p className="mb-0">
@@ -303,7 +303,7 @@ const AddBookForm = () => {
                       type="submit"
                       className="btn btn-primary btn-lg w-100 rounded-pill shadow"
                     >
-                      📚 Add Book
+                      &#128218; Add Book
                     </button>
 
                   </div>

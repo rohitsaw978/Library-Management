@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
@@ -22,9 +23,11 @@ const ViewBooks = () => {
     totalCopies: "",
   });
 
-  useEffect(() => {
-    fetchBooks();
-  }, []);
+  const location = useLocation();
+
+    useEffect(() => {
+      fetchBooks();
+  }, [location]);
 
   const fetchBooks = async () => {
     try {
@@ -126,7 +129,7 @@ const ViewBooks = () => {
     <div className="mb-4">
 
       <h2 className="admin-book-heading">
-        📚 Manage Library Books
+        &#128218; Manage Library Books
       </h2>
 
       <p className="text-muted text-center">
@@ -170,19 +173,19 @@ const ViewBooks = () => {
                 </h5>
 
                 <p className="book-author">
-                  👤 {book.author}
+                  &#128100; {book.author}
                 </p>
 
                 <p className="book-category">
-                  📚 {book.category}
+                  &#128218; {book.category}
                 </p>
 
                 <p className="book-isbn">
-                  🔢 ISBN : {book.isbn}
+                  &#128290; ISBN : {book.isbn}
                 </p>
 
                 <p className="book-price">
-                  💰 ₹ {book.price}
+                  &#128176; ₹ {book.price}
                 </p>
 
               </div>
@@ -193,7 +196,7 @@ const ViewBooks = () => {
                   className="btn edit-btn me-2"
                   onClick={() => handleEdit(book)}
                 >
-                  ✏ Edit
+                  &#9999; Edit
                 </button>
 
                 <button
@@ -202,7 +205,7 @@ const ViewBooks = () => {
                     handleDelete(book._id)
                   }
                 >
-                  🗑 Delete
+                  &#128465; Delete
                 </button>
 
               </div>
@@ -242,7 +245,7 @@ const ViewBooks = () => {
               <div className="modal-header bg-primary text-white">
 
                 <h5 className="modal-title fw-bold">
-                  ✏ Edit Book
+                  &#9999; Edit Book
                 </h5>
 
                 <button
@@ -374,7 +377,7 @@ const ViewBooks = () => {
                   className="btn btn-success"
                   onClick={handleUpdate}
                 >
-                  💾 Update Book
+                  &#128190; Update Book
                 </button>
 
               </div>
