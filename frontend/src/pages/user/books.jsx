@@ -21,10 +21,10 @@ const Books = () => {
 
   async function issueBook(bookid) {
         try {
-          console.log("bookId");
-            console.log(bookid);
+          // console.log("bookId");
+            // console.log(bookid);
           const authToken = localStorage.getItem("authToken");
-          console.log(authToken)
+          // console.log(authToken)
           if (!authToken) {
             showErrorToast("Please login to issue a book.");
             return;
@@ -53,7 +53,7 @@ const Books = () => {
       }
     
       async function bookDetails(bookid) {
-        console.log(bookid)
+        // console.log(bookid)
         navigate(`/bookdetails/${bookid}`);       
       }
 

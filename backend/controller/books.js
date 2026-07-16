@@ -19,7 +19,7 @@ booksController.addNewBook = async (req, res) => {
       price,
       description,
     } = req.body;
-    console.log(req.body);
+    // // console.log(req.body);
     const {id} = req.userInfo;
 
     const existingBook = await BookModel.findOne({ isbn });
@@ -28,12 +28,12 @@ booksController.addNewBook = async (req, res) => {
         .status(400)
         .json({error:true, message: "Book with this ISBN already exists" });
     }
-    console.log("req.file")
-    console.log(req.file)
+    // console.log("req.file")
+    // console.log(req.file)
 
     let coverImageUrl = req.file ? req.file.path : "";
     let cloudinaryId = req.file ? req.file.filename : "";
-    console.log(coverImageUrl);
+    // console.log(coverImageUrl);
 
     const newBook = new BookModel({
       title,
@@ -53,7 +53,7 @@ booksController.addNewBook = async (req, res) => {
     clearCache("homeData");
     res.status(201).json({error:false , message: "Book added successfully", book: newBook });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({error:true, message: "Internal Server Error", error });
   }
 };
@@ -94,7 +94,7 @@ booksController.getIssuedRequest = async (req, res) => {
 booksController.getLatestBooks = async (req, res) => {
   try {
     const books = await BookModel.find().populate("addedBy", "name email role").sort({ createdAt: -1 }) ;
-    console.log(books);
+    // console.log(books);
     const totalBooks = books.length;
     if(!books || books.length === 0){
       return res.json({error:true,message:"No Books Found"});
@@ -191,7 +191,7 @@ booksController.deleteBook = async (req, res) => {
     clearCache("homeData");
     res.status(200).json({ message: "Book Deleted Successfully" });
   } catch (error) {
-    // console.log(deletedBook)
+    // // console.log(deletedBook)
     res.status(500).json({ message: "Internal Server Error", error });
   }
 };
@@ -204,8 +204,8 @@ booksController.issueBook = async(req,res)=>{
   if (!book) return res.status(404).json({ message: "Book not found!" });
 
   const issuedBooksCount = await BorrowModel.countDocuments({ userId: userid, status: "Issued" });
-  console.log("issuedBooksCount");
-  console.log(issuedBooksCount);
+  // console.log("issuedBooksCount");
+  // console.log(issuedBooksCount);
 
   if (issuedBooksCount >= 4) {
     return res.status(400).json({ message: "You can issue a maximum of 4 books at a time." });
@@ -236,7 +236,7 @@ booksController.issueBook = async(req,res)=>{
   res.status(200).json({ message: "Book issued successfully!", dueDate });
     
   } catch (error) {
-    console.error("Error issuing book:", error);
+    // console.error("Error issuing book:", error);
     res.status(500).json({ message: "Internal server error" });    
   }
 }
@@ -298,7 +298,7 @@ booksController.reqIssueBook = async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -307,7 +307,7 @@ booksController.reqIssueBook = async (req, res) => {
 // booksController.getIssuedBooks = async (req, res) => {
 //   try {
 //     const userId = req.userInfo.id; 
-//     console.log("Fetching issued books for user:", userId);
+//     // console.log("Fetching issued books for user:", userId);
 
 //     const issuedBooks = await BorrowModel.find({ userId, returnDate: null }) 
 //       .populate("bookId", "title author category isbn price coverImage")
@@ -319,7 +319,7 @@ booksController.reqIssueBook = async (req, res) => {
 
 //     res.json({ error: false, message: "Issued books fetched successfully", issuedBooks });
 //   } catch (error) {
-//     console.error("Error fetching issued books:", error);
+//     // console.error("Error fetching issued books:", error);
 //     res.status(500).json({ error: true, message: "Internal server error" });
 //   }
 // };
@@ -357,7 +357,7 @@ booksController.getIssuedBooks = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Error fetching issued books:", error);
+    // console.error("Error fetching issued books:", error);
     res.status(500).json({ error: true, message: "Internal server error" });
   }
 };
@@ -365,8 +365,8 @@ booksController.getIssuedBooks = async (req, res) => {
 booksController.returnBook = async (req, res) => {
   try {
   const issueId = req.params.id;
-  console.log("issueId")
-  console.log(issueId)
+  // console.log("issueId")
+  // console.log(issueId)
 
   // Find issued book entry
   const issuedBook = await BorrowModel.findById(issueId);
@@ -390,7 +390,7 @@ booksController.returnBook = async (req, res) => {
 
   res.json({ message: "Book returned successfully", issuedBook });
 } catch (error) {
-  console.error("Error returning book:", error);
+  // console.error("Error returning book:", error);
   res.status(500).json({ message: "Server error" });
 }
 };
@@ -421,7 +421,7 @@ booksController.requestReturnBook = async (req, res) => {
     return res.status(200).json({ message: "Return request submitted successfully" });
 
   } catch (error) {
-    console.error("Error in return request:", error);
+    // console.error("Error in return request:", error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

@@ -16,7 +16,7 @@ Check out the live demo of the project:https://library-management-app-karan.verc
 ## ✨ Key Features
 
 ### 👨‍🎓 Student Features
-- &#9989; User registration & login with JWT authentication
+- \u2705 User registration & login with JWT authentication
 - 🔍 Browse and search available books with images
 - 📥 Request book issuance
 - 📤 Submit return requests

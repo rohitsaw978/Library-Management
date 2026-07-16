@@ -20,12 +20,12 @@ adminController.addLibrarian = async (req, res) => {
       password: hashedPassword,
       role
         });
-// console.log(user);
+// // console.log(user);
         await user.save();
 
         res.status(201).json({ message: "Librarian Added Successfully" });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
@@ -34,15 +34,15 @@ adminController.login = async (req,res)=>{
 
     try {
         const {email,password} = req.body;
-        // console.log("email,password");
-        console.log(email,password);
+        // // console.log("email,password");
+        // console.log(email,password);
         // const email="abc@gmail.com";
         // const password="123";
         const user = await UserModel.findOne({ email });
-        // console.log("user");
-        // console.log(user);
-        // console.log("print")
-        // console.log(user);
+        // // console.log("user");
+        // // console.log(user);
+        // // console.log("print")
+        // // console.log(user);
         if (!user) {
             return res.status(400).json({ message: "Invalid email or password" });
           }

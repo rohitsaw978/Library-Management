@@ -153,7 +153,7 @@ export default function ReturnRequest() {
                           className="btn btn-success btn-sm rounded-pill px-3"
                           onClick={() => approveRequest(req._id)}
                         >
-                          &#9989; Approve
+                          \u2705 Approve
                         </button>
 
                       </td>

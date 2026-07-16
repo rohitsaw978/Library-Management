@@ -190,7 +190,7 @@ export default function LibrarianRequests() {
       className="btn btn-success btn-sm rounded-pill px-3"
       onClick={() => approveRequest(req._id)}
     >
-      &#9989; Approve
+      \u2705 Approve
     </button>
 
     <button

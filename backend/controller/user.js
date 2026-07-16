@@ -40,11 +40,11 @@ userController.login = async (req,res)=>{
 
     try {
         const {email,password} = req.body;
-        console.log(req.body);
+        // console.log(req.body);
         // const email="abc@gmail.com";
         // const password="123";
         const user = await UserModel.findOne({ email });
-        console.log(user);
+        // console.log(user);
         // console.log("print")
         // console.log(user);
         if (!user) {
@@ -105,7 +105,7 @@ userController.addContact = async(req,res) => {
   try {
     const newContact = new ContactModel({ name, email, subject, message });
     await newContact.save();
-    console.log('📩 Contact saved to DB:', newContact);
+    // console.log('📩 Contact saved to DB:', newContact);
 
     res.status(200).json({ success: true, message: 'Your message has been sent! We will get back to you soon.' });
   } catch (error) {
