@@ -441,27 +441,27 @@ export default function ReturnRequest() {
 
                         {/* Action */}
 
-                        <td className="text-center">
-                          <button
-                            className="btn btn-success rounded-pill px-4"
-                            style={{
-                              fontWeight: "600",
-                            }}
-                            onClick={() =>
-                              approveRequest(req._id)
-                            }
-                          >
-                            <FaCheckCircle className="me-2" />
-                            Approve
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+                        <button
+                          className="btn btn-success btn-sm rounded-pill px-3"
+                          onClick={() => approveRequest(req._id)}
+                        >
+                          &#9989; Approve
+                        </button>
+
+                      </td>
+
+                    </tr>
+
+                  ))}
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          )}
+
         </div>
       </div>
     </div>
