@@ -4,6 +4,7 @@ import axios from "axios";
 import "./books.css";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Preloader";
+import { FaBook } from "react-icons/fa";
 import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 
 export default function ViewAllCategories() {
@@ -58,129 +59,130 @@ export default function ViewAllCategories() {
   }, []);
 
   return (
-  <div className="container-fluid books-container">
-    <div className="row">
+    <div className="container-fluid books-container">
+      <div className="row">
 
-      {/* Sidebar */}
-      <div className="col-md-3 p-4 sidebar">
-        <h4 className="text-center mb-4">&#128218; Categories</h4>
+        {/* Sidebar */}
+        <div className="col-md-3 p-4 sidebar">
+          <h4 className="text-center mb-4"><h2>
+            <FaBook style={{ marginRight: "8px", color: "#4F46E5" }} />
+            Categories
+          </h2></h4>
 
-        <div className="category-scroll">
-          <div
-            className={`category-item ${
-              activeCategory === "All" ? "active" : ""
-            }`}
-            onClick={() => handleCategoryClick("All")}
-          >
-            All
-          </div>
-
-          {[...new Set(books.map((book) => book.category))].map(
-            (category, index) => (
-              <div
-                key={index}
-                className={`category-item ${
-                  activeCategory === category ? "active" : ""
+          <div className="category-scroll">
+            <div
+              className={`category-item ${activeCategory === "All" ? "active" : ""
                 }`}
-                onClick={() => handleCategoryClick(category)}
-              >
-                {category}
-              </div>
-            )
-          )}
-        </div>
-      </div>
+              onClick={() => handleCategoryClick("All")}
+            >
+              All
+            </div>
 
-      {/* Main */}
-      <div className="col-md-9 main-content">
-
-        <div className="search-header p-3">
-          <h2 className="page-title">
-            Explore Categories
-          </h2>
-        </div>
-
-        {loading ? (
-          <Loader />
-        ) : filterBooks.length > 0 ? (
-
-          <div className="books-grid">
-
-            {[...new Set(filterBooks.map(book => book.category))].map(
-              (category, index) => {
-
-                const book = filterBooks.find(
-                  b => b.category === category
-                );
-
-                return (
-
-                  <div
-                    key={index}
-                    className="book-card"
-                  >
-
-                    <div className="card-image-container">
-
-                      <img
-                        src={book.coverImage}
-                        className="card-image"
-                        alt={category}
-                        onError={(e) => {
-                          e.target.src =
-                            "https://via.placeholder.com/150x200?text=No+Cover";
-                        }}
-                      />
-
-                      <div className="book-badge">
-                        {category}
-                      </div>
-
-                    </div>
-
-                    <div className="card-body">
-
-                      <h5 className="card-title">
-                        {category}
-                      </h5>
-
-                      <p className="card-author">
-                        {categoryCounts[category]} Books
-                      </p>
-
-                      <div className="card-footer">
-
-                        <Link
-                          to={`/books?category=${category}`}
-                          className="btn btn-primary btn-sm"
-                        >
-                          Explore
-                        </Link>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                );
-              }
+            {[...new Set(books.map((book) => book.category))].map(
+              (category, index) => (
+                <div
+                  key={index}
+                  className={`category-item ${activeCategory === category ? "active" : ""
+                    }`}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                </div>
+              )
             )}
+          </div>
+        </div>
 
+        {/* Main */}
+        <div className="col-md-9 main-content">
+
+          <div className="search-header p-3">
+            <h2 className="page-title">
+              Explore Categories
+            </h2>
           </div>
 
-        ) : (
+          {loading ? (
+            <Loader />
+          ) : filterBooks.length > 0 ? (
 
-          <div className="no-books-found">
-            <i className="bi bi-book"></i>
-            <h4>No Categories Found</h4>
-          </div>
+            <div className="books-grid">
 
-        )}
+              {[...new Set(filterBooks.map(book => book.category))].map(
+                (category, index) => {
+
+                  const book = filterBooks.find(
+                    b => b.category === category
+                  );
+
+                  return (
+
+                    <div
+                      key={index}
+                      className="book-card"
+                    >
+
+                      <div className="card-image-container">
+
+                        <img
+                          src={book.coverImage}
+                          className="card-image"
+                          alt={category}
+                          onError={(e) => {
+                            e.target.src =
+                              "https://via.placeholder.com/150x200?text=No+Cover";
+                          }}
+                        />
+
+                        <div className="book-badge">
+                          {category}
+                        </div>
+
+                      </div>
+
+                      <div className="card-body">
+
+                        <h5 className="card-title">
+                          {category}
+                        </h5>
+
+                        <p className="card-author">
+                          {categoryCounts[category]} Books
+                        </p>
+
+                        <div className="card-footer">
+
+                          <Link
+                            to={`/books?category=${category}`}
+                            className="btn btn-primary btn-sm"
+                          >
+                            Explore
+                          </Link>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  );
+                }
+              )}
+
+            </div>
+
+          ) : (
+
+            <div className="no-books-found">
+              <i className="bi bi-book"></i>
+              <h4>No Categories Found</h4>
+            </div>
+
+          )}
+
+        </div>
 
       </div>
-
     </div>
-  </div>
-);
+  );
 }

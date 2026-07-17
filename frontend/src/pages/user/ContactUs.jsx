@@ -5,6 +5,9 @@ import { FiMail, FiPhone, FiMapPin, FiClock, FiSend } from "react-icons/fi";
 import "./contact.css";
 import { Server_URL } from "../../utils/config";
 import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+import { MdSupportAgent } from "react-icons/md";
+import { FiZap } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
 
 const ContactUs = () => {
   const {
@@ -73,9 +76,9 @@ const ContactUs = () => {
               <h3>Visit Us</h3>
 
               <p>
-                123 College Avenue
+                Guru Nanak College,
                 <br />
-                Academic City, AC 12345
+                Dhanbad, Jharkhand - 826001
               </p>
             </div>
 
@@ -103,7 +106,7 @@ const ContactUs = () => {
               <h3>Call Us</h3>
 
               <p>
-                (123) 456-7890
+                (0326)-2305070
                 <br />
                 Mon-Fri, 8AM - 5PM
               </p>
@@ -154,15 +157,18 @@ const ContactUs = () => {
               <div className="contact-highlight">
 
                 <div className="highlight-box">
-                  &#128218; Smart Library Support
+                  <MdSupportAgent className="highlight-icon" />
+                  &nbsp;&nbsp;Smart Library Support
                 </div>
 
                 <div className="highlight-box">
-                  &#9889; Fast Response
+                  <FiZap className="highlight-icon" />
+                  &nbsp;&nbsp;Fast Response
                 </div>
 
                 <div className="highlight-box">
-                  &#128274; Secure Communication
+                  <FiLock className="highlight-icon" />
+                  &nbsp;&nbsp;Secure Communication
                 </div>
 
               </div>

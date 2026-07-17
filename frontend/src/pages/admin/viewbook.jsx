@@ -1,6 +1,28 @@
-import { useLocation } from "react-router-dom";
+import {
+  FaBook,
+  FaUser,
+  FaTag,
+  FaBarcode,
+  FaRupeeSign,
+  FaEdit,
+  FaTrash,
+  FaSave,
+} from "react-icons/fa";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  HiMiniBookOpen,
+  HiMiniUser,
+  HiMiniTag,
+} from "react-icons/hi2";
+
+import {
+  MdEditSquare,
+  MdDelete,
+  MdOutlineQrCode2,
+} from "react-icons/md";
+
+import { BsCurrencyRupee } from "react-icons/bs";
 import { Server_URL } from "../../utils/config";
 import {
   showErrorToast,
@@ -23,11 +45,9 @@ const ViewBooks = () => {
     totalCopies: "",
   });
 
-  const location = useLocation();
-
-    useEffect(() => {
-      fetchBooks();
-  }, [location]);
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
   const fetchBooks = async () => {
     try {
@@ -120,276 +140,283 @@ const ViewBooks = () => {
     }
   };
 
-   return (
-  <div className="viewbook-page">
-  <div className="container py-4">
+  return (
+    <div className="viewbook-page">
+      <div className="container py-4">
 
-    {/* Heading */}
+        {/* Heading */}
 
-    <div className="mb-4">
+        <div className="mb-4">
 
-      <h2 className="admin-book-heading">
-        &#128218; Manage Library Books
-      </h2>
+          <h2 className="admin-book-heading d-flex justify-content-center align-items-center gap-2">
+            <FaBook />
+            <span>Manage Library Books</span>
+          </h2>
 
-      <p className="text-muted text-center">
-        View, Edit and Delete Library Books
-      </p>
-
-    </div>
-
-    {/* Cards */}
-
-    <div className="row g-4">
-
-      {Array.isArray(books) && books.length > 0 ? (
-
-        books.map((book) => (
-
-          <div
-            key={book._id}
-            className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4"
-          >
-
-            <div className="card book-card">
-
-              <div className="book-image-wrapper">
-
-                <img
-                  src={
-                    book.coverImage ||
-                    "https://via.placeholder.com/200"
-                  }
-                  className="book-image"
-                  alt={book.title}
-                />
-
-              </div>
-
-              <div className="card-body">
-
-                <h5 className="card-title">
-                  {book.title}
-                </h5>
-
-                <p className="book-author">
-                  &#128100; {book.author}
-                </p>
-
-                <p className="book-category">
-                  &#128218; {book.category}
-                </p>
-
-                <p className="book-isbn">
-                  &#128290; ISBN : {book.isbn}
-                </p>
-
-                <p className="book-price">
-                  &#128176; ₹ {book.price}
-                </p>
-
-              </div>
-
-              <div className="card-footer text-center">
-
-                <button
-                  className="btn edit-btn me-2"
-                  onClick={() => handleEdit(book)}
-                >
-                  &#9999; Edit
-                </button>
-
-                <button
-                  className="btn delete-btn"
-                  onClick={() =>
-                    handleDelete(book._id)
-                  }
-                >
-                  &#128465; Delete
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        ))
-
-      ) : (
-
-        <div className="text-center py-5">
-
-          <h5 className="text-muted">
-            No Books Found
-          </h5>
+          <p className="text-muted text-center">
+            View, Edit and Delete Library Books
+          </p>
 
         </div>
 
-      )}
+        {/* Cards */}
 
-    </div>
+        <div className="row g-4">
 
-            {/* ===================== EDIT BOOK MODAL ===================== */}
+          {Array.isArray(books) && books.length > 0 ? (
 
-      {showModal && selectedBook && (
-        <div
-          className="modal fade show d-block"
-          tabIndex="-1"
-          style={{ background: "rgba(0,0,0,.65)" }}
-        >
-          <div className="modal-dialog modal-dialog-centered modal-lg">
+            books.map((book) => (
 
-            <div className="modal-content border-0 shadow-lg rounded-4">
+              <div
+                key={book._id}
+                className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4"
+              >
 
-              <div className="modal-header bg-primary text-white">
+                <div className="card book-card">
 
-                <h5 className="modal-title fw-bold">
-                  &#9999; Edit Book
-                </h5>
+                  <div className="book-image-wrapper">
 
-                <button
-                  type="button"
-                  className="btn-close btn-close-white"
-                  onClick={() => setShowModal(false)}
-                ></button>
-
-              </div>
-
-              <div className="modal-body p-4">
-
-                <form>
-
-                  <div className="row">
-
-                    <div className="col-md-6 mb-3">
-
-                      <label className="form-label fw-semibold">
-                        Book Title
-                      </label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                      />
-
-                    </div>
-
-                    <div className="col-md-6 mb-3">
-
-                      <label className="form-label fw-semibold">
-                        Author
-                      </label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="author"
-                        value={formData.author}
-                        onChange={handleChange}
-                      />
-
-                    </div>
-
-                    <div className="col-md-6 mb-3">
-
-                      <label className="form-label fw-semibold">
-                        Category
-                      </label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="category"
-                        value={formData.category}
-                        onChange={handleChange}
-                      />
-
-                    </div>
-
-                    <div className="col-md-6 mb-3">
-
-                      <label className="form-label fw-semibold">
-                        ISBN
-                      </label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="isbn"
-                        value={formData.isbn}
-                        onChange={handleChange}
-                      />
-
-                    </div>
-
-                    <div className="col-md-6 mb-3">
-
-                      <label className="form-label fw-semibold">
-                        Price
-                      </label>
-
-                      <input
-                        type="number"
-                        className="form-control"
-                        name="price"
-                        value={formData.price}
-                        onChange={handleChange}
-                      />
-
-                    </div>
-
-                    <div className="col-md-6 mb-3">
-
-                      <label className="form-label fw-semibold">
-                        Total Copies
-                      </label>
-
-                      <input
-                        type="number"
-                        className="form-control"
-                        name="totalCopies"
-                        value={formData.totalCopies}
-                        onChange={handleChange}
-                      />
-
-                    </div>
+                    <img
+                      src={
+                        book.coverImage ||
+                        "https://via.placeholder.com/200"
+                      }
+                      className="book-image"
+                      alt={book.title}
+                    />
 
                   </div>
 
-                </form>
+                  <div className="card-body">
+
+                    <h5 className="card-title">
+                      {book.title}
+                    </h5>
+
+                    <p className="book-author d-flex align-items-center gap-2">
+                      <FaUser color="#8b5cf6" />
+                      <span>{book.author}</span>
+                    </p>
+
+                    <p className="book-category d-flex align-items-center gap-2">
+                      <FaTag color="#2563eb" />
+                      <span>{book.category}</span>
+                    </p>
+
+                    <p className="book-isbn d-flex align-items-center gap-2">
+                      <FaBarcode color="#6366f1" />
+                      <span>ISBN : {book.isbn}</span>
+                    </p>
+
+                    <p className="book-price d-flex align-items-center gap-2">
+                      <FaRupeeSign color="#16a34a" />
+                      <span>{book.price}</span>
+                    </p>
+
+                  </div>
+
+                  <div className="card-footer text-center">
+
+                    <button
+                      className="btn edit-btn me-2 d-inline-flex align-items-center gap-2"
+                      onClick={() => handleEdit(book)}
+                    >
+                      <FaEdit />
+                      Edit
+                    </button>
+
+                    <button
+                      className="btn delete-btn d-inline-flex align-items-center gap-2"
+                      onClick={() => handleDelete(book._id)}
+                    >
+                      <FaTrash />
+                      Delete
+                    </button>
+
+                  </div>
+
+                </div>
 
               </div>
 
-              <div className="modal-footer">
+            ))
 
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </button>
+          ) : (
 
-                <button
-                  className="btn btn-success"
-                  onClick={handleUpdate}
-                >
-                  &#128190; Update Book
-                </button>
+            <div className="text-center py-5">
+
+              <h5 className="text-muted">
+                No Books Found
+              </h5>
+
+            </div>
+
+          )}
+
+        </div>
+
+        {/* ===================== EDIT BOOK MODAL ===================== */}
+
+        {showModal && selectedBook && (
+          <div
+            className="modal fade show d-block"
+            tabIndex="-1"
+            style={{ background: "rgba(0,0,0,.65)" }}
+          >
+            <div className="modal-dialog modal-dialog-centered modal-lg">
+
+              <div className="modal-content border-0 shadow-lg rounded-4">
+
+                <div className="modal-header bg-primary text-white">
+
+                  <h5 className="modal-title fw-bold d-flex align-items-center gap-2">
+  <FaEdit />
+  <span>Edit Book</span>
+</h5>
+
+                  <button
+                    type="button"
+                    className="btn-close btn-close-white"
+                    onClick={() => setShowModal(false)}
+                  ></button>
+
+                </div>
+
+                <div className="modal-body p-4">
+
+                  <form>
+
+                    <div className="row">
+
+                      <div className="col-md-6 mb-3">
+
+                        <label className="form-label fw-semibold">
+                          Book Title
+                        </label>
+
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="title"
+                          value={formData.title}
+                          onChange={handleChange}
+                        />
+
+                      </div>
+
+                      <div className="col-md-6 mb-3">
+
+                        <label className="form-label fw-semibold">
+                          Author
+                        </label>
+
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="author"
+                          value={formData.author}
+                          onChange={handleChange}
+                        />
+
+                      </div>
+
+                      <div className="col-md-6 mb-3">
+
+                        <label className="form-label fw-semibold">
+                          Category
+                        </label>
+
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="category"
+                          value={formData.category}
+                          onChange={handleChange}
+                        />
+
+                      </div>
+
+                      <div className="col-md-6 mb-3">
+
+                        <label className="form-label fw-semibold">
+                          ISBN
+                        </label>
+
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="isbn"
+                          value={formData.isbn}
+                          onChange={handleChange}
+                        />
+
+                      </div>
+
+                      <div className="col-md-6 mb-3">
+
+                        <label className="form-label fw-semibold">
+                          Price
+                        </label>
+
+                        <input
+                          type="number"
+                          className="form-control"
+                          name="price"
+                          value={formData.price}
+                          onChange={handleChange}
+                        />
+
+                      </div>
+
+                      <div className="col-md-6 mb-3">
+
+                        <label className="form-label fw-semibold">
+                          Total Copies
+                        </label>
+
+                        <input
+                          type="number"
+                          className="form-control"
+                          name="totalCopies"
+                          value={formData.totalCopies}
+                          onChange={handleChange}
+                        />
+
+                      </div>
+
+                    </div>
+
+                  </form>
+
+                </div>
+
+                <div className="modal-footer">
+
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+  className="btn btn-success d-inline-flex align-items-center gap-2"
+  onClick={handleUpdate}
+>
+  <FaSave />
+  Update Book
+</button>
+
+                </div>
 
               </div>
 
             </div>
-
           </div>
-        </div>
-      )}
+        )}
 
-        </div>
-</div>
+      </div>
+    </div>
   );
 };
 

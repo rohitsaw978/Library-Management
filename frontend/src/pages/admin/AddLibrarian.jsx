@@ -1,9 +1,18 @@
+import {
+  FaUserTie,
+  FaUserPlus,
+  FaEnvelope,
+  FaLock,
+  FaUser
+} from "react-icons/fa";
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
-import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
-
+import {
+  showErrorToast,
+  showSuccessToast,
+} from "../../utils/toasthelper";
 
 export default function AddLibrarian() {
   const {
@@ -15,10 +24,16 @@ export default function AddLibrarian() {
 
   const onSubmit = async (data) => {
     try {
-      const formData = { ...data, role: "librarian" };
-      const url = Server_URL + "admin/addlibrarian";
-      const authToken = localStorage.getItem("authToken");
-      console.log(authToken);
+      const formData = {
+        ...data,
+        role: "librarian",
+      };
+
+      const url =
+        Server_URL + "admin/addlibrarian";
+
+      const authToken =
+        localStorage.getItem("authToken");
 
       const response = await axios.post(
         url,
@@ -30,132 +45,235 @@ export default function AddLibrarian() {
         }
       );
 
-      console.log("Response:", response.data);
-      showSuccessToast("Registration Successful!");
+      console.log(response.data);
+
+      showSuccessToast(
+        "Registration Successful!"
+      );
+
       reset();
     } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-      showErrorToast("Registration Failed!");
+      console.error(error);
+
+      showErrorToast(
+        "Registration Failed!"
+      );
     }
-   
   };
+
   return (
-  <div
-    style={{
-      minHeight: "100vh",
-      padding: "40px 0",
-      background: `
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: "50px 0",
+        background: `
         radial-gradient(circle at top left, rgba(124,58,237,.22), transparent 35%),
         radial-gradient(circle at bottom right, rgba(37,99,235,.18), transparent 40%),
         #020617
-      `,
-    }}
-  >
-    <div className="container">
+        `,
+      }}
+    >
+      <style>{`
 
-      <div className="row justify-content-center">
+      .librarian-card{
+    background: rgba(139, 92, 246, 0.12);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
-        <div className="col-lg-8 col-xl-6">
+    border: 1px solid rgba(255,255,255,.18);
 
-          <div
-            className="card border-0 shadow-lg rounded-4"
-            style={{
-              background: "rgba(255,255,255,.95)",
-              backdropFilter: "blur(10px)",
-            }}
-          >
+    border-radius: 24px;
 
-            <div
-              className="card-header text-white text-center py-4"
-              style={{
-                background:
-                  "linear-gradient(90deg,#7c3aed,#2563eb)",
-              }}
-            >
-              <h2 className="fw-bold mb-1">
-                &#128104;&#8205;&#128188; Add Librarian
-              </h2>
+    overflow: hidden;
 
-              <p className="mb-0">
-                Register a new librarian account
-              </p>
-            </div>
+    box-shadow:
+        0 8px 32px rgba(31,38,135,.35),
+        0 0 30px rgba(139,92,246,.25);
 
-            <div className="card-body p-4">
+    color: #fff;
+}
 
-              <form onSubmit={handleSubmit(onSubmit)}>
+      .premium-input{
+    height:58px;
 
-                <div className="mb-4">
-                  <label className="form-label fw-semibold">
-                    Name
-                  </label>
+    background: rgba(255,255,255,.08);
 
-                  <input
-                    type="text"
-                    className="form-control form-control-lg shadow-sm"
-                    placeholder="Enter Full Name"
-                    {...register("name", {
-                      required: "Name is required",
-                    })}
-                  />
+    border:1px solid rgba(255,255,255,.15);
 
-                  {errors.name && (
-                    <small className="text-danger">
-                      {errors.name.message}
-                    </small>
-                  )}
-                </div>
+    color:#fff;
 
-                <div className="mb-4">
-                  <label className="form-label fw-semibold">
-                    Email
-                  </label>
+    border-radius:14px;
 
-                  <input
-                    type="email"
-                    className="form-control form-control-lg shadow-sm"
-                    placeholder="Enter Email Address"
-                    {...register("email", {
-                      required: "Email is required",
-                    })}
-                  />
+    transition:.3s;
+}
 
-                  {errors.email && (
-                    <small className="text-danger">
-                      {errors.email.message}
-                    </small>
-                  )}
-                </div>
+.premium-input::placeholder{
+    color:rgba(255,255,255,.55);
+}
 
-                <div className="mb-4">
-                  <label className="form-label fw-semibold">
-                    Password
-                  </label>
+.premium-input:focus{
+    background:rgba(255,255,255,.12);
+    border-color:#a855f7;
+    box-shadow:0 0 20px rgba(168,85,247,.35);
+    color:#fff;
+}
 
-                  <input
-                    type="password"
-                    className="form-control form-control-lg shadow-sm"
-                    placeholder="Enter Password"
-                    {...register("password", {
-                      required: "Password is required",
-                    })}
-                  />
+      `}</style>
 
-                  {errors.password && (
-                    <small className="text-danger">
-                      {errors.password.message}
-                    </small>
-                  )}
-                </div>
+      <div className="container">
 
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-lg w-100 rounded-pill shadow"
+        <div className="row justify-content-center">
+
+          <div className="col-lg-8 col-xl-6">
+
+            <div className="librarian-card">
+
+              <div
+                className="text-center py-4"
+                style={{
+                  background:
+                    "linear-gradient(90deg,#9333ea,#2563eb)"
+                }}
+              >
+
+                <h2 className="text-white fw-bold d-flex align-items-center justify-content-center gap-2">
+                  <FaUserTie size={28} />
+                  Add Librarian
+                </h2>
+
+                <p
+                  className="mb-0"
+                  style={{
+                    color:
+                      "rgba(255,255,255,.85)"
+                  }}
                 >
-                  &#10133; Add Librarian
-                </button>
+                  Register a new librarian
+                </p>
 
-              </form>
+              </div>
+
+              <div className="card-body p-5">
+
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+
+                  {/* Name */}
+
+                  <div className="mb-4">
+
+                    <label
+                      className="form-label fw-semibold mb-2"
+                      style={{ color: "#E2E8F0" }}
+                    >
+                      Full Name
+                    </label>
+
+                    <input
+                      type="text"
+                      className="form-control premium-input"
+                      placeholder="Enter Full Name"
+                      {...register("name", {
+                        required: "Name is required",
+                      })}
+                    />
+
+                    {errors.name && (
+                      <small className="text-danger">
+                        {errors.name.message}
+                      </small>
+                    )}
+
+                  </div>
+
+                  {/* Email */}
+
+                  <div className="mb-4">
+
+                    <label
+                      className="form-label fw-semibold mb-2"
+                      style={{ color: "#E2E8F0" }}
+                    >
+                      Email Address
+                    </label>
+
+                    <input
+                      type="email"
+                      className="form-control premium-input"
+                      placeholder="Enter Email Address"
+                      {...register("email", {
+                        required: "Email is required",
+                      })}
+                    />
+
+                    {errors.email && (
+                      <small className="text-danger">
+                        {errors.email.message}
+                      </small>
+                    )}
+
+                  </div>
+
+                  {/* Password */}
+
+                  <div className="mb-4">
+
+                    <label
+                      className="form-label fw-semibold mb-2"
+                      style={{ color: "#E2E8F0" }}
+                    >
+                      Password
+                    </label>
+
+                    <input
+                      type="password"
+                      className="form-control premium-input"
+                      placeholder="Enter Password"
+                      {...register("password", {
+                        required: "Password is required",
+                      })}
+                    />
+
+                    {errors.password && (
+                      <small className="text-danger">
+                        {errors.password.message}
+                      </small>
+                    )}
+
+                  </div>
+
+                  {/* Submit Button */}
+
+                  <button
+                    type="submit"
+                    className="btn w-100 text-white fw-bold d-flex align-items-center justify-content-center gap-2"
+                    style={{
+                      height: "58px",
+                      border: "none",
+                      borderRadius: "14px",
+                      background: "linear-gradient(90deg,#9333ea,#2563eb)",
+                      boxShadow: "0 10px 25px rgba(139,92,246,.35)",
+                      transition: "all .3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-3px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 16px 30px rgba(139,92,246,.45)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow =
+                        "0 10px 25px rgba(139,92,246,.35)";
+                    }}
+                  >
+                    <FaUserPlus size={18} />
+                    Add Librarian
+                  </button>
+
+                </form>
+
+              </div>
 
             </div>
 
@@ -166,6 +284,5 @@ export default function AddLibrarian() {
       </div>
 
     </div>
-  </div>
-);
+  );
 }

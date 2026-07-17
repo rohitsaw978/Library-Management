@@ -1,54 +1,70 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import "./navbar.css";
 import logo from "../assets/axlib-logo.png";
 
 export default function Navbar() {
-
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const token = localStorage.getItem("authToken");
+  const [token, setToken] = useState(
+    localStorage.getItem("authToken")
+  );
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  useEffect(() => {
+    const syncAuth = () => {
+      setToken(localStorage.getItem("authToken"));
+    };
 
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("role");
+    window.addEventListener("storage", syncAuth);
 
-    navigate("/login");
-  };
+    window.addEventListener("focus", syncAuth);
+
+    syncAuth();
+
+    return () => {
+      window.removeEventListener("storage", syncAuth);
+      window.removeEventListener("focus", syncAuth);
+    };
+  }, []);
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
   const handleNavClick = () => {
-
     closeMenu();
 
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("role");
+
+    setToken(null);
+
+    closeMenu();
+
+    navigate("/login");
+  };
+
   return (
-
     <nav className="navbar">
-
       <div className="navbar-container">
+        {/* ================= LOGO ================= */}
 
-        {/* LOGO */}
-
-        <Link
-          className="navbar-brand"
+        <NavLink
           to="/"
+          className="navbar-brand"
           onClick={handleNavClick}
         >
-
           <img
             src={logo}
             alt="AXLIB Logo"
@@ -60,125 +76,142 @@ export default function Navbar() {
               <span className="logo-a">A</span>XLIB
             </h2>
           </div>
+        </NavLink>
 
-        </Link>
-
-        {/* MOBILE TOGGLE */}
+        {/* ================= MOBILE TOGGLE ================= */}
 
         <button
           className={`navbar-toggle ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle Menu"
         >
-
           <span className="toggle-bar"></span>
           <span className="toggle-bar"></span>
           <span className="toggle-bar"></span>
-
         </button>
 
-        {/* NAVIGATION */}
+        {/* ================= NAVIGATION ================= */}
 
         <div
           className={`navbar-links ${
             menuOpen ? "show" : ""
           }`}
         >
-
-          <Link
-            className="nav-link"
+          <NavLink
             to="/"
+            end
             onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive
+                ? "nav-link active"
+                : "nav-link"
+            }
           >
             Home
-          </Link>
+          </NavLink>
 
-          <Link
-            className="nav-link"
+          <NavLink
             to="/books"
             onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive
+                ? "nav-link active"
+                : "nav-link"
+            }
           >
             Books
-          </Link>
+          </NavLink>
 
-          <Link
-            className="nav-link"
+          <NavLink
             to="/category"
             onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive
+                ? "nav-link active"
+                : "nav-link"
+            }
           >
             Category
-          </Link>
+          </NavLink>
 
-          <Link
-            className="nav-link"
+          <NavLink
             to="/aboutus"
             onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive
+                ? "nav-link active"
+                : "nav-link"
+            }
           >
             About
-          </Link>
+          </NavLink>
 
-          <Link
-            className="nav-link"
+          <NavLink
             to="/contactus"
             onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive
+                ? "nav-link active"
+                : "nav-link"
+            }
           >
             Contact
-          </Link>
+          </NavLink>
 
-          {/* AUTH BUTTONS */}
+          {/* ================= AUTH ================= */}
 
           <div className="auth-section">
-
             {token ? (
               <>
-
-                <Link
-                  className="login-btn"
+                <NavLink
                   to="/user"
                   onClick={handleNavClick}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "login-btn active-btn"
+                      : "login-btn"
+                  }
                 >
-                  &#128100; Profile
-                </Link>
+                  👤 Profile
+                </NavLink>
 
                 <button
                   className="logout-btn"
-                  onClick={() => {
-                    closeMenu();
-                    handleLogout();
-                  }}
+                  onClick={handleLogout}
                 >
                   Logout
                 </button>
-
               </>
             ) : (
               <>
-
-                <Link
-                  className="login-btn"
+                <NavLink
                   to="/login"
                   onClick={handleNavClick}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "login-btn active-btn"
+                      : "login-btn"
+                  }
                 >
                   Login
-                </Link>
+                </NavLink>
 
-                <Link
-                  className="signup-btn"
+                <NavLink
                   to="/register"
                   onClick={handleNavClick}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "signup-btn active-btn"
+                      : "signup-btn"
+                  }
                 >
                   Signup
-                </Link>
-
+                </NavLink>
               </>
             )}
-
           </div>
-
         </div>
-
       </div>
-
     </nav>
-
   );
 }

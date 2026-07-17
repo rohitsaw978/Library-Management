@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./Register.css";
-
 import {
   FaUser,
   FaEnvelope,
@@ -11,8 +10,11 @@ import {
   FaCalendarAlt,
   FaEye,
   FaEyeSlash,
+  FaStar,
+  FaChartLine,
+  FaTachometerAlt,
+  FaBookOpen,
 } from "react-icons/fa";
-
 import { FcGoogle } from "react-icons/fc";
 
 import { Server_URL } from "../../utils/config";
@@ -66,7 +68,7 @@ export default function Register() {
     <div className="register-page">
 
 
-            {/* Left Side */}
+      {/* Left Side */}
 
       <div className="left-section">
         <div className="left-content">
@@ -86,7 +88,10 @@ export default function Register() {
           <div className="feature-grid">
 
             <div className="feature-card">
-              <h3>&#128218; Smart Library</h3>
+              <h3>
+                <FaBookOpen className="feature-icon"/>
+                &nbsp;&nbsp;Smart Library
+              </h3>
               <p>
                 Access thousands of books
                 in one place.
@@ -94,14 +99,20 @@ export default function Register() {
             </div>
 
             <div className="feature-card">
-              <h3>&#11088; Book Reviews</h3>
+              <h3>
+                <FaStar className="feature-icon" />
+                &nbsp;&nbsp;Book Reviews
+              </h3>
               <p>
                 Discover top rated books.
               </p>
             </div>
 
             <div className="feature-card">
-              <h3>&#128202; Analytics</h3>
+              <h3>
+                <FaChartLine className="feature-icon" />
+                &nbsp;&nbsp;Analytics
+              </h3>
               <p>
                 Track reading activity and
                 progress.
@@ -109,7 +120,10 @@ export default function Register() {
             </div>
 
             <div className="feature-card">
-              <h3>&#128203; Dashboard Overview</h3>
+              <h3>
+                <FaTachometerAlt className="feature-icon" />
+                &nbsp;&nbsp;Dashboard Overview
+              </h3>
               <p>
                 Complete overview of your
                 account.
@@ -127,7 +141,7 @@ export default function Register() {
         <div className="register-card">
 
           <div className="user-circle">
-            &#128100;
+            <FaUser />
           </div>
 
           <h2>Create Account</h2>
@@ -135,7 +149,7 @@ export default function Register() {
           <form
             onSubmit={handleSubmit(onSubmit)}
           >
-                        <div className="input-box">
+            <div className="input-box">
               <FaUser className="input-icon" />
               <input
                 type="text"
@@ -243,7 +257,7 @@ export default function Register() {
               </p>
             )}
 
-                        <div className="terms">
+            <div className="terms">
               <input
                 type="checkbox"
                 id="terms"
@@ -284,7 +298,7 @@ export default function Register() {
                 Continue with Google
               </span>
             </button>
-                      </form>
+          </form>
 
         </div>
       </div>

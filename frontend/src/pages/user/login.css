@@ -329,3 +329,41 @@ body,
     font-size:28px;
   }
 }
+
+/* ==========================
+   PASSWORD SHOW / HIDE
+========================== */
+
+.password-wrapper{
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper .form-input{
+  width: 100%;
+  padding-right: 50px;
+}
+
+.toggle-password{
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 20px;
+  transition: all .3s ease;
+  user-select: none;
+}
+
+.toggle-password:hover{
+  color: #a855f7;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.toggle-password svg{
+  pointer-events: none;
+}

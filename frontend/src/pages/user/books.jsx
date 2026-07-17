@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./books.css"
 import { useNavigate } from "react-router-dom";
+import { FaBook } from "react-icons/fa";
 import { Server_URL } from "../../utils/config";
 import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 
@@ -20,42 +21,42 @@ const Books = () => {
 
 
   async function issueBook(bookid) {
-        try {
-          // console.log("bookId");
-            // console.log(bookid);
-          const authToken = localStorage.getItem("authToken");
-          // console.log(authToken)
-          if (!authToken) {
-            showErrorToast("Please login to issue a book.");
-            return;
-        }
-           const url =Server_URL + 'borrow/request-issue/'+bookid;
-           const response = await axios.post(`${Server_URL}books/borrow/request-issue/${bookid}`,{}, {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          });
+    try {
+      // console.log("bookId");
+      // console.log(bookid);
+      const authToken = localStorage.getItem("authToken");
+      // console.log(authToken)
+      if (!authToken) {
+        showErrorToast("Please login to issue a book.");
+        return;
+      }
+      const url = Server_URL + 'borrow/request-issue/' + bookid;
+      const response = await axios.post(`${Server_URL}books/borrow/request-issue/${bookid}`, {}, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
 
-          // alert(response.data);
-          const {error,message} = response.data;
-          if(error){
-            console.log(error);
-            showErrorToast(message)
-          }
-          else{
-            showSuccessToast(message);
-          }
-        } catch (error) {
-          // console.error("Error:", error.response?.data || error.message);
-          showErrorToast(error.response?.data?.message || "Something went wrong! Please try again.");
-          
-        }    
+      // alert(response.data);
+      const { error, message } = response.data;
+      if (error) {
+        console.log(error);
+        showErrorToast(message)
       }
-    
-      async function bookDetails(bookid) {
-        // console.log(bookid)
-        navigate(`/bookdetails/${bookid}`);       
+      else {
+        showSuccessToast(message);
       }
+    } catch (error) {
+      // console.error("Error:", error.response?.data || error.message);
+      showErrorToast(error.response?.data?.message || "Something went wrong! Please try again.");
+
+    }
+  }
+
+  async function bookDetails(bookid) {
+    // console.log(bookid)
+    navigate(`/bookdetails/${bookid}`);
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -87,15 +88,15 @@ const Books = () => {
 
   const filterBooks = (search, category) => {
     let filtered = books;
-    
+
     if (category !== "All") {
       filtered = filtered.filter(book => book.category === category);
     }
-    
+
     if (search) {
       filtered = filtered.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
     }
-    
+
     setFilteredBooks(filtered);
   };
 
@@ -103,16 +104,18 @@ const Books = () => {
   return (
     <div className="container-fluid books-container">
       <div className="row">
-      
+
         <div className="col-md-3 p-4 sidebar">
-          <h4 className="text-center mb-4">&#128218; Categories</h4>
+          <h4 className="text-center mb-4"><h2>
+            <FaBook style={{ marginRight: "8px", color: "#4F46E5" }} />
+            Categories
+          </h2></h4>
           <div className="category-scroll">
             {categories.map((category, index) => (
               <div
                 key={index}
-                className={`category-item ${
-                  selectedCategory === category ? "active" : ""
-                }`}
+                className={`category-item ${selectedCategory === category ? "active" : ""
+                  }`}
                 onClick={() => handleCategoryChange(category)}
               >
                 {category}

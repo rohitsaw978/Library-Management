@@ -1,181 +1,469 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
-import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+import {
+  showErrorToast,
+  showSuccessToast,
+} from "../../utils/toasthelper";
 
+import {
+  FaUndoAlt,
+  FaBook,
+  FaUser,
+  FaClipboardList,
+  FaMoneyBillWave,
+  FaCheckCircle,
+} from "react-icons/fa";
+
+import { MdDateRange } from "react-icons/md";
 
 export default function ReturnRequest() {
   const [requests, setRequests] = useState([]);
 
-  useEffect(() => {
-    const fetchRequests = async () => {
-      try {
-        const url = Server_URL + "librarian/returnrequest"
-        const res = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`
-          }
-        });
-        console.log(res);
-        setRequests(res.data.requests);
-      } catch (err) {
-        console.error("Error fetching requests", err);
-      }
-    };
+  const fetchRequests = async () => {
+    try {
+      const url =
+        Server_URL + "librarian/returnrequest";
 
+      const res = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(
+            "authToken"
+          )}`,
+        },
+      });
+
+      setRequests(res.data.requests || []);
+    } catch (err) {
+      console.error("Error fetching requests", err);
+      setRequests([]);
+    }
+  };
+
+  useEffect(() => {
     fetchRequests();
   }, []);
 
   const approveRequest = async (id) => {
     try {
-        const url = Server_URL + "librarian/approvereturnrequest/" + id;
-      const response = await axios.put(url , {}, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`
+      const url =
+        Server_URL +
+        "librarian/approvereturnrequest/" +
+        id;
+
+      const response = await axios.put(
+        url,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              "authToken"
+            )}`,
+          },
         }
-      });
-      showSuccessToast(response.data.message || "Book Return successfully!");
-      setRequests(prev => prev.filter(req => req._id !== id));
+      );
+
+      showSuccessToast(
+        response.data.message ||
+        "Book Returned Successfully!"
+      );
+
+      setRequests((prev) =>
+        prev.filter((req) => req._id !== id)
+      );
     } catch (err) {
-      console.error("Error approving request", err);
-      showErrorToast("Failed to approve request");
+      console.error(err);
+      showErrorToast(
+        "Failed to approve request"
+      );
     }
   };
 
   return (
-  <div
-    style={{
-      padding: "40px 0",
-      background: `
-      radial-gradient(circle at top left, rgba(124,58,237,.22), transparent 35%),
-      radial-gradient(circle at bottom right, rgba(37,99,235,.18), transparent 40%),
-      #020617
-      `,
-    }}
-  >
-    <div className="container">
-
-      <div className="card border-0 shadow-lg rounded-4">
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: "40px 0",
+        background: `
+          radial-gradient(circle at top left, rgba(124,58,237,.22), transparent 35%),
+          radial-gradient(circle at bottom right, rgba(37,99,235,.18), transparent 40%),
+          #020617
+        `,
+      }}
+    >
+      <div className="container">
 
         <div
-          className="card-header text-white py-4"
+          className="card border-0 shadow-lg rounded-4"
           style={{
-            background:
-              "linear-gradient(90deg,#7c3aed,#2563eb)",
+            overflow: "hidden",
+            background: "rgba(15,23,42,.95)",
+            border:
+              "1px solid rgba(139,92,246,.22)",
+            backdropFilter: "blur(15px)",
           }}
         >
-          <h2 className="fw-bold mb-1">
-            &#128218; Return Book Requests
-          </h2>
 
-          <p className="mb-0">
-            Pending return requests from users
-          </p>
-        </div>
+          {/* Header */}
 
-        <div className="card-body">
+          <div
+            className="card-header border-0 py-4"
+            style={{
+              background:
+                "linear-gradient(90deg,#9333ea,#2563eb)",
+            }}
+          >
+            <div className="d-flex justify-content-between align-items-center flex-wrap">
 
-          {requests.length === 0 ? (
+              <div>
 
-            <div className="alert alert-info text-center">
-              No Pending Requests.
+                <h2 className="fw-bold text-white mb-1 d-flex align-items-center gap-3">
+                  <FaClipboardList size={28} />
+                  <span>
+                    Return Book Requests
+                  </span>
+                </h2>
+
+                <p
+                  className="mb-0"
+                  style={{
+                    color:
+                      "rgba(255,255,255,.85)",
+                  }}
+                >
+                  Pending return requests
+                  from users
+                </p>
+
+              </div>
+
+              <div
+                className="badge rounded-pill px-4 py-3"
+                style={{
+                  background:
+                    "rgba(255,255,255,.18)",
+                  color: "#fff",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                }}
+              >
+                Total : {requests.length}
+              </div>
+
             </div>
+          </div>
 
-          ) : (
+          <div className="card-body">
 
-            <div className="table-responsive">
+            {requests.length === 0 ? (
 
-              <table className="table table-hover align-middle">
+              <div
+                className="text-center py-5"
+                style={{
+                  color: "#cbd5e1",
+                }}
+              >
+                <FaUndoAlt
+                  size={55}
+                  style={{
+                    color: "#8b5cf6",
+                    marginBottom: "15px",
+                  }}
+                />
 
-                <thead className="table-dark">
+                <h5 className="text-white">
+                  No Pending Requests
+                </h5>
 
-                  <tr>
-                    <th>User Name</th>
-                    <th>Book</th>
-                    <th>Issue Date</th>
-                    <th>Due Date</th>
-                    <th>Fine</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
+                <p className="mb-0 text-secondary">
+                  Return requests will
+                  appear here.
+                </p>
 
-                </thead>
+              </div>
 
-                <tbody>
+            ) : (
 
-                  {requests.map((req) => (
+              <div className="table-responsive">
 
-                    <tr key={req._id}>
+                <table
+                  className="table table-dark align-middle"
+                  style={{
+                    marginBottom: 0,
+                    "--bs-table-bg":
+                      "transparent",
+                    "--bs-table-color":
+                      "#f8fafc",
+                    "--bs-table-border-color":
+                      "rgba(255,255,255,.08)",
+                  }}
+                >
 
-                      <td className="fw-semibold">
-                        {req.userId?.name || "N/A"}
-                      </td>
+                  <thead>
 
-                      <td>
-                        {req.bookId?.title || "N/A"}
-                      </td>
+                    <tr>
 
-                      <td>
-                        {new Date(req.issueDate).toLocaleDateString()}
-                      </td>
+                      <th
+                        style={{
+                          background: "#1e293b",
+                          padding: "18px",
+                          borderBottom:
+                            "2px solid #8b5cf6",
+                        }}
+                      >
+                        User
+                      </th>
 
-                      <td>
-                        {new Date(req.dueDate).toLocaleDateString()}
-                      </td>
+                      <th
+                        style={{
+                          background: "#1e293b",
+                          padding: "18px",
+                          borderBottom:
+                            "2px solid #8b5cf6",
+                        }}
+                      >
+                        Book
+                      </th>
 
-                      <td>
+                      <th
+                        style={{
+                          background: "#1e293b",
+                          padding: "18px",
+                          borderBottom:
+                            "2px solid #8b5cf6",
+                        }}
+                      >
+                        Issue Date
+                      </th>
 
-                        <span className="badge bg-danger rounded-pill px-3 py-2">
-                          ₹ {req.fine}
-                        </span>
+                      <th
+                        style={{
+                          background: "#1e293b",
+                          padding: "18px",
+                          borderBottom:
+                            "2px solid #8b5cf6",
+                        }}
+                      >
+                        Due Date
+                      </th>
 
-                      </td>
+                      <th
+                        style={{
+                          background: "#1e293b",
+                          padding: "18px",
+                          borderBottom:
+                            "2px solid #8b5cf6",
+                        }}
+                      >
+                        Fine
+                      </th>
 
-                      <td>
+                      <th
+                        style={{
+                          background: "#1e293b",
+                          padding: "18px",
+                          borderBottom:
+                            "2px solid #8b5cf6",
+                        }}
+                      >
+                        Status
+                      </th>
 
-                        <span
-                          className={`badge rounded-pill px-3 py-2 fw-bold ${
-                            req.status.toLowerCase() === "pending"
-                              ? "bg-warning text-dark"
-                              : req.status.toLowerCase() === "returned"
-                              ? "bg-success text-dark"
-                              : "bg-secondary text-white"
-                          }`}
-                        >
-                          {req.status}
-                        </span>
-
-                      </td>
-
-                      <td>
-
-                        <button
-                          className="btn btn-success btn-sm rounded-pill px-3"
-                          onClick={() => approveRequest(req._id)}
-                        >
-                          \u2705 Approve
-                        </button>
-
-                      </td>
+                      <th
+                        className="text-center"
+                        style={{
+                          background: "#1e293b",
+                          padding: "18px",
+                          borderBottom:
+                            "2px solid #8b5cf6",
+                        }}
+                      >
+                        Action
+                      </th>
 
                     </tr>
 
-                  ))}
+                  </thead>
 
-                </tbody>
+                  <tbody>
 
-              </table>
+                    {requests.map((req) => (
+                      <tr
+                        key={req._id}
+                        style={{
+                          cursor: "pointer",
+                          transition: ".3s",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(255,255,255,.05)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background =
+                            "transparent";
+                        }}
+                      >
+                        {/* User */}
 
-            </div>
+                        <td>
+                          <div
+                            className="d-flex align-items-center gap-2 fw-semibold"
+                            style={{
+                              color: "#f8fafc",
+                            }}
+                          >
+                            <FaUser
+                              style={{
+                                color: "#8b5cf6",
+                              }}
+                            />
 
-          )}
+                            <span>
+                              {req.userId?.name || "N/A"}
+                            </span>
+                          </div>
+                        </td>
 
+                        {/* Book */}
+
+                        <td>
+                          <div
+                            className="d-flex align-items-center gap-2 fw-semibold"
+                            style={{
+                              color: "#60a5fa",
+                            }}
+                          >
+                            <FaBook />
+
+                            <span>
+                              {req.bookId?.title || "N/A"}
+                            </span>
+                          </div>
+                        </td>
+
+                        {/* Issue Date */}
+
+                        <td>
+                          <div
+                            className="d-flex align-items-center gap-2"
+                            style={{
+                              color: "#e2e8f0",
+                            }}
+                          >
+                            <MdDateRange
+                              style={{
+                                color: "#8b5cf6",
+                              }}
+                            />
+
+                            <span>
+                              {new Date(
+                                req.issueDate
+                              ).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </td>
+
+                        {/* Due Date */}
+
+                        <td>
+                          <div
+                            className="d-flex align-items-center gap-2"
+                            style={{
+                              color: "#e2e8f0",
+                            }}
+                          >
+                            <MdDateRange
+                              style={{
+                                color: "#ef4444",
+                              }}
+                            />
+
+                            <span>
+                              {new Date(
+                                req.dueDate
+                              ).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </td>
+
+                        {/* Fine */}
+
+                        <td>
+                          <span
+                            className="badge rounded-pill px-3 py-2"
+                            style={{
+                              background:
+                                "rgba(239,68,68,.18)",
+                              color: "#f87171",
+                              border:
+                                "1px solid #ef4444",
+                              fontSize: "13px",
+                              fontWeight: "600",
+                            }}
+                          >
+                            <FaMoneyBillWave className="me-1" />
+                            ₹ {req.fine}
+                          </span>
+                        </td>
+
+                        {/* Status */}
+
+                        <td>
+                          <span
+                            className="badge rounded-pill px-3 py-2"
+                            style={{
+                              fontSize: "13px",
+                              fontWeight: "600",
+
+                              background:
+                                req.status.toLowerCase() ===
+                                  "pending"
+                                  ? "rgba(245,158,11,.18)"
+                                  : "rgba(34,197,94,.18)",
+
+                              color:
+                                req.status.toLowerCase() ===
+                                  "pending"
+                                  ? "#fbbf24"
+                                  : "#4ade80",
+
+                              border:
+                                req.status.toLowerCase() ===
+                                  "pending"
+                                  ? "1px solid #f59e0b"
+                                  : "1px solid #22c55e",
+                            }}
+                          >
+                            {req.status}
+                          </span>
+                        </td>
+
+                        {/* Action */}
+
+                        <td className="text-center">
+                          <button
+                            className="btn btn-success rounded-pill px-4"
+                            style={{
+                              fontWeight: "600",
+                            }}
+                            onClick={() =>
+                              approveRequest(req._id)
+                            }
+                          >
+                            <FaCheckCircle className="me-2" />
+                            Approve
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
-
       </div>
-
     </div>
-
-  </div>
-);
+  );
 }
