@@ -1,799 +1,1272 @@
-/* ==========================
-   RESET
-========================== */
+/* ===========================================================
+   AXLIB PREMIUM NAVBAR
+   PART 1A
+   ROOT • NAVBAR • CONTAINER • BRAND • LOGO
+=========================================================== */
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+/*==============================
+ROOT VARIABLES
+==============================*/
+
+:root{
+
+  --primary:#8b5cf6;
+  --secondary:#2563eb;
+  --accent:#fbbf24;
+
+  --dark:#020617;
+  --dark-light:#0f172a;
+
+  --glass:rgba(15,23,42,.72);
+  --glass-border:rgba(255,255,255,.08);
+
+  --white:#ffffff;
+  --text:#cbd5e1;
+
+  --radius:18px;
+
+  --transition:.35s ease;
+
+  --shadow:
+    0 15px 45px rgba(0,0,0,.28);
+
 }
 
-/* ==========================
-   NAVBAR
-========================== */
+/*==============================
+NAVBAR
+==============================*/
 
 .navbar{
 
   position:sticky;
+
   top:0;
+
   left:0;
 
   width:100%;
 
-  z-index:1000;
+  z-index:9999;
 
-  background:rgba(10,15,35,.88);
+  background:var(--glass);
 
   backdrop-filter:blur(18px);
+
   -webkit-backdrop-filter:blur(18px);
 
-  border-bottom:1px solid rgba(255,255,255,.05);
+  border-bottom:
+  1px solid var(--glass-border);
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.25);
+  box-shadow:var(--shadow);
 
-  transition:
-    background .3s ease,
-    box-shadow .3s ease;
+  transition:all .35s ease;
+
 }
 
-/* ==========================
-   CONTAINER
-========================== */
+/*==============================
+CONTAINER
+==============================*/
 
 .navbar-container{
 
-  width:100%;
-  max-width:1600px;
+  width:min(95%,1450px);
 
-  height:80px;
+  height:78px;
 
   margin:auto;
 
-  padding:0 24px;
-
   display:flex;
+
   align-items:center;
+
+  justify-content:space-between;
+
+  gap:25px;
+
 }
 
-/* ==========================
-   BRAND
-========================== */
+/*==============================
+BRAND
+==============================*/
 
 .navbar-brand{
 
   display:flex;
+
   align-items:center;
 
-  gap:12px;
+  gap:14px;
+
+  text-decoration:none;
 
   flex-shrink:0;
 
-  text-decoration:none;
 }
+
+/*==============================
+LOGO
+==============================*/
 
 .navbar-logo{
 
-  width:76px;
-  height:76px;
+  width:64px;
+
+  height:64px;
 
   object-fit:contain;
 
-  transition:
-    transform .3s ease;
+  transition:.35s ease;
+
+  filter:
+  drop-shadow(
+    0 6px 18px
+    rgba(139,92,246,.25)
+  );
+
 }
 
-.navbar-logo:hover{
+.navbar-brand:hover
+.navbar-logo{
 
-  transform:scale(1.05);
+  transform:
+  rotate(-5deg)
+  scale(1.06);
+
 }
+
+/*==============================
+BRAND TEXT
+==============================*/
 
 .brand-text{
 
   display:flex;
+
   align-items:center;
+
 }
 
 .brand-text h2{
 
-  margin:0;
-
   font-size:34px;
+
   font-weight:800;
 
-  letter-spacing:3px;
+  letter-spacing:2px;
 
-  color:#fbbf24;
+  margin:0;
 
-  text-shadow:
-    0 0 15px rgba(251,191,36,.25);
+  color:var(--accent);
+
+  transition:.35s ease;
+
 }
 
 .logo-a{
 
   color:#ffffff;
+
 }
 
-/* ==========================
-   NAVIGATION
-========================== */
+.navbar-brand:hover
+.brand-text h2{
+
+  letter-spacing:3px;
+
+  text-shadow:
+  0 0 20px
+  rgba(251,191,36,.35);
+
+}
+
+/*==============================
+DESKTOP SPACING
+==============================*/
+
+@media(min-width:1400px){
+
+.navbar-container{
+
+  width:min(94%,1600px);
+
+}
+
+}
+
+/*==============================
+TABLET
+==============================*/
+
+@media(max-width:992px){
+
+.navbar-container{
+
+  height:72px;
+
+}
+
+.navbar-logo{
+
+  width:56px;
+
+  height:56px;
+
+}
+
+.brand-text h2{
+
+  font-size:28px;
+
+}
+
+}
+
+/*==============================
+MOBILE
+==============================*/
+
+@media(max-width:768px){
+
+.navbar-container{
+
+  height:68px;
+
+  width:94%;
+
+}
+
+.navbar-logo{
+
+  width:50px;
+
+  height:50px;
+
+}
+
+.brand-text h2{
+
+  font-size:23px;
+
+  letter-spacing:1px;
+
+}
+
+}
+
+/*==============================
+SMALL MOBILE
+==============================*/
+
+@media(max-width:480px){
+
+.navbar-container{
+
+  width:95%;
+
+}
+
+.navbar-logo{
+
+  width:46px;
+
+  height:46px;
+
+}
+
+.brand-text h2{
+
+  font-size:20px;
+
+}
+
+}
+
+/* ===========================================================
+   AXLIB PREMIUM NAVBAR
+   PART 1B
+   NAVIGATION • ACTIVE LINK • AUTH BUTTONS
+=========================================================== */
+
+/*==============================
+NAVIGATION
+==============================*/
 
 .navbar-links{
 
-  flex:1;
+    display:flex;
 
-  display:flex;
-  align-items:center;
+    align-items:center;
 
-  gap:35px;
+    justify-content:center;
 
-  margin-left:40px;
+    flex:1;
 
-  transition:
-    transform .35s ease,
-    opacity .35s ease;
+    gap:32px;
+
+    margin-left:50px;
+
 }
+
+/*==============================
+NAV LINK
+==============================*/
 
 .nav-link{
 
-  position:relative;
+    position:relative;
 
-  text-decoration:none;
+    display:flex;
 
-  color:#cbd5e1;
+    align-items:center;
 
-  font-size:15px;
-  font-weight:600;
+    justify-content:center;
 
-  transition:
-    color .3s ease,
-    background .3s ease;
+    text-decoration:none;
+
+    color:#cbd5e1;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    padding:10px 0;
+
+    transition:.35s ease;
+
 }
 
 .nav-link:hover{
 
-  color:#ffffff;
+    color:#ffffff;
+
 }
+
+/*==============================
+UNDERLINE
+==============================*/
 
 .nav-link::after{
 
-  content:"";
+    content:"";
 
-  position:absolute;
+    position:absolute;
 
-  left:0;
-  bottom:-6px;
+    left:50%;
 
-  width:0;
-  height:2px;
+    bottom:-6px;
 
-  border-radius:20px;
+    width:0;
 
-  background:
+    height:3px;
+
+    border-radius:50px;
+
+    transform:translateX(-50%);
+
+    background:
+
     linear-gradient(
-      90deg,
-      #9333ea,
-      #2563eb
+        90deg,
+        #8b5cf6,
+        #2563eb
     );
 
-  transition:
-    width .3s ease;
+    transition:.35s ease;
+
 }
 
 .nav-link:hover::after{
 
-  width:100%;
+    width:100%;
+
 }
 
-
-/* ==========================
-   ACTIVE LINK
-========================== */
+/*==============================
+ACTIVE LINK
+==============================*/
 
 .nav-link.active{
 
-  color:#ffffff;
+    color:#ffffff;
 
-  background:
-    rgba(255,255,255,.08);
+    padding:10px 18px;
 
-  padding:10px 16px;
+    border-radius:14px;
 
-  border-radius:12px;
+    background:
 
-  border:
-    1px solid rgba(139,92,246,.25);
+    rgba(255,255,255,.06);
 
-  box-shadow:
-    0 8px 20px rgba(139,92,246,.15);
+    border:
+
+    1px solid rgba(139,92,246,.30);
+
+    box-shadow:
+
+    0 10px 25px rgba(139,92,246,.15);
+
 }
 
 .nav-link.active::after{
 
-  width:100%;
+    display:none;
+
 }
 
-/* ==========================
-   AUTH SECTION
-========================== */
+/*==============================
+AUTH SECTION
+==============================*/
 
 .auth-section{
 
-  margin-left:auto;
+    display:flex;
 
-  display:flex;
-  align-items:center;
+    align-items:center;
 
-  gap:12px;
+    gap:14px;
+
+    margin-left:auto;
+
 }
 
-/* ==========================
-   COMMON BUTTONS
-========================== */
+/*==============================
+COMMON BUTTON
+==============================*/
 
 .login-btn,
 .signup-btn,
 .logout-btn{
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    display:inline-flex;
 
-  min-width:110px;
-  height:44px;
+    align-items:center;
 
-  padding:10px 22px;
+    justify-content:center;
 
-  border:none;
+    min-width:120px;
 
-  border-radius:14px;
+    height:46px;
 
-  text-decoration:none;
+    padding:0 22px;
 
-  font-size:14px;
-  font-weight:600;
+    border-radius:14px;
 
-  cursor:pointer;
+    font-size:14px;
 
-  transition:
-    all .3s ease;
+    font-weight:600;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+
 }
 
-/* ==========================
-   LOGIN / PROFILE
-========================== */
+/*==============================
+LOGIN BUTTON
+==============================*/
 
 .login-btn{
 
-  color:#ffffff;
+    color:#ffffff;
 
-  background:
+    background:
+
     rgba(255,255,255,.05);
 
-  border:
+    border:
+
     1px solid rgba(255,255,255,.10);
 
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(15px);
 
-  box-shadow:
-    0 4px 12px rgba(0,0,0,.15);
 }
 
 .login-btn:hover{
 
-  color:#ffffff;
+    color:#ffffff;
 
-  transform:
-    translateY(-3px);
+    transform:translateY(-3px);
 
-  border-color:
-    rgba(147,51,234,.40);
+    border-color:
 
-  box-shadow:
-    0 10px 24px rgba(124,58,237,.20);
+    rgba(139,92,246,.45);
+
+    box-shadow:
+
+    0 10px 24px rgba(139,92,246,.18);
+
 }
 
-/* ==========================
-   SIGNUP BUTTON
-========================== */
+/*==============================
+SIGNUP BUTTON
+==============================*/
 
 .signup-btn{
 
-  color:#ffffff;
+    color:#ffffff;
 
-  background:
+    border:none;
+
+    background:
+
     linear-gradient(
-      135deg,
-      #9333ea,
-      #2563eb
+        135deg,
+        #8b5cf6,
+        #2563eb
     );
 
-  box-shadow:
-    0 8px 22px rgba(37,99,235,.25);
+    box-shadow:
+
+    0 12px 28px rgba(37,99,235,.25);
+
 }
 
 .signup-btn:hover{
 
-  color:#ffffff;
+    color:#ffffff;
 
-  transform:
-    translateY(-3px);
+    transform:translateY(-3px);
 
-  box-shadow:
-    0 12px 30px rgba(37,99,235,.35);
+    box-shadow:
+
+    0 18px 35px rgba(37,99,235,.35);
+
 }
 
-/* ==========================
-   LOGOUT BUTTON
-========================== */
+/*==============================
+LOGOUT BUTTON
+==============================*/
 
 .logout-btn{
 
-  color:#ffffff;
+    border:none;
 
-  background:
+    color:#ffffff;
+
+    background:
+
     linear-gradient(
-      135deg,
-      #dc2626,
-      #ef4444
+        135deg,
+        #dc2626,
+        #ef4444
     );
 
-  box-shadow:
-    0 8px 22px rgba(239,68,68,.25);
+    box-shadow:
+
+    0 12px 28px rgba(239,68,68,.22);
+
 }
 
 .logout-btn:hover{
 
-  transform:
-    translateY(-3px);
+    transform:translateY(-3px);
 
-  box-shadow:
-    0 12px 30px rgba(239,68,68,.35);
+    box-shadow:
+
+    0 18px 35px rgba(239,68,68,.32);
+
 }
 
-/* ==========================
-   DESKTOP LAYOUT
-========================== */
+/*==============================
+PROFILE ICON
+==============================*/
 
-@media (min-width:769px){
+.login-btn span{
 
-  .navbar-links{
+    margin-right:8px;
 
-    justify-content:flex-start;
-  }
-
-  .auth-section{
-
-    margin-left:auto;
-  }
 }
 
-/* ==========================
-   HAMBURGER BUTTON
-========================== */
+/*==============================
+LAPTOP
+==============================*/
+
+@media(max-width:1200px){
+
+.navbar-links{
+
+    gap:24px;
+
+    margin-left:30px;
+
+}
+
+}
+
+/*==============================
+TABLET
+==============================*/
+
+@media(max-width:992px){
+
+.navbar-links{
+
+    gap:18px;
+
+    margin-left:20px;
+
+}
+
+.login-btn,
+.signup-btn,
+.logout-btn{
+
+    min-width:105px;
+
+    font-size:13px;
+
+}
+
+}
+
+/* ===========================================================
+   AXLIB PREMIUM NAVBAR
+   PART 2
+   MOBILE MENU • HAMBURGER • RESPONSIVE
+=========================================================== */
+
+/*==============================
+HAMBURGER BUTTON
+==============================*/
 
 .navbar-toggle{
 
-  display:none;
+    display:none;
 
-  width:32px;
-  height:24px;
+    width:46px;
 
-  padding:0;
+    height:46px;
 
-  border:none;
-  outline:none;
+    border:none;
 
-  background:transparent;
+    outline:none;
 
-  cursor:pointer;
+    cursor:pointer;
 
-  flex-direction:column;
-  justify-content:space-between;
+    border-radius:12px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:6px;
+
+    transition:.35s ease;
+
+}
+
+.navbar-toggle:hover{
+
+    background:rgba(139,92,246,.15);
+
+    border-color:rgba(139,92,246,.35);
+
 }
 
 .toggle-bar{
 
-  width:100%;
-  height:3px;
+    width:22px;
 
-  border-radius:20px;
+    height:2.5px;
 
-  background:#ffffff;
+    border-radius:30px;
 
-  transition:
-    transform .35s ease,
-    opacity .35s ease;
+    background:#ffffff;
+
+    transition:.35s ease;
+
 }
 
-/* ==========================
-   HAMBURGER ANIMATION
-========================== */
+/*==============================
+HAMBURGER ANIMATION
+==============================*/
 
-.navbar-toggle.open
-.toggle-bar:nth-child(1){
+.navbar-toggle.open .toggle-bar:nth-child(1){
 
-  transform:
-    translateY(10px)
+    transform:
+    translateY(8px)
     rotate(45deg);
+
 }
 
-.navbar-toggle.open
-.toggle-bar:nth-child(2){
+.navbar-toggle.open .toggle-bar:nth-child(2){
 
-  opacity:0;
+    opacity:0;
+
+    transform:scale(0);
+
 }
 
-.navbar-toggle.open
-.toggle-bar:nth-child(3){
+.navbar-toggle.open .toggle-bar:nth-child(3){
 
-  transform:
-    translateY(-10px)
+    transform:
+    translateY(-8px)
     rotate(-45deg);
+
 }
 
-/* ==========================
-   TABLET
-========================== */
+/*==============================
+MOBILE MENU
+==============================*/
 
-@media (max-width:992px){
+@media(max-width:768px){
 
-  .navbar-container{
-
-    padding:0 20px;
-  }
-
-  .navbar-links{
-
-    gap:25px;
-  }
-
-  .navbar-logo{
-
-    width:68px;
-    height:68px;
-  }
-
-  .brand-text h2{
-
-    font-size:30px;
-  }
-
-  .login-btn,
-  .signup-btn,
-  .logout-btn{
-
-    min-width:100px;
-
-    padding:10px 18px;
-  }
-}
-
-/* ==========================
-   MOBILE
-========================== */
-
-@media (max-width:768px){
-
-  .navbar-container{
-
-    height:72px;
-
-    padding:0 16px;
-  }
-
-  .navbar-logo{
-
-    width:58px;
-    height:58px;
-  }
-
-  .brand-text h2{
-
-    font-size:24px;
-
-    letter-spacing:2px;
-  }
-
-  .navbar-toggle{
+.navbar-toggle{
 
     display:flex;
 
     margin-left:auto;
-  }
 
-  /* ==========================
-     MOBILE MENU
-  ========================== */
+}
 
-  .navbar-links{
+.navbar-links{
 
     position:fixed;
 
-    top:72px;
+    top:68px;
+
     left:0;
 
     width:100%;
 
+    height:calc(100vh - 68px);
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(2,6,23,.98),
+        rgba(15,23,42,.98)
+    );
+
+    backdrop-filter:blur(24px);
+
+    -webkit-backdrop-filter:blur(24px);
+
     display:flex;
 
     flex-direction:column;
 
-    align-items:flex-start;
+    align-items:center;
 
-    gap:18px;
+    justify-content:flex-start;
 
-    padding:24px;
+    gap:22px;
+
+    padding:35px 25px;
 
     margin:0;
 
-    background:
-      rgba(10,15,35,.98);
-
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
-
-    border-top:
-      1px solid rgba(255,255,255,.05);
-
-    box-shadow:
-      0 20px 40px rgba(0,0,0,.35);
-
-    transform:translateY(-100%);
+    transform:translateX(100%);
 
     opacity:0;
 
-    pointer-events:none;
+    visibility:hidden;
 
-    transition:
-      transform .35s ease,
-      opacity .35s ease;
-  }
+    transition:.35s ease;
 
-  .navbar-links.show{
+    overflow-y:auto;
 
-    transform:translateY(0);
+    z-index:999;
+
+}
+
+.navbar-links.show{
+
+    transform:translateX(0);
 
     opacity:1;
 
-    pointer-events:auto;
-  }
+    visibility:visible;
 
-  .nav-link{
+}
+
+/*==============================
+LINK
+==============================*/
+
+.nav-link{
+
+    width:100%;
+
+    max-width:320px;
+
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.05);
+
+}
+
+.nav-link:hover{
+
+    background:rgba(139,92,246,.15);
+
+    border-color:rgba(139,92,246,.35);
+
+}
+
+.nav-link::after{
+
+    display:none;
+
+}
+
+.nav-link.active{
 
     width:100%;
 
-    font-size:16px;
-  }
+    max-width:320px;
 
-  .nav-link.active{
+    background:
+
+    linear-gradient(
+        135deg,
+        #8b5cf6,
+        #2563eb
+    );
+
+    border:none;
+
+    box-shadow:
+
+    0 12px 28px rgba(139,92,246,.25);
+
+}
+
+/*==============================
+AUTH
+==============================*/
+
+.auth-section{
 
     width:100%;
-  }
 
-  /* ==========================
-     MOBILE AUTH
-  ========================== */
-
-  .auth-section{
-
-    width:100%;
+    max-width:320px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:12px;
+    gap:14px;
 
-    margin-top:12px;
+    margin-top:18px;
 
-    margin-left:0;
-  }
+}
 
-  .login-btn,
-  .signup-btn,
-  .logout-btn{
+.login-btn,
+.signup-btn,
+.logout-btn{
 
     width:100%;
 
-    height:48px;
-
-    justify-content:center;
-
-    text-align:center;
+    height:50px;
 
     border-radius:14px;
-  }
+
 }
 
-/* ==========================
-   SMALL MOBILE
-========================== */
+/*==============================
+MENU SHADOW
+==============================*/
 
-@media (max-width:480px){
+.navbar-links{
 
-  .navbar-container{
+    box-shadow:
 
-    height:68px;
+    -10px 0 40px rgba(0,0,0,.35);
 
-    padding:0 12px;
-  }
+}
 
-  .navbar-logo{
+}
 
-    width:50px;
-    height:50px;
-  }
+/*==============================
+SMALL MOBILE
+==============================*/
 
-  .brand-text h2{
+@media(max-width:480px){
 
-    font-size:20px;
+.navbar-links{
 
-    letter-spacing:1px;
-  }
+    padding:25px 18px;
 
-  .navbar-links{
+}
 
-    top:68px;
+.nav-link{
 
-    padding:20px;
-  }
-
-  .nav-link{
+    height:48px;
 
     font-size:15px;
-  }
 
-  .login-btn,
-  .signup-btn,
-  .logout-btn{
+}
 
-    height:46px;
+.login-btn,
+.signup-btn,
+.logout-btn{
+
+    height:48px;
 
     font-size:14px;
-  }
+
 }
 
-/* ==========================
-   LARGE DESKTOP
-========================== */
+.navbar-toggle{
 
-@media (min-width:1200px){
+    width:42px;
 
-  .navbar-container{
+    height:42px;
 
-    padding:0 32px;
-  }
-
-  .navbar-links{
-
-    gap:40px;
-  }
-
-  .brand-text h2{
-
-    font-size:36px;
-  }
-
-  .navbar-logo{
-
-    width:80px;
-    height:80px;
-  }
 }
 
-/* ==========================
-   EXTRA LARGE SCREEN
-========================== */
+.toggle-bar{
 
-@media (min-width:1600px){
+    width:20px;
 
-  .navbar-container{
-
-    max-width:1700px;
-  }
-
-  .navbar-links{
-
-    gap:45px;
-  }
 }
 
-/* ==========================
-   BUTTON ACTIVE STATE
-========================== */
-
-.login-btn.active-btn,
-.signup-btn.active-btn{
-
-  border:1px solid rgba(139,92,246,.35);
-
-  box-shadow:
-    0 8px 22px rgba(139,92,246,.18);
 }
 
+/* ===========================================================
+   AXLIB PREMIUM NAVBAR
+   PART 3
+   PREMIUM ANIMATION • DESKTOP POLISH • FINAL EFFECTS
+=========================================================== */
 
-/* ==========================
-   SCROLLBAR
-========================== */
+/*==============================
+SCROLL EFFECT
+==============================*/
+
+.navbar.scrolled{
+
+    background:
+    rgba(2,6,23,.92);
+
+    backdrop-filter:blur(24px);
+
+    -webkit-backdrop-filter:blur(24px);
+
+    border-bottom:
+    1px solid rgba(139,92,246,.18);
+
+    box-shadow:
+    0 12px 40px rgba(0,0,0,.35);
+
+}
+
+/*==============================
+LINK HOVER GLOW
+==============================*/
+
+.nav-link{
+
+    overflow:hidden;
+
+}
+
+.nav-link::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:12px;
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(139,92,246,.18),
+        transparent 75%
+    );
+
+    opacity:0;
+
+    transition:.35s;
+
+    z-index:-1;
+
+}
+
+.nav-link:hover::before{
+
+    opacity:1;
+
+}
+
+/*==============================
+ACTIVE GLOW
+==============================*/
+
+.nav-link.active{
+
+    animation:
+    activeGlow 2.5s infinite;
+
+}
+
+@keyframes activeGlow{
+
+0%{
+
+box-shadow:
+0 0 0 rgba(139,92,246,.10);
+
+}
+
+50%{
+
+box-shadow:
+0 0 25px rgba(139,92,246,.22);
+
+}
+
+100%{
+
+box-shadow:
+0 0 0 rgba(139,92,246,.10);
+
+}
+
+}
+
+/*==============================
+BUTTON RIPPLE
+==============================*/
+
+.login-btn,
+.signup-btn,
+.logout-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.login-btn::before,
+.signup-btn::before,
+.logout-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.18);
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    transition:.45s;
+
+}
+
+.login-btn:hover::before,
+.signup-btn:hover::before,
+.logout-btn:hover::before{
+
+    width:280px;
+
+    height:280px;
+
+}
+
+/*==============================
+LOGO ANIMATION
+==============================*/
+
+.navbar-logo{
+
+    animation:
+    floatLogo 5s ease-in-out infinite;
+
+}
+
+@keyframes floatLogo{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-3px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/*==============================
+DESKTOP HOVER
+==============================*/
+
+@media(min-width:992px){
+
+.nav-link{
+
+padding:12px 2px;
+
+}
+
+.nav-link:hover{
+
+transform:
+translateY(-2px);
+
+}
+
+}
+
+/*==============================
+SMOOTH MENU
+==============================*/
+
+.navbar-links{
+
+transition:
+
+opacity .35s ease,
+
+transform .35s ease,
+
+gap .35s ease;
+
+}
+
+/*==============================
+CUSTOM SCROLLBAR
+==============================*/
 
 ::-webkit-scrollbar{
 
-  width:8px;
-  height:8px;
+width:8px;
+
+height:8px;
+
 }
 
 ::-webkit-scrollbar-track{
 
-  background:#020617;
+background:#020617;
+
 }
 
 ::-webkit-scrollbar-thumb{
 
-  background:
-    linear-gradient(
-      180deg,
-      #9333ea,
-      #2563eb
-    );
+border-radius:50px;
 
-  border-radius:50px;
+background:
+
+linear-gradient(
+180deg,
+#8b5cf6,
+#2563eb
+);
+
 }
 
 ::-webkit-scrollbar-thumb:hover{
 
-  background:
-    linear-gradient(
-      180deg,
-      #7e22ce,
-      #1d4ed8
-    );
+background:
+
+linear-gradient(
+180deg,
+#a855f7,
+#3b82f6
+);
+
 }
 
-/* ==========================
-   TEXT SELECTION
-========================== */
+/*==============================
+TEXT SELECTION
+==============================*/
 
 ::selection{
 
-  background:
-    rgba(147,51,234,.35);
+background:
 
-  color:#ffffff;
+rgba(139,92,246,.35);
+
+color:#fff;
+
 }
 
-::-moz-selection{
+/*==============================
+SMOOTH TRANSITION
+==============================*/
 
-  background:
-    rgba(147,51,234,.35);
+*{
 
-  color:#ffffff;
+transition:
+
+background .3s ease,
+
+border-color .3s ease,
+
+color .3s ease,
+
+transform .3s ease,
+
+box-shadow .3s ease;
+
 }
 
-/* ==========================
-   FOCUS EFFECT
-========================== */
+/*==============================
+OVERFLOW FIX
+==============================*/
 
-.nav-link:focus-visible,
-.login-btn:focus-visible,
-.signup-btn:focus-visible,
-.logout-btn:focus-visible,
-.navbar-toggle:focus-visible{
+html,
+body{
 
-  outline:2px solid #8b5cf6;
+overflow-x:hidden;
 
-  outline-offset:3px;
-
-  border-radius:10px;
 }
 
-/* ==========================
-   SMOOTH SCROLL
-========================== */
+.navbar{
 
-html{
+overflow:visible;
 
-  scroll-behavior:smooth;
 }
 
+/*==============================
+END
+==============================*/

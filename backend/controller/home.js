@@ -1,94 +1,71 @@
 const homeController = {};
-
 const { BookModel } = require("../model/BookModel");
 const { BorrowModel } = require("../model/BorrowModel");
-const { getCache, setCache } = require("../utils/cache");
+const { setCache, getCache } = require("../utils/cache");
 
 homeController.getHomeData = async (req, res) => {
   try {
-    // Cache
+  
     const cachedData = getCache("homeData");
-
     if (cachedData) {
       return res.status(200).json({
         error: false,
-        ...cachedData,
+        message: "Homepage data fetched from cache",
+        ...cachedData
       });
     }
 
-    // Total Books
+
     const totalBooks = await BookModel.countDocuments();
-
-    // Total Categories
-    const totalCategories = await BookModel.distinct("category");
-
-    // Categories
     const categories = await BookModel.aggregate([
-      {
-        $group: {
-          _id: "$category",
-          count: { $sum: 1 },
-          coverImage: { $first: "$coverImage" },
-        },
-      },
-      {
-        $sort: { count: -1 },
-      },
-      {
-        $limit: 4,
-      },
-    ]);
+      { $group: { _id: "$category", count: { $sum: 1 }, coverImage: { $first: "$coverImage" } } },
+      { $sort: { count: -1 } },
+      { $limit: 4 }
+    ]).then(data =>
+      data.map(item => ({
+        category: item._id,
+        count: item.count,
+        // coverImage: item.coverImage || "/images/default-subject.jpg"
+        coverImage: item.coverImage
+      }))
+    );
 
-    const formattedCategories = categories.map((item) => ({
-      _id: item._id,
-      category: item._id,
-      count: item.count,
-      coverImage: item.coverImage || "",
-    }));
+    const totalCategories = await BookModel.distinct("category").then(c => c.length);
 
-    // New Arrivals
-    const newArrivals = await BookModel.find({})
+    const newArrivals = await BookModel.find()
       .sort({ createdAt: -1 })
       .limit(4)
       .select("title author category coverImage");
 
-    // Active Students
-    const issuedBooks = await BorrowModel.find({
-      status: "Issued",
-    }).select("userId");
+    const issuedBooks = await BorrowModel.find({ status: "Issued" }).select("userId");
+    const activeStudents = new Set(issuedBooks.map(issue => issue.userId.toString()));
+    const totalActiveStudents = activeStudents.size;
 
-    const totalActiveStudents = [
-      ...new Set(
-        issuedBooks.map((item) => item.userId.toString())
-      ),
-    ].length;
-
-    const response = {
+    const responseData = {
       stats: {
         totalBooks,
-        totalCategories: totalCategories.length,
-        totalActiveStudents,
+        totalCategories,
+        totalActiveStudents
       },
-      categories: formattedCategories,
-      newArrivals,
+      categories,
+      newArrivals
     };
 
-    setCache("homeData", response);
+    
+    setCache("homeData", responseData);
 
-    return res.status(200).json({
+    res.status(200).json({
       error: false,
-      ...response,
+      message: "Homepage data fetched successfully",
+      ...responseData
     });
-  } catch (err) {
-    console.error(err);
-
-    return res.status(500).json({
+  } catch (error) {
+    res.status(500).json({
       error: true,
-      message: err.message,
+      message: "Internal Server Error",
+      details: error.message
     });
   }
 };
 
-module.exports = {
-  homeController,
-};
+module.exports = { homeController };

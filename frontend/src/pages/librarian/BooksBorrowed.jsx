@@ -25,7 +25,7 @@ export default function BooksBorrowed() {
 
       setRequests(res.data.requests || []);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       setRequests([]);
     }
   };

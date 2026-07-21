@@ -21,42 +21,42 @@ const Books = () => {
 
 
   async function issueBook(bookid) {
-        try {
-          console.log("bookId");
-            console.log(bookid);
-          const authToken = localStorage.getItem("authToken");
-          console.log(authToken)
-          if (!authToken) {
-            showErrorToast("Please login to issue a book.");
-            return;
-        }
-           const url =Server_URL + 'borrow/request-issue/'+bookid;
-           const response = await axios.post(`${Server_URL}books/borrow/request-issue/${bookid}`,{}, {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          });
+    try {
+      // // console.log("bookId");
+      // // console.log(bookid);
+      const authToken = localStorage.getItem("authToken");
+      // // console.log(authToken)
+      if (!authToken) {
+        showErrorToast("Please login to issue a book.");
+        return;
+      }
+      const url = Server_URL + 'borrow/request-issue/' + bookid;
+      const response = await axios.post(`${Server_URL}books/borrow/request-issue/${bookid}`, {}, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
 
-          // alert(response.data);
-          const {error,message} = response.data;
-          if(error){
-            console.log(error);
-            showErrorToast(message)
-          }
-          else{
-            showSuccessToast(message);
-          }
-        } catch (error) {
-          // console.error("Error:", error.response?.data || error.message);
-          showErrorToast(error.response?.data?.message || "Something went wrong! Please try again.");
-          
-        }    
+      // alert(response.data);
+      const { error, message } = response.data;
+      if (error) {
+        // console.log(error);
+        showErrorToast(message)
       }
-    
-      async function bookDetails(bookid) {
-        console.log(bookid)
-        navigate(`/bookdetails/${bookid}`);       
+      else {
+        showSuccessToast(message);
       }
+    } catch (error) {
+      // // console.error("Error:", error.response?.data || error.message);
+      showErrorToast(error.response?.data?.message || "Something went wrong! Please try again.");
+
+    }
+  }
+
+  async function bookDetails(bookid) {
+    // // console.log(bookid)
+    navigate(`/bookdetails/${bookid}`);
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -70,7 +70,7 @@ const Books = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching books:", error);
+        // console.error("Error fetching books:", error);
       }).finally(() => {
         setIsLoading(false);
       });

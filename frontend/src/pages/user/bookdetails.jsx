@@ -41,7 +41,7 @@ function BookDetails() {
     //             setBook(updatedResponse.data);
     //         }
     //     } catch (error) {
-    //         console.error("Error:", error.response?.data || error.message);
+    //         // console.error("Error:", error.response?.data || error.message);
     //         alert(error.response?.data?.message || "Something went wrong! Please try again.");
     //     } finally {
     //         setIsIssuing(false);
@@ -49,10 +49,10 @@ function BookDetails() {
     // }
     async function issueBook(bookid) {
         try {
-        //   console.log("bookId");
-            // console.log(bookid);
+        //   // console.log("bookId");
+            // // console.log(bookid);
           const authToken = localStorage.getItem("authToken");
-        //   console.log(authToken)
+        //   // console.log(authToken)
           if (!authToken) {
             showErrorToast("Please login to issue a book.");
             return;
@@ -67,14 +67,14 @@ function BookDetails() {
           // alert(response.data);
           const {error,message} = response.data;
           if(error){
-            console.log(error);
+            // console.log(error);
             showErrorToast(message)
           }
           else{
             showSuccessToast(message);
           }
         } catch (error) {
-          // console.error("Error:", error.response?.data || error.message);
+          // // console.error("Error:", error.response?.data || error.message);
           showErrorToast(error.response?.data?.message || "Something went wrong! Please try again.");
           
         }    
@@ -88,7 +88,7 @@ function BookDetails() {
                 setBook(response.data);
                 setError(null);
             } catch (error) {
-                console.error("Error fetching book:", error);
+                // console.error("Error fetching book:", error);
                 setError("Failed to load book details. Please try again later.");
             } finally {
                 setIsLoading(false);

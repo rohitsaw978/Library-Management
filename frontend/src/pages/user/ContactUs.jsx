@@ -26,7 +26,7 @@ const ContactUs = () => {
       );
       reset();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       showErrorToast(
         "There was a problem sending your message. Please try again later."
       );

@@ -45,7 +45,7 @@ export default function AddLibrarian() {
         }
       );
 
-      console.log(response.data);
+      // console.log(response.data);
 
       showSuccessToast(
         "Registration Successful!"
@@ -53,7 +53,7 @@ export default function AddLibrarian() {
 
       reset();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
 
       showErrorToast(
         "Registration Failed!"

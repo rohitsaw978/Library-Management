@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import './App.css';
 import Userlayout from "./layout/userlayout";
 import AdminLayout from "./layout/adminlayout";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Lazy load all page components
 const Login = lazy(() => import("./pages/user/login"));
@@ -50,7 +51,7 @@ function App() {
           navigate("/");
         }
       } catch (err) {
-        console.error("Token decode failed", err);
+        // console.error("Token decode failed", err);
         localStorage.removeItem("authToken");
       }
     }

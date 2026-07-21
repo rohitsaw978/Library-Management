@@ -14,7 +14,9 @@ const contact = require("./routes/contact"); // <-- New Route
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://library-management-app-karan.vercel.app",
+  "http://localhost:5174",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174",
 ];
 
 app.use(express.json());
@@ -48,12 +50,12 @@ const PORT = process.env.PORT || 5000;
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("\u2705 MongoDB Connected");
+    console.log("✅ MongoDB Connected");
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
   })
   .catch((err) => {
-    console.log("MongoDB Error:", err.message);
+    // console.log("MongoDB Error:", err.message);
   });

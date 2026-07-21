@@ -5,6 +5,7 @@ const { checkRole } = require("../middlewares/checkRole");
 const { userAuth } = require("../middlewares/userAuth");
 const { userController } = require("../controller/user");
 
+
 // Get All Users
 router.get("/", userController.getUsers);
 
@@ -36,5 +37,7 @@ router.post("/reset-password", userController.resetPassword);
 
 // Delete User / Librarian
 router.delete("/:id", userController.deleteUser);
+
+router.post("/google", userController.googleLogin);
 
 module.exports = router;

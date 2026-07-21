@@ -10,6 +10,11 @@ import {
   showSuccessToast,
 } from "../../utils/toasthelper";
 
+import { jwtDecode } from "jwt-decode";
+
+
+
+
 export default function Login() {
   const {
     register,
@@ -18,6 +23,34 @@ export default function Login() {
   } = useForm();
 
   const navigate = useNavigate();
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+  try {
+    const response = await axios.post(
+      `${Server_URL}users/google`,
+      {
+        credential: credentialResponse.credential,
+      }
+    );
+
+    localStorage.setItem(
+      "authToken",
+      response.data.token
+    );
+
+    localStorage.setItem(
+      "role",
+      response.data.user.role
+    );
+
+    showSuccessToast("Google Login Successful!");
+
+    navigate("/");
+
+  } catch (err) {
+    showErrorToast("Google Login Failed");
+  }
+};
 
   // Password Show / Hide
   const [showPassword, setShowPassword] = useState(false);

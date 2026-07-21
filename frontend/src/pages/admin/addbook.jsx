@@ -53,7 +53,7 @@ const AddBookForm = () => {
         reset();
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       showErrorToast("Failed to Add Book!");
     }
   };
@@ -163,7 +163,7 @@ const AddBookForm = () => {
                     color: "rgba(255,255,255,.8)",
                   }}
                 >
-                  Add a new book into your library
+                  <br />Add a new book into your library
                 </p>
               </div>
 
@@ -241,18 +241,10 @@ const AddBookForm = () => {
                         })}
                       >
                         <option value="">Select Category</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Management">Management</option>
-                        <option value="Commerce">Commerce</option>
-                        <option value="Arts & Humanities">Arts & Humanities</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-fiction">Non-fiction</option>
                         <option value="Science">Science</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Language & Literature">Language & Literature</option>
-                        <option value="General Knowledge">General Knowledge</option>
-                        <option value="Research & Journals">Research & Journals</option>
-                        <option value="Novels & Fiction">Novels & Fiction</option>
-                        <option value="Others">Others</option>
-
+                        <option value="History">History</option>
                       </select>
 
                       {errors.category && (

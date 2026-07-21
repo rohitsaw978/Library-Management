@@ -7,6 +7,10 @@ const JWT_SECRET = "12345@abcd12";
 const jwt = require("jsonwebtoken");
 const {OtpModel} = require("../model/OtpModel");
 const userController = {};
+const axios = require("axios");
+
+
+
 
 userController.userRegistration = async (req, res) => {
     try {
@@ -68,6 +72,63 @@ userController.login = async (req,res)=>{
         res.status(500).json({ message: "Server error", error: error.message });
     }
 }
+
+userController.googleLogin = async (req, res) => {
+  try {
+    const { access_token } = req.body;
+
+    const googleRes = await axios.get(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+
+    const { email, name, picture } = googleRes.data;
+
+    let user = await UserModel.findOne({ email });
+
+    if (!user) {
+      user = new UserModel({
+        name,
+        email,
+        password: "",
+        stream: "",
+        year: "",
+        role: "user",
+      });
+
+      await user.save();
+    }
+
+    const payload = {
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+    };
+
+    const token = jwt.sign(payload, JWT_SECRET, {
+      expiresIn: "24h",
+    });
+
+    res.status(200).json({
+      success: true,
+      token,
+      user,
+      picture,
+    });
+  } catch (error) {
+    console.error("Google Login Error:", error.response?.data || error.message);
+
+    res.status(500).json({
+      success: false,
+      message: "Google Login Failed",
+    });
+  }
+};
 
 userController.getUsers = async (req,res) => {
     try {

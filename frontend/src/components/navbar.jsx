@@ -1,70 +1,108 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import "./navbar.css";
 import logo from "../assets/axlib-logo.png";
+import { FaBook, FaPlus, FaUserCircle } from "react-icons/fa";
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
 
-  const [token, setToken] = useState(
-    localStorage.getItem("authToken")
-  );
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const token = localStorage.getItem("authToken");
 
   const navigate = useNavigate();
 
+  /* ===============================
+      SCROLL EFFECT
+  =============================== */
+
   useEffect(() => {
-    const syncAuth = () => {
-      setToken(localStorage.getItem("authToken"));
+
+    const handleScroll = () => {
+
+      if (window.scrollY > 40) {
+
+        setScrolled(true);
+
+      } else {
+
+        setScrolled(false);
+
+      }
+
     };
 
-    window.addEventListener("storage", syncAuth);
-
-    window.addEventListener("focus", syncAuth);
-
-    syncAuth();
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("storage", syncAuth);
-      window.removeEventListener("focus", syncAuth);
+
+      window.removeEventListener("scroll", handleScroll);
+
     };
+
   }, []);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
-  const handleNavClick = () => {
-    closeMenu();
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
+  /* ===============================
+      LOGOUT
+  =============================== */
 
   const handleLogout = () => {
+
     localStorage.removeItem("authToken");
     localStorage.removeItem("role");
 
-    setToken(null);
+    navigate("/login");
+
+  };
+
+  /* ===============================
+      CLOSE MOBILE MENU
+  =============================== */
+
+  const closeMenu = () => {
+
+    setMenuOpen(false);
+
+  };
+
+  /* ===============================
+      NAVIGATION CLICK
+  =============================== */
+
+  const handleNavClick = () => {
 
     closeMenu();
 
-    navigate("/login");
+    window.scrollTo({
+
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+
+    });
+
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* ================= LOGO ================= */}
 
-        <NavLink
+    <nav
+      className={`navbar ${scrolled ? "scrolled" : ""}`}
+    >
+
+      <div className="navbar-container">
+
+        {/* ===============================
+              LOGO
+        =============================== */}
+
+        <Link
           to="/"
           className="navbar-brand"
           onClick={handleNavClick}
         >
+
           <img
             src={logo}
             alt="AXLIB Logo"
@@ -72,39 +110,55 @@ export default function Navbar() {
           />
 
           <div className="brand-text">
-            <h2>
-              <span className="logo-a">A</span>XLIB
-            </h2>
-          </div>
-        </NavLink>
 
-        {/* ================= MOBILE TOGGLE ================= */}
+            <h2>
+
+              <span className="logo-a">
+                A
+              </span>
+
+              XLIB
+
+            </h2>
+
+          </div>
+
+        </Link>
+
+        {/* ===============================
+              MOBILE TOGGLE
+        =============================== */}
 
         <button
-          className={`navbar-toggle ${menuOpen ? "open" : ""}`}
+          className={`navbar-toggle ${menuOpen ? "open" : ""
+            }`}
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
         >
+
           <span className="toggle-bar"></span>
+
           <span className="toggle-bar"></span>
+
           <span className="toggle-bar"></span>
+
         </button>
 
-        {/* ================= NAVIGATION ================= */}
+        {/* ======= PART 2 STARTS FROM HERE ======= */}
+
+        {/* ===============================
+              NAVIGATION MENU
+        =============================== */}
 
         <div
-          className={`navbar-links ${
-            menuOpen ? "show" : ""
-          }`}
+          className={`navbar-links ${menuOpen ? "show" : ""
+            }`}
         >
+
           <NavLink
             to="/"
-            end
             onClick={handleNavClick}
             className={({ isActive }) =>
-              isActive
-                ? "nav-link active"
-                : "nav-link"
+              isActive ? "nav-link active" : "nav-link"
             }
           >
             Home
@@ -114,9 +168,7 @@ export default function Navbar() {
             to="/books"
             onClick={handleNavClick}
             className={({ isActive }) =>
-              isActive
-                ? "nav-link active"
-                : "nav-link"
+              isActive ? "nav-link active" : "nav-link"
             }
           >
             Books
@@ -126,9 +178,7 @@ export default function Navbar() {
             to="/category"
             onClick={handleNavClick}
             className={({ isActive }) =>
-              isActive
-                ? "nav-link active"
-                : "nav-link"
+              isActive ? "nav-link active" : "nav-link"
             }
           >
             Category
@@ -138,9 +188,7 @@ export default function Navbar() {
             to="/aboutus"
             onClick={handleNavClick}
             className={({ isActive }) =>
-              isActive
-                ? "nav-link active"
-                : "nav-link"
+              isActive ? "nav-link active" : "nav-link"
             }
           >
             About
@@ -150,68 +198,74 @@ export default function Navbar() {
             to="/contactus"
             onClick={handleNavClick}
             className={({ isActive }) =>
-              isActive
-                ? "nav-link active"
-                : "nav-link"
+              isActive ? "nav-link active" : "nav-link"
             }
           >
             Contact
           </NavLink>
 
-          {/* ================= AUTH ================= */}
+          {/* ===============================
+                AUTH SECTION
+          =============================== */}
 
           <div className="auth-section">
+
             {token ? (
+
               <>
-                <NavLink
+
+                <Link
                   to="/user"
+                  className="login-btn"
                   onClick={handleNavClick}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "login-btn active-btn"
-                      : "login-btn"
-                  }
                 >
-                  👤 Profile
-                </NavLink>
+                  <FaUserCircle className="nav-icon" />
+                  &nbsp;Profile
+                </Link>
 
                 <button
                   className="logout-btn"
-                  onClick={handleLogout}
+                  onClick={() => {
+                    closeMenu();
+                    handleLogout();
+                  }}
                 >
                   Logout
                 </button>
+
               </>
+
             ) : (
+
               <>
-                <NavLink
+
+                <Link
                   to="/login"
+                  className="login-btn"
                   onClick={handleNavClick}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "login-btn active-btn"
-                      : "login-btn"
-                  }
                 >
                   Login
-                </NavLink>
+                </Link>
 
-                <NavLink
+                <Link
                   to="/register"
+                  className="signup-btn"
                   onClick={handleNavClick}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "signup-btn active-btn"
-                      : "signup-btn"
-                  }
                 >
                   Signup
-                </NavLink>
+                </Link>
+
               </>
+
             )}
+
           </div>
+
         </div>
       </div>
+
     </nav>
+
   );
+
 }

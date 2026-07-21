@@ -25,7 +25,7 @@ adminController.addLibrarian = async (req, res) => {
 
         res.status(201).json({ message: "Librarian Added Successfully" });
     } catch (error) {
-        // console.error(error);
+        console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 }

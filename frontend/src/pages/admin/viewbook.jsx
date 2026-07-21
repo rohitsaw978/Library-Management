@@ -64,7 +64,7 @@ const ViewBooks = () => {
 
       setBooks(response.data.books || []);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setBooks([]);
     }
   };

@@ -35,7 +35,7 @@ export default function ViewAllCategories() {
         setCategoryCounts(categoryCountMap);
       }
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      // console.error("Error fetching categories:", error);
       showErrorToast("Failed to load categories.");
     } finally {
       setLoading(false);

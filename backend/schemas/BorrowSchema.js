@@ -13,6 +13,3 @@ const BorrowSchema = new Schema({
 },{ timestamps: true })
 
 module.exports = {BorrowSchema};
-
-
-

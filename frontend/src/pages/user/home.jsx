@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import { Server_URL } from "../../utils/config";
 
+
+  const handleLinkClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
 import {
   FiBook,
   FiClock,
@@ -47,7 +55,7 @@ export default function Home() {
         setNewArrivals(data.newArrivals || []);
       }
     } catch (error) {
-      console.error("Home API Error:", error);
+      // console.error("Home API Error:", error);
 
       setStats({
         totalCategories: 0,
@@ -86,7 +94,7 @@ export default function Home() {
           </p>
 
           <div className="hero-buttons">
-            <Link to="/books" className="btn btn-primary">
+            <Link to="/books" className="btn btn-primary" onClick={handleLinkClick}>
               <FiBook />
               Browse Collections
             </Link>
@@ -160,6 +168,7 @@ export default function Home() {
                   <Link
                     to={`/books?category=${cat?.category}`}
                     className="btn btn-outline"
+                    onClick={handleLinkClick}
                   >
                     View Collection
                   </Link>
@@ -169,7 +178,8 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <Link to="/category" className="btn btn-view-all">
+            <Link to="/category" className="btn btn-view-all"
+             onClick={handleLinkClick}>
               View All Categories
             </Link>
           </div>
@@ -263,4 +273,3 @@ export default function Home() {
     </div>
   );
 }
-

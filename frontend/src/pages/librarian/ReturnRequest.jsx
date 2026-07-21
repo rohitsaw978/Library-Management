@@ -35,7 +35,7 @@ export default function ReturnRequest() {
 
       setRequests(res.data.requests || []);
     } catch (err) {
-      console.error("Error fetching requests", err);
+      // console.error("Error fetching requests", err);
       setRequests([]);
     }
   };
@@ -72,7 +72,7 @@ export default function ReturnRequest() {
         prev.filter((req) => req._id !== id)
       );
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       showErrorToast(
         "Failed to approve request"
       );
@@ -441,27 +441,27 @@ export default function ReturnRequest() {
 
                         {/* Action */}
 
-                        <button
-                          className="btn btn-success btn-sm rounded-pill px-3"
-                          onClick={() => approveRequest(req._id)}
-                        >
-                          &#9989; Approve
-                        </button>
-
-                      </td>
-
-                    </tr>
-
-                  ))}
-
-                </tbody>
-
-              </table>
-
-            </div>
-
-          )}
-
+                        <td className="text-center">
+                          <button
+                            className="btn btn-success rounded-pill px-4"
+                            style={{
+                              fontWeight: "600",
+                            }}
+                            onClick={() =>
+                              approveRequest(req._id)
+                            }
+                          >
+                            <FaCheckCircle className="me-2" />
+                            Approve
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

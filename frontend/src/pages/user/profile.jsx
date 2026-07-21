@@ -4,6 +4,11 @@ import { Server_URL } from "../../utils/config";
 import "./profile.css";
 import { getAuthToken } from "../../utils/auth";
 import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+import {
+  FaBook,
+  FaClipboardList,
+  FaUndoAlt
+} from "react-icons/fa";
 
 function ProfilePage() {
   const [user, setUser] = useState([]);
@@ -24,7 +29,7 @@ function ProfilePage() {
       setIssuedRequests(books.filter(b => b.status === "Requested"));
       setReturnRequests(books.filter(b => b.status === "Requested Return"));
     } catch (error) {
-      console.error("Error fetching issued books:", error.message);
+      // console.error("Error fetching issued books:", error.message);
     }
   };
   async function fetchProfile() {
@@ -32,11 +37,11 @@ function ProfilePage() {
       const response = await axios.get(`${Server_URL}users/profile`, {
         headers: { Authorization: `Bearer ${getAuthToken()}` },
       });
-      
+
       const { user } = response.data;
       setUser(user);
     } catch (error) {
-      console.error("Error fetching profile:", error);
+      // console.error("Error fetching profile:", error);
     }
   }
 
@@ -55,7 +60,7 @@ function ProfilePage() {
       showSuccessToast(response.data.message);
       fetchIssuedBooks();
     } catch (error) {
-      console.error("Error returning book:", error);
+      // console.error("Error returning book:", error);
       showErrorToast(error.response?.data?.message || "Something went wrong!");
     }
   }
@@ -73,7 +78,10 @@ function ProfilePage() {
 
         <div className="profile-sections">
           <div className="section-card issued-books">
-            <h2>&#128218; Issued Books</h2>
+            <h2>
+              <FaBook className="section-icon" />
+              Issued Books
+            </h2>
             {issuedBooks.length === 0 ? (
               <p>No books currently issued.</p>
             ) : (
@@ -112,7 +120,10 @@ function ProfilePage() {
           </div>
 
           <div className="section-card issued-requests">
-            <h2>&#128221; Issued Requests</h2>
+            <h2>
+              <FaClipboardList className="section-icon" />
+              Issued Requests
+            </h2>
             {issuedRequests.length === 0 ? (
               <p>No pending issue requests.</p>
             ) : (
@@ -140,7 +151,10 @@ function ProfilePage() {
           </div>
 
           <div className="section-card return-requests">
-            <h2>&#128260; Return Requests</h2>
+            <h2>
+              <FaUndoAlt className="section-icon" />
+              Return Requests
+            </h2>
             {returnRequests.length === 0 ? (
               <p>No pending return requests.</p>
             ) : (

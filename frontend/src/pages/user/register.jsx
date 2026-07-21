@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./Register.css";
@@ -17,13 +18,20 @@ import {
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
+
+
 import { Server_URL } from "../../utils/config";
 import {
   showSuccessToast,
   showErrorToast,
 } from "../../utils/toasthelper";
 
+import { useGoogleLogin } from "@react-oauth/google";
+
+
 export default function Register() {
+
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] =
     useState(false);
@@ -34,6 +42,31 @@ export default function Register() {
     reset,
     formState: { errors },
   } = useForm();
+
+const googleLogin = useGoogleLogin({
+  onSuccess: async (tokenResponse) => {
+    try {
+      const response = await axios.post(
+        `${Server_URL}users/google`,
+        tokenResponse
+      );
+
+      localStorage.setItem("authToken", response.data.token);
+      localStorage.setItem("role", response.data.user.role);
+
+      showSuccessToast("Google Login Successful!");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      showErrorToast("Google Login Failed");
+    }
+  },
+
+  onError: () => {
+    showErrorToast("Google Login Failed");
+  },
+});  
+
 
   const onSubmit = async (data) => {
     try {
@@ -56,7 +89,7 @@ export default function Register() {
 
     } catch (error) {
 
-      console.log(error);
+      // console.log(error);
 
       showErrorToast(
         "Registration Failed!"
@@ -290,14 +323,13 @@ export default function Register() {
             </div>
 
             <button
-              type="button"
-              className="google-btn"
-            >
-              <FcGoogle className="google-logo" />
-              <span>
-                Continue with Google
-              </span>
-            </button>
+  type="button"
+  className="google-btn"
+  onClick={() => googleLogin()}
+>
+  <FcGoogle className="google-logo" />
+  <span>Continue with Google</span>
+</button>
           </form>
 
         </div>

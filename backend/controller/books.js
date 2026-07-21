@@ -19,7 +19,7 @@ booksController.addNewBook = async (req, res) => {
       price,
       description,
     } = req.body;
-    // // console.log(req.body);
+    // console.log(req.body);
     const {id} = req.userInfo;
 
     const existingBook = await BookModel.findOne({ isbn });
@@ -236,7 +236,7 @@ booksController.issueBook = async(req,res)=>{
   res.status(200).json({ message: "Book issued successfully!", dueDate });
     
   } catch (error) {
-    // console.error("Error issuing book:", error);
+    console.error("Error issuing book:", error);
     res.status(500).json({ message: "Internal server error" });    
   }
 }
@@ -298,7 +298,7 @@ booksController.reqIssueBook = async (req, res) => {
     });
 
   } catch (error) {
-    // console.error(error);
+    console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -357,7 +357,7 @@ booksController.getIssuedBooks = async (req, res) => {
     });
 
   } catch (error) {
-    // console.error("Error fetching issued books:", error);
+    console.error("Error fetching issued books:", error);
     res.status(500).json({ error: true, message: "Internal server error" });
   }
 };
@@ -390,7 +390,7 @@ booksController.returnBook = async (req, res) => {
 
   res.json({ message: "Book returned successfully", issuedBook });
 } catch (error) {
-  // console.error("Error returning book:", error);
+  console.error("Error returning book:", error);
   res.status(500).json({ message: "Server error" });
 }
 };
@@ -421,7 +421,7 @@ booksController.requestReturnBook = async (req, res) => {
     return res.status(200).json({ message: "Return request submitted successfully" });
 
   } catch (error) {
-    // console.error("Error in return request:", error);
+    console.error("Error in return request:", error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

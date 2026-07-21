@@ -1,134 +1,66 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
-
-import {
-  FaUserCircle,
-  FaPlusCircle,
-  FaBookOpen,
-  FaBars,
-  FaTimes,
-  FaChevronDown,
-} from "react-icons/fa";
-
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./adminnavbar.css";
 import logo from "../assets/axlib-logo.png";
-
+import { FaBook, FaPlus, FaUserCircle } from "react-icons/fa";
 export default function AdminNavbar() {
 
-  // ==========================
-  // HOOKS
-  // ==========================
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const token = localStorage.getItem("authToken");
+  const role = localStorage.getItem("role");
 
   const navigate = useNavigate();
-  const location = useLocation();
 
-  // ==========================
-  // STATES
-  // ==========================
-
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const [auth, setAuth] = useState({
-    token: localStorage.getItem("authToken"),
-    role: localStorage.getItem("role"),
-  });
-
-  // ==========================
-  // SYNC AUTH
-  // ==========================
+  /* ==========================
+      SCROLL EFFECT
+  ========================== */
 
   useEffect(() => {
 
-    const syncAuth = () => {
+    const handleScroll = () => {
 
-      setAuth({
-        token: localStorage.getItem("authToken"),
-        role: localStorage.getItem("role"),
-      });
+      setScrolled(window.scrollY > 40);
 
     };
 
-    window.addEventListener("storage", syncAuth);
-    window.addEventListener("focus", syncAuth);
-
-    syncAuth();
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
 
-      window.removeEventListener("storage", syncAuth);
-      window.removeEventListener("focus", syncAuth);
+      window.removeEventListener("scroll", handleScroll);
 
     };
 
   }, []);
 
-  // ==========================
-  // CLOSE MENU ON ROUTE CHANGE
-  // ==========================
-
-  useEffect(() => {
-
-    setMenuOpen(false);
-
-    setDropdownOpen(false);
-
-  }, [location.pathname]);
-
-  // ==========================
-  // HELPERS
-  // ==========================
-
-  const closeMenu = () => {
-
-    setMenuOpen(false);
-
-    setDropdownOpen(false);
-
-  };
-
-  const toggleMenu = () => {
-
-    setMenuOpen((prev) => !prev);
-
-  };
-
-  const toggleDropdown = () => {
-
-    setDropdownOpen((prev) => !prev);
-
-  };
-
-  // ==========================
-  // LOGOUT
-  // ==========================
+  /* ==========================
+      LOGOUT
+  ========================== */
 
   const handleLogout = () => {
 
     localStorage.removeItem("authToken");
     localStorage.removeItem("role");
 
-    setAuth({
-      token: null,
-      role: null,
-    });
-
-    closeMenu();
-
-    navigate("/login", {
-      replace: true,
-    });
+    navigate("/login");
 
   };
 
-  // ==========================
-  // JSX
-  // ==========================
+  /* ==========================
+      CLOSE MENU
+  ========================== */
+
+  const closeMenu = () => {
+
+    setMenuOpen(false);
+
+  };
 
   return (
 
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
 
       <div className="navbar-container">
 
@@ -136,9 +68,8 @@ export default function AdminNavbar() {
             LOGO
         ========================== */}
 
-        <NavLink
+        <Link
           to="/admin"
-          end
           className="navbar-brand"
           onClick={closeMenu}
         >
@@ -150,37 +81,45 @@ export default function AdminNavbar() {
           />
 
           <div className="brand-text">
+
             <h2>
-              <span className="logo-a">A</span>XLIB
+
+              <span className="logo-a">
+                A
+              </span>
+
+              XLIB
+
             </h2>
+
           </div>
 
-        </NavLink>
+        </Link>
 
         {/* ==========================
             MOBILE TOGGLE
         ========================== */}
 
         <button
-          className={`navbar-toggle ${menuOpen ? "open" : ""}`}
-          onClick={toggleMenu}
-          aria-label="Toggle Navigation"
+          className={`navbar-toggle ${menuOpen ? "open" : ""
+            }`}
+          onClick={() => setMenuOpen(!menuOpen)}
         >
 
-          {menuOpen ? (
-            <FaTimes size={22} />
-          ) : (
-            <FaBars size={22} />
-          )}
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
 
         </button>
 
+        {/* ===== PART 2 START ===== */}
         {/* ==========================
-            NAVIGATION
+            NAVIGATION MENU
         ========================== */}
 
         <div
-          className={`navbar-links ${menuOpen ? "show" : ""}`}
+          className={`navbar-links ${menuOpen ? "show" : ""
+            }`}
         >
 
           {/* Dashboard */}
@@ -190,9 +129,7 @@ export default function AdminNavbar() {
             end
             onClick={closeMenu}
             className={({ isActive }) =>
-              isActive
-                ? "nav-link active"
-                : "nav-link"
+              isActive ? "nav-link active" : "nav-link"
             }
           >
             Dashboard
@@ -206,58 +143,53 @@ export default function AdminNavbar() {
 
             <button
               className="admin-dropdown-btn"
-              onClick={toggleDropdown}
-              aria-expanded={dropdownOpen}
-              aria-haspopup="true"
+              type="button"
             >
-
-              Books
-
-              <FaChevronDown
-                className={`dropdown-arrow ${dropdownOpen ? "rotate" : ""
-                  }`}
-              />
-
+              Books ▾
             </button>
 
-            <div
-              className={`admin-dropdown-content ${dropdownOpen ? "show-dropdown" : ""
-                }`}
-            >
+            <div className="admin-dropdown-content">
 
               <NavLink
                 to="/admin/addbook"
                 onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
               >
-                <FaPlusCircle className="menu-icon" />
-                Add Book
+                <FaPlus className="nav-icon" />
+                &nbsp;Add Book
               </NavLink>
 
               <NavLink
                 to="/admin/viewbook"
                 onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
               >
-                <FaBookOpen className="menu-icon" />
-                View Books
+                <FaBook className="nav-icon" />
+                &nbsp;View Books
               </NavLink>
 
             </div>
 
           </div>
 
+          {/* ===== PART 3 START ===== */}
           {/* ==========================
               LIBRARIAN MENU
           ========================== */}
 
-          {auth.role === "librarian" && (
+          {role === "librarian" && (
+
             <>
+
               <NavLink
                 to="/admin/issuerequest"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive
-                    ? "nav-link active"
-                    : "nav-link"
+                  isActive ? "nav-link active" : "nav-link"
                 }
               >
                 Issue Request
@@ -267,27 +199,25 @@ export default function AdminNavbar() {
                 to="/admin/returnrequest"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive
-                    ? "nav-link active"
-                    : "nav-link"
+                  isActive ? "nav-link active" : "nav-link"
                 }
               >
                 Return Request
               </NavLink>
+
             </>
+
           )}
 
           {/* ==========================
-              BORROWED BOOKS
+              BOOKS BORROWED
           ========================== */}
 
           <NavLink
             to="/admin/issued"
             onClick={closeMenu}
             className={({ isActive }) =>
-              isActive
-                ? "nav-link active"
-                : "nav-link"
+              isActive ? "nav-link active" : "nav-link"
             }
           >
             Books Borrowed
@@ -297,65 +227,70 @@ export default function AdminNavbar() {
               ADMIN MENU
           ========================== */}
 
-          {auth.role === "admin" && (
+          {role === "admin" && (
+
             <NavLink
               to="/admin/addlibrarian"
               onClick={closeMenu}
               className={({ isActive }) =>
-                isActive
-                  ? "nav-link active"
-                  : "nav-link"
+                isActive ? "nav-link active" : "nav-link"
               }
             >
               Add Librarian
             </NavLink>
+
           )}
 
+          {/* ===== PART 4 START ===== */}
           {/* ==========================
               AUTH SECTION
           ========================== */}
 
           <div className="auth-section">
 
-            {auth.token ? (
+            {token ? (
+
               <>
 
-                <NavLink
+                <Link
                   to="/admin"
-                  end
+                  className="login-btn"
                   onClick={closeMenu}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "login-btn active-btn"
-                      : "login-btn"
-                  }
                 >
-                  <FaUserCircle className="menu-icon" />
-                  Profile
-                </NavLink>
+                  <FaUserCircle className="nav-icon" />
+                  &nbsp;Profile
+                </Link>
 
                 <button
+                  type="button"
                   className="logout-btn"
-                  onClick={handleLogout}
+                  onClick={() => {
+
+                    closeMenu();
+                    handleLogout();
+
+                  }}
                 >
                   Logout
                 </button>
 
               </>
+
             ) : (
 
-              <NavLink
+              <Link
                 to="/login"
-                onClick={closeMenu}
                 className="login-btn"
+                onClick={closeMenu}
               >
                 Login
-              </NavLink>
+              </Link>
 
             )}
 
           </div>
 
+          {/* ===== PART 5 START ===== */}
         </div>
 
       </div>
@@ -363,4 +298,5 @@ export default function AdminNavbar() {
     </nav>
 
   );
+
 }

@@ -61,26 +61,6 @@
   z-index: 5;
 }
 
-/* Top Gradient Line */
-
-.footer-top-line {
-  width: 180px;
-  height: 5px;
-
-  margin: 0 auto 50px;
-
-  border-radius: 100px;
-
-  background: linear-gradient(
-    90deg,
-    #8b5cf6,
-    #3b82f6
-  );
-
-  box-shadow:
-    0 0 25px rgba(139,92,246,.7);
-}
-
 /* Glass Footer */
 
 .footer-main {
@@ -322,4 +302,3 @@
     justify-content: center;
   }
 }
-

@@ -20,7 +20,7 @@ const AdminLogin = () => {
         try {
           const url =Server_URL + 'admin/login';
           const response = await axios.post(url, data);
-          console.log("Response:", response.data);
+          // console.log("Response:", response.data);
           showSuccessToast("Login Successful!");
           navigate("/admin")
                 
@@ -28,7 +28,7 @@ const AdminLogin = () => {
           
   
         } catch (error) {
-          console.error("Error:", error.response?.data || error.message);
+          // console.error("Error:", error.response?.data || error.message);
           showErrorToast("Login Failed!");
         }
       };

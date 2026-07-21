@@ -1,55 +1,53 @@
 /* ===========================================================
-   AXLIB PREMIUM RESPONSIVE CSS
-   PART 1
-   ROOT • RESET • GLOBAL • CONTAINER • COMMON STYLES
+   AXLIB PREMIUM HOME CSS
+   PART 1A-1
+   ROOT • RESET • GLOBAL • BODY • CONTAINER
 =========================================================== */
 
 /*==============================
-ROOT
+ROOT VARIABLES
 ==============================*/
 
 :root{
 
     --primary:#8b5cf6;
-    --secondary:#3b82f6;
+    --secondary:#2563eb;
     --accent:#f59e0b;
 
     --dark:#030712;
-    --dark-light:#0f172a;
+    --dark-light:#111827;
 
-    --glass:rgba(255,255,255,.05);
-    --glass-border:rgba(255,255,255,.08);
+    --white:#ffffff;
 
     --text:#ffffff;
     --text-light:#cbd5e1;
 
-    --radius:24px;
+    --glass:rgba(255,255,255,.05);
+    --glass-border:rgba(255,255,255,.10);
 
-    --shadow:
-    0 20px 50px rgba(0,0,0,.25);
-
-    --shadow-hover:
-    0 30px 70px rgba(0,0,0,.35);
+    --radius:22px;
 
     --transition:.35s ease;
 
-}
+    --shadow:
+        0 15px 40px rgba(0,0,0,.30);
 
+}
 
 /*==============================
 RESET
 ==============================*/
 
-*,
-*::before,
-*::after{
-
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
-
 }
 
+*::before,
+*::after{
+    box-sizing:border-box;
+}
 
 /*==============================
 HTML
@@ -64,7 +62,6 @@ html{
     overflow-x:hidden;
 
 }
-
 
 /*==============================
 BODY
@@ -83,52 +80,63 @@ body{
 
     color:var(--text);
 
-    line-height:1.6;
-
     overflow-x:hidden;
 
-    text-rendering:optimizeLegibility;
+    line-height:1.6;
 
     -webkit-font-smoothing:antialiased;
 
+    text-rendering:optimizeLegibility;
+
 }
 
-
 /*==============================
-GLOBAL
+LINKS
 ==============================*/
 
 a{
 
-    color:inherit;
-
     text-decoration:none;
+
+    color:inherit;
 
 }
 
+/*==============================
+BUTTON
+==============================*/
+
 button{
-
-    font-family:inherit;
-
-    cursor:pointer;
 
     border:none;
 
     outline:none;
 
+    cursor:pointer;
+
+    font-family:inherit;
+
 }
+
+/*==============================
+IMAGE
+==============================*/
 
 img{
 
     width:100%;
 
-    max-width:100%;
-
     display:block;
+
+    max-width:100%;
 
     height:auto;
 
 }
+
+/*==============================
+LIST
+==============================*/
 
 ul,
 ol{
@@ -136,7 +144,6 @@ ol{
     list-style:none;
 
 }
-
 
 /*==============================
 SECTION
@@ -148,13 +155,10 @@ section{
 
     width:100%;
 
-    padding:100px 0;
-
 }
 
-
 /*==============================
-BACKGROUND
+HOME BACKGROUND
 ==============================*/
 
 .library-homepage{
@@ -173,19 +177,13 @@ BACKGROUND
 
     radial-gradient(
         circle at bottom right,
-        rgba(59,130,246,.16),
+        rgba(37,99,235,.18),
         transparent 40%
     ),
 
-    linear-gradient(
-        180deg,
-        #030712,
-        #07111f,
-        #030712
-    );
+    var(--dark);
 
 }
-
 
 /*==============================
 CONTAINER
@@ -194,12 +192,11 @@ CONTAINER
 .container,
 .na-container{
 
-    width:min(92%,1400px);
+    width:min(94%,1350px);
 
     margin-inline:auto;
 
 }
-
 
 /*==============================
 COMMON TITLE
@@ -208,21 +205,19 @@ COMMON TITLE
 .section-title,
 .na-heading{
 
-    font-size:
-    clamp(2rem,5vw,3.2rem);
+    text-align:center;
+
+    font-size:clamp(2rem,5vw,3.2rem);
 
     font-weight:800;
-
-    text-align:center;
 
     color:#fff;
 
     line-height:1.2;
 
-    margin-bottom:16px;
+    margin-bottom:14px;
 
 }
-
 
 /*==============================
 COMMON SUBTITLE
@@ -233,21 +228,17 @@ COMMON SUBTITLE
 
     max-width:760px;
 
-    margin:auto;
-
-    margin-bottom:60px;
-
-    color:var(--text-light);
+    margin:0 auto 60px;
 
     text-align:center;
 
-    font-size:
-    clamp(.95rem,2vw,1.1rem);
+    color:var(--text-light);
+
+    font-size:1.05rem;
 
     line-height:1.8;
 
 }
-
 
 /*==============================
 COMMON BUTTON
@@ -265,7 +256,7 @@ COMMON BUTTON
 
     min-height:56px;
 
-    padding:15px 32px;
+    padding:15px 34px;
 
     border-radius:16px;
 
@@ -273,10 +264,15 @@ COMMON BUTTON
 
     font-weight:600;
 
-    transition:all .35s ease;
+    transition:var(--transition);
 
 }
 
+/* ===========================================================
+   AXLIB PREMIUM HOME CSS
+   PART 1A-2
+   GLASS CARDS • HERO SECTION • HERO CONTENT
+=========================================================== */
 
 /*==============================
 GLASS CARD
@@ -288,13 +284,13 @@ GLASS CARD
 
     overflow:hidden;
 
-    border-radius:24px;
+    border-radius:var(--radius);
 
     background:var(--glass);
 
     border:1px solid var(--glass-border);
 
-    backdrop-filter:blur(20px);
+    backdrop-filter:blur(22px);
 
     box-shadow:var(--shadow);
 
@@ -306,14 +302,12 @@ GLASS CARD
 
     transform:translateY(-8px);
 
-    box-shadow:var(--shadow-hover);
+    border-color:rgba(139,92,246,.35);
+
+    box-shadow:
+        0 20px 50px rgba(139,92,246,.18);
 
 }
-
-
-/*==============================
-COMMON GLOW
-==============================*/
 
 .card-glass::before{
 
@@ -324,58 +318,15 @@ COMMON GLOW
     inset:0;
 
     background:
-
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,.05),
-        transparent
-    );
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.04),
+            transparent
+        );
 
     pointer-events:none;
 
 }
-
-
-/*==============================
-OVERFLOW FIX
-==============================*/
-
-.container,
-.na-container,
-.stats-grid,
-.categories-grid,
-.na-grid-container,
-.hours-grid{
-
-    overflow:visible;
-
-}
-
-
-/*==============================
-SMOOTH ANIMATION
-==============================*/
-
-*{
-
-    transition:
-
-    background .3s ease,
-
-    color .3s ease,
-
-    border-color .3s ease,
-
-    transform .3s ease,
-
-    box-shadow .3s ease;
-
-}
-
-/* ===========================================================
-   PART 2
-   HERO SECTION
-=========================================================== */
 
 /*==============================
 HERO SECTION
@@ -387,21 +338,21 @@ HERO SECTION
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     min-height:100vh;
 
-    padding:120px 0 90px;
+    padding:120px 0 100px;
 
-    overflow:hidden;
+    background-size:cover;
 
     background-position:center;
 
     background-repeat:no-repeat;
 
-    background-size:cover;
+    overflow:hidden;
 
 }
 
@@ -415,23 +366,22 @@ LEFT GLOW
 
     position:absolute;
 
-    width:700px;
+    width:650px;
 
-    height:700px;
-
-    top:-250px;
+    height:650px;
 
     left:-220px;
+
+    top:-220px;
 
     border-radius:50%;
 
     background:
-
-    radial-gradient(
-        circle,
-        rgba(139,92,246,.28),
-        transparent 70%
-    );
+        radial-gradient(
+            circle,
+            rgba(139,92,246,.25),
+            transparent 70%
+        );
 
     filter:blur(100px);
 
@@ -453,19 +403,18 @@ RIGHT GLOW
 
     height:650px;
 
-    bottom:-220px;
+    right:-220px;
 
-    right:-200px;
+    bottom:-220px;
 
     border-radius:50%;
 
     background:
-
-    radial-gradient(
-        circle,
-        rgba(37,99,235,.24),
-        transparent 70%
-    );
+        radial-gradient(
+            circle,
+            rgba(37,99,235,.22),
+            transparent 70%
+        );
 
     filter:blur(100px);
 
@@ -489,6 +438,14 @@ HERO CONTENT
 
     margin:auto;
 
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
     text-align:center;
 
     padding:0 20px;
@@ -496,77 +453,49 @@ HERO CONTENT
 }
 
 /*==============================
-TITLE
+HERO TITLE
 ==============================*/
 
 .hero-title{
 
-    font-size:
-
-    clamp(2.8rem,7vw,5rem);
+    font-size:clamp(2.8rem,7vw,5rem);
 
     font-weight:800;
 
-    color:#ffffff;
-
     line-height:1.1;
 
-    margin-bottom:24px;
+    color:#fff;
 
-    letter-spacing:-1px;
-
-}
-
-.hero-title span{
-
-    color:#fbbf24;
+    margin-bottom:22px;
 
 }
-
-/*==============================
-BRAND
-==============================*/
 
 .hero-brand{
 
-    display:inline-block;
-
-    margin-left:8px;
-
-    color:#ffffff;
-
-}
-
-.hero-a{
-
     color:#fbbf24;
 
 }
 
 /*==============================
-SUBTITLE
+HERO SUBTITLE
 ==============================*/
 
 .hero-subtitle{
 
     max-width:760px;
 
-    margin:auto;
+    margin-bottom:40px;
 
-    margin-bottom:42px;
+    color:var(--text-light);
 
-    color:#d6d9e0;
-
-    font-size:
-
-    clamp(1rem,2vw,1.25rem);
+    font-size:clamp(1rem,2vw,1.2rem);
 
     line-height:1.9;
 
 }
 
 /*==============================
-BUTTON WRAPPER
+BUTTON GROUP
 ==============================*/
 
 .hero-buttons{
@@ -583,45 +512,75 @@ BUTTON WRAPPER
 
 }
 
+/* ===========================================================
+   AXLIB PREMIUM HOME CSS
+   PART 1A-3
+   HERO BUTTONS • RESPONSIVE
+=========================================================== */
+
 /*==============================
 PRIMARY BUTTON
 ==============================*/
 
 .btn-primary{
 
-    color:#ffffff;
-
     background:
-
     linear-gradient(
         135deg,
-        #8b5cf6,
-        #2563eb
+        var(--primary),
+        var(--secondary)
     );
+
+    color:#fff;
 
     border:none;
 
     box-shadow:
-
-    0 18px 45px
-
-    rgba(139,92,246,.28);
+    0 15px 35px rgba(139,92,246,.35);
 
 }
 
 .btn-primary:hover{
 
     transform:
-
-    translateY(-5px)
-
-    scale(1.03);
+    translateY(-5px);
 
     box-shadow:
+    0 22px 45px rgba(139,92,246,.45);
 
-    0 25px 55px
+}
 
-    rgba(139,92,246,.45);
+/*==============================
+OUTLINE BUTTON
+==============================*/
+
+.btn-outline{
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:1px solid
+    rgba(255,255,255,.12);
+
+    color:#fff;
+
+    backdrop-filter:blur(18px);
+
+}
+
+.btn-outline:hover{
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    border-color:transparent;
+
+    transform:
+    translateY(-4px);
 
 }
 
@@ -631,14 +590,12 @@ VIEW ALL BUTTON
 
 .btn-view-all{
 
-    color:#ffffff;
-
     background:
-
     rgba(255,255,255,.05);
 
-    border:1px solid
+    color:#fff;
 
+    border:1px solid
     rgba(255,255,255,.12);
 
     backdrop-filter:blur(18px);
@@ -647,15 +604,43 @@ VIEW ALL BUTTON
 
 .btn-view-all:hover{
 
-    transform:translateY(-5px);
-
-    border-color:
-
-    rgba(139,92,246,.45);
-
     background:
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
 
-    rgba(255,255,255,.08);
+    border-color:transparent;
+
+    transform:
+    translateY(-4px);
+
+}
+
+/*==============================
+BUTTON ICON
+==============================*/
+
+.btn svg{
+
+    font-size:20px;
+
+}
+
+/*==============================
+TEXT CENTER
+==============================*/
+
+.text-center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:50px;
 
 }
 
@@ -663,7 +648,7 @@ VIEW ALL BUTTON
 TABLET
 ==============================*/
 
-@media (max-width:992px){
+@media(max-width:992px){
 
 .hero-section{
 
@@ -675,13 +660,19 @@ TABLET
 
 .hero-content{
 
-    max-width:760px;
+    max-width:720px;
 
 }
 
 .hero-title{
 
-    font-size:4rem;
+    font-size:3.5rem;
+
+}
+
+.hero-buttons{
+
+    gap:16px;
 
 }
 
@@ -691,13 +682,13 @@ TABLET
 MOBILE
 ==============================*/
 
-@media (max-width:768px){
+@media(max-width:768px){
 
 .hero-section{
 
     min-height:auto;
 
-    padding:80px 0 60px;
+    padding:90px 0 70px;
 
 }
 
@@ -709,7 +700,7 @@ MOBILE
 
 .hero-title{
 
-    font-size:2.7rem;
+    font-size:2.8rem;
 
 }
 
@@ -717,15 +708,15 @@ MOBILE
 
     font-size:1rem;
 
-    margin-bottom:32px;
-
 }
 
 .hero-buttons{
 
+    width:100%;
+
     flex-direction:column;
 
-    width:100%;
+    gap:16px;
 
 }
 
@@ -743,11 +734,11 @@ MOBILE
 SMALL MOBILE
 ==============================*/
 
-@media (max-width:480px){
+@media(max-width:480px){
 
 .hero-section{
 
-    padding:70px 0 50px;
+    padding:80px 0 60px;
 
 }
 
@@ -763,6 +754,8 @@ SMALL MOBILE
 
     font-size:.95rem;
 
+    margin-bottom:30px;
+
 }
 
 .btn{
@@ -775,11 +768,18 @@ SMALL MOBILE
 
 }
 
+.btn svg{
+
+    font-size:18px;
+
+}
+
 }
 
 /* ===========================================================
-   PART 3
-   LIBRARY STATISTICS
+   AXLIB PREMIUM HOME CSS
+   PART 1B-1
+   STATISTICS SECTION
 =========================================================== */
 
 /*==============================
@@ -790,12 +790,40 @@ STATS SECTION
 
     position:relative;
 
-    padding:100px 0;
+    padding:110px 0;
+
+}
+
+.stats-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:220px;
+
+    height:4px;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #8b5cf6,
+        #2563eb,
+        transparent
+    );
 
 }
 
 /*==============================
-GRID
+STATS GRID
 ==============================*/
 
 .stats-grid{
@@ -803,21 +831,25 @@ GRID
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
+    repeat(3,1fr);
 
     gap:30px;
+
+    margin-top:55px;
 
     align-items:stretch;
 
 }
 
 /*==============================
-CARD
+STAT CARD
 ==============================*/
 
 .stat-cardhome{
 
     position:relative;
+
+    overflow:hidden;
 
     display:flex;
 
@@ -833,28 +865,23 @@ CARD
 
     padding:40px 30px;
 
-    overflow:hidden;
-
     border-radius:24px;
 
-    background:
-    rgba(255,255,255,.05);
+    background:rgba(255,255,255,.05);
 
-    border:1px solid
-    rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
 
     backdrop-filter:blur(20px);
 
-    box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.20);
-
     transition:.35s ease;
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.25);
 
 }
 
 /*==============================
-TOP GLOW
+HOVER GLOW
 ==============================*/
 
 .stat-cardhome::before{
@@ -866,95 +893,60 @@ TOP GLOW
     inset:0;
 
     background:
-
     linear-gradient(
         135deg,
         rgba(139,92,246,.10),
-        transparent 60%
+        transparent
     );
 
-    pointer-events:none;
+    opacity:0;
+
+    transition:.35s;
 
 }
-
-/*==============================
-BORDER EFFECT
-==============================*/
-
-.stat-cardhome::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:inherit;
-
-    border:1px solid
-    transparent;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        rgba(139,92,246,.25),
-        rgba(37,99,235,.12)
-    ) border-box;
-
-    mask:
-    linear-gradient(#fff 0 0)
-    padding-box,
-
-    linear-gradient(#fff 0 0);
-
-    -webkit-mask:
-    linear-gradient(#fff 0 0)
-    padding-box,
-
-    linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite:xor;
-
-    mask-composite:exclude;
-
-    pointer-events:none;
-
-}
-
-/*==============================
-HOVER
-==============================*/
 
 .stat-cardhome:hover{
 
     transform:
-
     translateY(-10px);
 
     border-color:
-
-    rgba(139,92,246,.35);
+    rgba(139,92,246,.40);
 
     box-shadow:
+    0 22px 55px rgba(139,92,246,.20);
 
-    0 25px 60px
+}
 
-    rgba(139,92,246,.20);
+.stat-cardhome:hover::before{
+
+    opacity:1;
 
 }
 
 /*==============================
-ICON
+STAT ICON
 ==============================*/
 
 .stat-icon{
 
-    font-size:54px;
+    font-size:52px;
 
     color:#8b5cf6;
 
-    margin-bottom:18px;
+    margin-bottom:22px;
+
+    transition:.35s;
+
+}
+
+.stat-cardhome:hover .stat-icon{
+
+    color:#fbbf24;
+
+    transform:
+    scale(1.15)
+    rotate(8deg);
 
 }
 
@@ -964,15 +956,13 @@ NUMBER
 
 .stat-cardhome h3{
 
-    font-size:
-
-    clamp(2rem,5vw,2.8rem);
+    font-size:clamp(2.2rem,4vw,3rem);
 
     font-weight:800;
 
     color:#ffffff;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
     line-height:1;
 
@@ -984,11 +974,11 @@ TEXT
 
 .stat-cardhome p{
 
-    font-size:16px;
-
     color:#cbd5e1;
 
-    line-height:1.8;
+    font-size:17px;
+
+    line-height:1.7;
 
 }
 
@@ -996,21 +986,12 @@ TEXT
 TABLET
 ==============================*/
 
-@media (max-width:992px){
-
-.stats-section{
-
-    padding:80px 0;
-
-}
+@media(max-width:992px){
 
 .stats-grid{
 
     grid-template-columns:
-
     repeat(2,1fr);
-
-    gap:24px;
 
 }
 
@@ -1020,7 +1001,13 @@ TABLET
 MOBILE
 ==============================*/
 
-@media (max-width:768px){
+@media(max-width:768px){
+
+.stats-section{
+
+    padding:80px 0;
+
+}
 
 .stats-grid{
 
@@ -1032,19 +1019,7 @@ MOBILE
 
     min-height:220px;
 
-    padding:30px 24px;
-
-}
-
-.stat-icon{
-
-    font-size:46px;
-
-}
-
-.stat-cardhome h3{
-
-    font-size:2.3rem;
+    padding:35px 25px;
 
 }
 
@@ -1054,27 +1029,17 @@ MOBILE
 SMALL MOBILE
 ==============================*/
 
-@media (max-width:480px){
-
-.stats-section{
-
-    padding:70px 0;
-
-}
+@media(max-width:480px){
 
 .stat-cardhome{
 
-    min-height:200px;
-
-    padding:26px 20px;
-
-    border-radius:20px;
+    padding:28px 20px;
 
 }
 
 .stat-icon{
 
-    font-size:42px;
+    font-size:44px;
 
 }
 
@@ -1093,20 +1058,20 @@ SMALL MOBILE
 }
 
 /* ===========================================================
-   PART 4
-   BROWSE BY CATEGORIES
-   PREMIUM • AUTO FIT • SAME HEIGHT
+   AXLIB PREMIUM HOME CSS
+   PART 1B-2
+   CATEGORIES SECTION
 =========================================================== */
 
 /*==============================
-SECTION
+CATEGORIES SECTION
 ==============================*/
 
 .categories-section{
 
     position:relative;
 
-    padding:100px 0;
+    padding:110px 0;
 
 }
 
@@ -1119,11 +1084,13 @@ GRID
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fill,minmax(280px,1fr));
+    repeat(auto-fit,minmax(280px,1fr));
 
     gap:30px;
 
     align-items:stretch;
+
+    margin-top:50px;
 
 }
 
@@ -1135,36 +1102,28 @@ CATEGORY CARD
 
     position:relative;
 
+    overflow:hidden;
+
     display:flex;
 
     flex-direction:column;
 
-    height:100%;
+    width:100%;
 
-    min-height:480px;
+    border-radius:22px;
 
-    overflow:hidden;
+    background:rgba(255,255,255,.05);
 
-    border-radius:24px;
+    border:1px solid rgba(255,255,255,.10);
 
-    background:
-    rgba(255,255,255,.05);
-
-    border:1px solid
-    rgba(255,255,255,.08);
-
-    backdrop-filter:blur(22px);
+    backdrop-filter:blur(20px);
 
     transition:.35s ease;
 
     box-shadow:
-    0 15px 45px rgba(0,0,0,.20);
+    0 12px 35px rgba(0,0,0,.25);
 
 }
-
-/*==============================
-TOP GLOW
-==============================*/
 
 .category-card::before{
 
@@ -1175,52 +1134,19 @@ TOP GLOW
     inset:0;
 
     background:
-
     linear-gradient(
         135deg,
-        rgba(139,92,246,.10),
-        transparent 60%
-    );
-
-    pointer-events:none;
-
-}
-
-/*==============================
-BOTTOM LIGHT
-==============================*/
-
-.category-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:0;
-
-    height:4px;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        #8b5cf6,
-        #2563eb
+        rgba(139,92,246,.08),
+        transparent
     );
 
     opacity:0;
 
-    transition:.35s ease;
+    transition:.35s;
+
+    pointer-events:none;
 
 }
-
-/*==============================
-HOVER
-==============================*/
 
 .category-card:hover{
 
@@ -1231,12 +1157,11 @@ HOVER
     rgba(139,92,246,.35);
 
     box-shadow:
-    0 25px 60px
-    rgba(139,92,246,.20);
+    0 25px 55px rgba(139,92,246,.20);
 
 }
 
-.category-card:hover::after{
+.category-card:hover::before{
 
     opacity:1;
 
@@ -1250,11 +1175,9 @@ IMAGE
 
     width:100%;
 
-    aspect-ratio:16/10;
+    height:250px;
 
     overflow:hidden;
-
-    background:#111827;
 
 }
 
@@ -1266,11 +1189,11 @@ IMAGE
 
     object-fit:cover;
 
-    transition:.45s ease;
+    transition:.5s ease;
 
 }
 
-.category-card:hover img{
+.category-card:hover .category-img-container img{
 
     transform:scale(1.08);
 
@@ -1288,15 +1211,15 @@ INFO
 
     flex-direction:column;
 
-    padding:24px;
+    justify-content:center;
+
+    align-items:center;
 
     text-align:center;
 
-}
+    padding:25px;
 
-/*==============================
-TITLE
-==============================*/
+}
 
 .category-info h3{
 
@@ -1306,21 +1229,15 @@ TITLE
 
     color:#ffffff;
 
-    margin-bottom:12px;
-
-    line-height:1.4;
+    margin-bottom:10px;
 
 }
-
-/*==============================
-BOOK COUNT
-==============================*/
 
 .category-info p{
 
     color:#cbd5e1;
 
-    font-size:15px;
+    font-size:16px;
 
     margin-bottom:22px;
 
@@ -1332,27 +1249,25 @@ BUTTON
 
 .btn-outline{
 
-    margin-top:auto;
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
+    display:inline-flex;
 
     justify-content:center;
 
-    min-height:52px;
+    align-items:center;
+
+    width:100%;
+
+    max-width:200px;
+
+    height:50px;
 
     border-radius:14px;
 
-    color:#ffffff;
+    color:#fff;
 
-    border:1px solid
-    rgba(139,92,246,.30);
+    border:1px solid rgba(139,92,246,.35);
 
-    background:
-    rgba(255,255,255,.05);
+    background:rgba(255,255,255,.04);
 
     transition:.35s ease;
 
@@ -1361,7 +1276,6 @@ BUTTON
 .btn-outline:hover{
 
     background:
-
     linear-gradient(
         135deg,
         #8b5cf6,
@@ -1375,44 +1289,16 @@ BUTTON
 }
 
 /*==============================
-VIEW ALL BUTTON
+VIEW ALL
 ==============================*/
 
 .text-center{
 
-    margin-top:55px;
+    margin-top:50px;
 
-    text-align:center;
+    display:flex;
 
-}
-
-/*==============================
-LARGE DESKTOP
-==============================*/
-
-@media (min-width:1400px){
-
-.categories-grid{
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-}
-
-}
-
-/*==============================
-DESKTOP
-==============================*/
-
-@media (max-width:1200px){
-
-.categories-grid{
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-}
+    justify-content:center;
 
 }
 
@@ -1420,26 +1306,12 @@ DESKTOP
 TABLET
 ==============================*/
 
-@media (max-width:992px){
-
-.categories-section{
-
-    padding:80px 0;
-
-}
+@media(max-width:992px){
 
 .categories-grid{
 
     grid-template-columns:
     repeat(2,1fr);
-
-    gap:24px;
-
-}
-
-.category-card{
-
-    min-height:450px;
 
 }
 
@@ -1449,25 +1321,23 @@ TABLET
 MOBILE
 ==============================*/
 
-@media (max-width:768px){
+@media(max-width:768px){
+
+.categories-section{
+
+    padding:80px 0;
+
+}
 
 .categories-grid{
 
     grid-template-columns:1fr;
 
-    gap:22px;
-
-}
-
-.category-card{
-
-    min-height:auto;
-
 }
 
 .category-img-container{
 
-    aspect-ratio:16/9;
+    height:220px;
 
 }
 
@@ -1477,81 +1347,65 @@ MOBILE
 
 }
 
-.category-info h3{
-
-    font-size:22px;
-
-}
-
 }
 
 /*==============================
 SMALL MOBILE
 ==============================*/
 
-@media (max-width:480px){
+@media(max-width:480px){
 
-.categories-section{
+.category-img-container{
 
-    padding:70px 0;
-
-}
-
-.category-card{
-
-    border-radius:20px;
-
-}
-
-.category-info{
-
-    padding:18px;
+    height:200px;
 
 }
 
 .category-info h3{
 
-    font-size:20px;
+    font-size:21px;
 
 }
 
 .category-info p{
 
-    font-size:14px;
+    font-size:15px;
 
 }
 
 .btn-outline{
 
-    min-height:48px;
-
-    font-size:15px;
+    max-width:100%;
 
 }
 
 }
 
 /* ===========================================================
-   PART 5
-   NEW ARRIVALS
-   PREMIUM • AUTO FIT • SAME HEIGHT
+   AXLIB PREMIUM HOME CSS
+   PART 2
+   NEW ARRIVALS SECTION
 =========================================================== */
 
 /*==============================
-SECTION
+NEW ARRIVALS SECTION
 ==============================*/
 
 .na-section{
 
     position:relative;
 
-    padding:100px 0;
+    padding:110px 0;
 
 }
 
+/*==============================
+CONTAINER
+==============================*/
+
 .na-container{
 
-    width:min(92%,1400px);
+    width:min(94%,1350px);
 
     margin:auto;
 
@@ -1566,11 +1420,13 @@ GRID
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fill,minmax(260px,1fr));
+    repeat(auto-fit,minmax(280px,1fr));
 
     gap:30px;
 
     align-items:stretch;
+
+    margin-top:50px;
 
 }
 
@@ -1586,33 +1442,24 @@ BOOK CARD
 
     flex-direction:column;
 
-    height:100%;
-
-    min-height:560px;
+    width:100%;
 
     overflow:hidden;
 
-    border-radius:24px;
+    border-radius:22px;
 
-    background:
-    rgba(255,255,255,.05);
+    background:rgba(255,255,255,.05);
 
-    border:1px solid
-    rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
 
     backdrop-filter:blur(20px);
 
     transition:.35s ease;
 
     box-shadow:
-    0 15px 45px
-    rgba(0,0,0,.20);
+    0 12px 35px rgba(0,0,0,.25);
 
 }
-
-/*==============================
-TOP GLOW
-==============================*/
 
 .na-book-item::before{
 
@@ -1623,52 +1470,19 @@ TOP GLOW
     inset:0;
 
     background:
-
     linear-gradient(
         135deg,
-        rgba(59,130,246,.10),
-        transparent 65%
-    );
-
-    pointer-events:none;
-
-}
-
-/*==============================
-BOTTOM BORDER
-==============================*/
-
-.na-book-item::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:0;
-
-    height:4px;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        #3b82f6,
-        #8b5cf6
+        rgba(37,99,235,.10),
+        transparent
     );
 
     opacity:0;
 
-    transition:.35s ease;
+    transition:.35s;
+
+    pointer-events:none;
 
 }
-
-/*==============================
-HOVER
-==============================*/
 
 .na-book-item:hover{
 
@@ -1676,33 +1490,30 @@ HOVER
     translateY(-10px);
 
     border-color:
-    rgba(59,130,246,.35);
+    rgba(37,99,235,.40);
 
     box-shadow:
-    0 25px 60px
-    rgba(59,130,246,.20);
+    0 25px 60px rgba(37,99,235,.22);
 
 }
 
-.na-book-item:hover::after{
+.na-book-item:hover::before{
 
     opacity:1;
 
 }
 
 /*==============================
-BOOK COVER
+BOOK IMAGE
 ==============================*/
 
 .na-cover-wrapper{
 
     width:100%;
 
-    aspect-ratio:3/4;
+    height:340px;
 
     overflow:hidden;
-
-    background:#111827;
 
 }
 
@@ -1714,12 +1525,11 @@ BOOK COVER
 
     object-fit:cover;
 
-    transition:.45s ease;
+    transition:.5s ease;
 
 }
 
-.na-book-item:hover
-.na-cover-image{
+.na-book-item:hover .na-cover-image{
 
     transform:scale(1.08);
 
@@ -1737,7 +1547,13 @@ BOOK INFO
 
     flex-direction:column;
 
-    padding:22px;
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:25px;
 
 }
 
@@ -1747,27 +1563,15 @@ TITLE
 
 .na-book-title{
 
-    color:#ffffff;
-
-    font-size:22px;
+    font-size:21px;
 
     font-weight:700;
 
+    color:#fff;
+
     line-height:1.5;
 
-    margin-bottom:10px;
-
-    display:-webkit-box;
-
-    line-clamp:2;
-
-    -webkit-line-clamp:2;
-
-    -webkit-box-orient:vertical;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
+    margin-bottom:12px;
 
 }
 
@@ -1777,21 +1581,19 @@ AUTHOR
 
 .na-book-author{
 
-    color:#cbd5e1;
-
     font-size:15px;
+
+    color:#cbd5e1;
 
     margin-bottom:18px;
 
 }
 
 /*==============================
-CATEGORY
+CATEGORY TAG
 ==============================*/
 
 .na-book-category{
-
-    margin-top:auto;
 
     display:inline-flex;
 
@@ -1799,55 +1601,22 @@ CATEGORY
 
     justify-content:center;
 
-    align-self:flex-start;
+    padding:8px 18px;
 
-    padding:9px 18px;
-
-    border-radius:30px;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    color:#ffffff;
+    border-radius:50px;
 
     background:
-
     linear-gradient(
         135deg,
         #8b5cf6,
         #2563eb
     );
 
-}
+    color:#fff;
 
-/*==============================
-LARGE DESKTOP
-==============================*/
+    font-size:13px;
 
-@media (min-width:1400px){
-
-.na-grid-container{
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-}
-
-}
-
-/*==============================
-DESKTOP
-==============================*/
-
-@media (max-width:1200px){
-
-.na-grid-container{
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-}
+    font-weight:600;
 
 }
 
@@ -1855,26 +1624,18 @@ DESKTOP
 TABLET
 ==============================*/
 
-@media (max-width:992px){
-
-.na-section{
-
-    padding:80px 0;
-
-}
+@media(max-width:992px){
 
 .na-grid-container{
 
     grid-template-columns:
     repeat(2,1fr);
 
-    gap:24px;
-
 }
 
-.na-book-item{
+.na-cover-wrapper{
 
-    min-height:520px;
+    height:300px;
 
 }
 
@@ -1884,31 +1645,29 @@ TABLET
 MOBILE
 ==============================*/
 
-@media (max-width:768px){
+@media(max-width:768px){
+
+.na-section{
+
+    padding:80px 0;
+
+}
 
 .na-grid-container{
 
     grid-template-columns:1fr;
 
-    gap:22px;
-
-}
-
-.na-book-item{
-
-    min-height:auto;
-
 }
 
 .na-cover-wrapper{
 
-    aspect-ratio:16/10;
+    height:280px;
 
 }
 
 .na-book-info{
 
-    padding:20px;
+    padding:22px;
 
 }
 
@@ -1924,23 +1683,11 @@ MOBILE
 SMALL MOBILE
 ==============================*/
 
-@media (max-width:480px){
+@media(max-width:480px){
 
-.na-section{
+.na-cover-wrapper{
 
-    padding:70px 0;
-
-}
-
-.na-book-item{
-
-    border-radius:20px;
-
-}
-
-.na-book-info{
-
-    padding:18px;
+    height:240px;
 
 }
 
@@ -1962,27 +1709,54 @@ SMALL MOBILE
 
     justify-content:center;
 
-    text-align:center;
-
 }
 
 }
 
 /* ===========================================================
-   PART 6
-   LIBRARY HOURS
-   PREMIUM GLASS UI
+   AXLIB PREMIUM HOME CSS
+   PART 3
+   LIBRARY HOURS SECTION
 =========================================================== */
 
 /*==============================
-SECTION
+HOURS SECTION
 ==============================*/
 
 .hours-section{
 
     position:relative;
 
-    padding:100px 0 120px;
+    padding:110px 0 120px;
+
+}
+
+.hours-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:220px;
+
+    height:4px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        #8b5cf6,
+        #2563eb,
+        transparent
+    );
 
 }
 
@@ -1995,15 +1769,13 @@ GRID
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(340px,1fr));
+    repeat(2,1fr);
 
-    gap:30px;
+    gap:35px;
+
+    margin-top:55px;
 
     align-items:stretch;
-
-    max-width:1200px;
-
-    margin:auto;
 
 }
 
@@ -2015,6 +1787,8 @@ CARD
 
     position:relative;
 
+    overflow:hidden;
+
     display:flex;
 
     flex-direction:column;
@@ -2025,33 +1799,24 @@ CARD
 
     text-align:center;
 
-    min-height:380px;
+    min-height:340px;
 
     padding:45px 35px;
 
-    overflow:hidden;
-
     border-radius:24px;
 
-    background:
-    rgba(255,255,255,.05);
+    background:rgba(255,255,255,.05);
 
-    border:1px solid
-    rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
 
     backdrop-filter:blur(22px);
 
     transition:.35s ease;
 
     box-shadow:
-    0 15px 45px
-    rgba(0,0,0,.20);
+    0 15px 40px rgba(0,0,0,.25);
 
 }
-
-/*==============================
-TOP GLOW
-==============================*/
 
 .hours-card::before{
 
@@ -2062,52 +1827,19 @@ TOP GLOW
     inset:0;
 
     background:
-
     linear-gradient(
         135deg,
-        rgba(139,92,246,.10),
-        transparent 65%
-    );
-
-    pointer-events:none;
-
-}
-
-/*==============================
-BOTTOM LINE
-==============================*/
-
-.hours-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:0;
-
-    height:4px;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        #8b5cf6,
-        #2563eb
+        rgba(139,92,246,.08),
+        transparent
     );
 
     opacity:0;
 
-    transition:.35s ease;
+    transition:.35s;
+
+    pointer-events:none;
 
 }
-
-/*==============================
-HOVER
-==============================*/
 
 .hours-card:hover{
 
@@ -2115,15 +1847,14 @@ HOVER
     translateY(-10px);
 
     border-color:
-    rgba(139,92,246,.35);
+    rgba(139,92,246,.40);
 
     box-shadow:
-    0 25px 60px
-    rgba(139,92,246,.22);
+    0 25px 60px rgba(139,92,246,.20);
 
 }
 
-.hours-card:hover::after{
+.hours-card:hover::before{
 
     opacity:1;
 
@@ -2135,11 +1866,23 @@ ICON
 
 .hours-icon{
 
-    font-size:58px;
+    font-size:56px;
 
     color:#8b5cf6;
 
-    margin-bottom:20px;
+    margin-bottom:22px;
+
+    transition:.35s ease;
+
+}
+
+.hours-card:hover .hours-icon{
+
+    color:#fbbf24;
+
+    transform:
+    scale(1.12)
+    rotate(8deg);
 
 }
 
@@ -2151,7 +1894,7 @@ TITLE
 
     color:#ffffff;
 
-    font-size:28px;
+    font-size:30px;
 
     font-weight:700;
 
@@ -2175,29 +1918,16 @@ TEXT
 
 }
 
-.hours-card p:last-child{
+/*==============================
+REGULAR HOURS STYLE
+==============================*/
 
-    margin-top:8px;
+.hours-card p:nth-child(3),
+.hours-card p:nth-child(5){
 
     color:#ffffff;
 
-    opacity:.9;
-
-}
-
-/*==============================
-LARGE DESKTOP
-==============================*/
-
-@media (min-width:1400px){
-
-.hours-grid{
-
-    max-width:1400px;
-
-    gap:35px;
-
-}
+    font-weight:600;
 
 }
 
@@ -2205,27 +1935,19 @@ LARGE DESKTOP
 TABLET
 ==============================*/
 
-@media (max-width:992px){
-
-.hours-section{
-
-    padding:80px 0 100px;
-
-}
+@media(max-width:992px){
 
 .hours-grid{
 
     grid-template-columns:1fr;
 
-    max-width:700px;
+    gap:30px;
 
 }
 
 .hours-card{
 
-    min-height:340px;
-
-    padding:38px 30px;
+    min-height:300px;
 
 }
 
@@ -2235,19 +1957,19 @@ TABLET
 MOBILE
 ==============================*/
 
-@media (max-width:768px){
+@media(max-width:768px){
 
 .hours-section{
 
-    padding:70px 0 90px;
+    padding:80px 0;
 
 }
 
 .hours-card{
 
-    min-height:auto;
+    padding:35px 25px;
 
-    padding:30px 24px;
+    min-height:280px;
 
 }
 
@@ -2259,7 +1981,7 @@ MOBILE
 
 .hours-card h3{
 
-    font-size:24px;
+    font-size:26px;
 
 }
 
@@ -2275,13 +1997,13 @@ MOBILE
 SMALL MOBILE
 ==============================*/
 
-@media (max-width:480px){
+@media(max-width:480px){
 
 .hours-card{
 
-    border-radius:20px;
+    padding:28px 20px;
 
-    padding:24px 18px;
+    border-radius:20px;
 
 }
 
@@ -2301,610 +2023,20 @@ SMALL MOBILE
 
     font-size:14px;
 
-    line-height:1.8;
+    line-height:1.7;
 
 }
 
 }
 
 /* ===========================================================
-   PART 7
-   RESPONSIVE OPTIMIZATION
-   320px → 4K
+   AXLIB PREMIUM HOME CSS
+   PART 4
+   PREMIUM EFFECTS • ANIMATIONS • SCROLLBAR
 =========================================================== */
 
 /*==============================
-4K SCREEN
-==============================*/
-
-@media (min-width:1800px){
-
-.container,
-.na-container{
-
-    max-width:1700px;
-
-}
-
-.hero-title{
-
-    font-size:6rem;
-
-}
-
-.hero-subtitle{
-
-    max-width:900px;
-
-    font-size:1.4rem;
-
-}
-
-.section-title,
-.na-heading{
-
-    font-size:4rem;
-
-}
-
-.stats-grid,
-.categories-grid,
-.na-grid-container{
-
-    gap:40px;
-
-}
-
-.hours-grid{
-
-    max-width:1450px;
-
-}
-
-}
-
-
-/*==============================
-LARGE DESKTOP
-==============================*/
-
-@media (max-width:1600px){
-
-.container,
-.na-container{
-
-    width:min(94%,1500px);
-
-}
-
-}
-
-
-/*==============================
-DESKTOP
-==============================*/
-
-@media (max-width:1400px){
-
-.container,
-.na-container{
-
-    width:94%;
-
-}
-
-.hero-section{
-
-    padding:110px 0 90px;
-
-}
-
-.stats-grid{
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-}
-
-.categories-grid{
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-}
-
-.na-grid-container{
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-}
-
-.hours-grid{
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-}
-
-}
-
-
-/*==============================
-LAPTOP
-==============================*/
-
-@media (max-width:1200px){
-
-.container,
-.na-container{
-
-    width:95%;
-
-}
-
-.hero-section{
-
-    padding:100px 0 80px;
-
-}
-
-.hero-title{
-
-    font-size:4rem;
-
-}
-
-.hero-subtitle{
-
-    font-size:1.1rem;
-
-}
-
-.stats-grid{
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-}
-
-.categories-grid{
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-}
-
-.na-grid-container{
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-}
-
-}
-
-
-/*==============================
-TABLET
-==============================*/
-
-@media (max-width:992px){
-
-section{
-
-    padding:80px 0;
-
-}
-
-.container,
-.na-container{
-
-    width:95%;
-
-}
-
-.hero-section{
-
-    min-height:auto;
-
-    padding:90px 0 70px;
-
-}
-
-.hero-title{
-
-    font-size:3.5rem;
-
-}
-
-.hero-buttons{
-
-    justify-content:center;
-
-}
-
-.stats-grid{
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-}
-
-.categories-grid{
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-}
-
-.na-grid-container{
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-}
-
-.hours-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-}
-
-
-/*==============================
-MOBILE
-==============================*/
-
-@media (max-width:768px){
-
-html{
-
-    font-size:15px;
-
-}
-
-section{
-
-    padding:70px 0;
-
-}
-
-.container,
-.na-container{
-
-    width:94%;
-
-}
-
-.hero-content{
-
-    width:100%;
-
-}
-
-.hero-title{
-
-    font-size:2.7rem;
-
-}
-
-.hero-subtitle{
-
-    font-size:1rem;
-
-}
-
-.hero-buttons{
-
-    flex-direction:column;
-
-    gap:15px;
-
-}
-
-.btn{
-
-    width:100%;
-
-    max-width:320px;
-
-}
-
-.stats-grid,
-.categories-grid,
-.na-grid-container,
-.hours-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-.category-card,
-.na-book-item,
-.hours-card,
-.stat-cardhome{
-
-    min-height:auto;
-
-}
-
-.category-img-container{
-
-    aspect-ratio:16/9;
-
-}
-
-.na-cover-wrapper{
-
-    aspect-ratio:3/4;
-
-}
-
-}
-
-
-/*==============================
-SMALL MOBILE
-==============================*/
-
-@media (max-width:480px){
-
-html{
-
-    font-size:14px;
-
-}
-
-.container,
-.na-container{
-
-    width:95%;
-
-}
-
-.hero-title{
-
-    font-size:2.2rem;
-
-}
-
-.hero-subtitle{
-
-    font-size:.95rem;
-
-}
-
-.section-title,
-.na-heading{
-
-    font-size:2rem;
-
-}
-
-.section-subtitle,
-.na-subheading{
-
-    font-size:.95rem;
-
-}
-
-.btn{
-
-    width:100%;
-
-    max-width:100%;
-
-    min-height:50px;
-
-    font-size:15px;
-
-}
-
-.stat-cardhome,
-.category-card,
-.na-book-item,
-.hours-card{
-
-    border-radius:20px;
-
-}
-
-.category-info,
-.na-book-info{
-
-    padding:18px;
-
-}
-
-.category-info h3{
-
-    font-size:20px;
-
-}
-
-.na-book-title{
-
-    font-size:18px;
-
-}
-
-.hours-card h3{
-
-    font-size:22px;
-
-}
-
-}
-
-
-/*==============================
-EXTRA SMALL
-==============================*/
-
-@media (max-width:360px){
-
-html{
-
-    font-size:13px;
-
-}
-
-.hero-title{
-
-    font-size:1.9rem;
-
-}
-
-.hero-subtitle{
-
-    font-size:.9rem;
-
-}
-
-.btn{
-
-    padding:14px 18px;
-
-}
-
-.category-img-container{
-
-    aspect-ratio:4/3;
-
-}
-
-.na-cover-wrapper{
-
-    aspect-ratio:3/4;
-
-}
-
-}
-
-
-/*==============================
-LANDSCAPE MOBILE
-==============================*/
-
-@media (max-height:500px)
-and (orientation:landscape){
-
-.hero-section{
-
-    min-height:auto;
-
-    padding:60px 0;
-
-}
-
-.hero-title{
-
-    font-size:2.6rem;
-
-}
-
-.hero-buttons{
-
-    flex-direction:row;
-
-}
-
-}
-
-
-/*==============================
-HIGH DPI
-==============================*/
-
-@media
-(-webkit-min-device-pixel-ratio:2),
-(min-resolution:192dpi){
-
-.category-img-container img,
-.na-cover-image{
-
-    image-rendering:auto;
-
-}
-
-}
-
-/* ===========================================================
-   PART 8
-   FINAL OPTIMIZATION
-   PREMIUM EFFECTS • PERFORMANCE • CLEANUP
-=========================================================== */
-
-/*==============================
-SMOOTH SCROLL
-==============================*/
-
-html{
-
-    scroll-behavior:smooth;
-
-}
-
-/*==============================
-IMAGE OPTIMIZATION
-==============================*/
-
-img{
-
-    display:block;
-
-    width:100%;
-
-    max-width:100%;
-
-    height:auto;
-
-    object-fit:cover;
-
-}
-
-/*==============================
-VIDEO / IFRAME
-==============================*/
-
-video,
-iframe{
-
-    width:100%;
-
-    max-width:100%;
-
-    height:auto;
-
-    display:block;
-
-}
-
-/*==============================
-LONG WORD FIX
-==============================*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-a{
-
-    overflow-wrap:break-word;
-
-    word-break:break-word;
-
-}
-
-/*==============================
-COMMON HOVER
+COMMON CARD EFFECT
 ==============================*/
 
 .category-card,
@@ -2912,16 +2044,41 @@ COMMON HOVER
 .stat-cardhome,
 .hours-card{
 
-    will-change:transform;
+    position:relative;
 
-    backface-visibility:hidden;
+    isolation:isolate;
 
-    transform:translateZ(0);
+}
+
+.category-card::after,
+.na-book-item::after,
+.stat-cardhome::after,
+.hours-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.04),
+        transparent
+    );
+
+    pointer-events:none;
+
+    z-index:0;
 
 }
 
 /*==============================
-CARD ANIMATION
+SMOOTH HOVER
 ==============================*/
 
 .category-card:hover,
@@ -2929,92 +2086,133 @@ CARD ANIMATION
 .stat-cardhome:hover,
 .hours-card:hover{
 
-    transform:
-    translateY(-10px);
+    transition:
+
+    transform .35s ease,
+
+    box-shadow .35s ease,
+
+    border-color .35s ease;
 
 }
 
 /*==============================
-IMAGE ZOOM
+IMAGE HOVER
 ==============================*/
 
-.category-card:hover
 .category-img-container img,
-
-.na-book-item:hover
 .na-cover-image{
+
+    transition:
+
+    transform .55s ease,
+
+    filter .55s ease;
+
+}
+
+.category-card:hover img,
+.na-book-item:hover img{
 
     transform:scale(1.08);
 
+    filter:brightness(1.05);
+
 }
 
 /*==============================
-BUTTON EFFECT
+BUTTON ANIMATION
 ==============================*/
 
 .btn{
 
-    position:relative;
+    transition:
 
-    overflow:hidden;
+    background .35s ease,
 
-}
+    transform .35s ease,
 
-.btn::before{
+    box-shadow .35s ease,
 
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:-120%;
-
-    width:70%;
-
-    height:100%;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.22),
-        transparent
-    );
-
-    transition:.6s ease;
+    color .35s ease;
 
 }
 
-.btn:hover::before{
+.btn:hover{
 
-    left:140%;
+    transform:translateY(-4px);
 
 }
 
 /*==============================
-FOCUS
+TITLE ANIMATION
 ==============================*/
 
-button:focus,
-a:focus{
+.section-title,
+.na-heading{
 
-    outline:2px solid #8b5cf6;
+    transition:color .35s ease;
 
-    outline-offset:4px;
+}
+
+.section-title:hover,
+.na-heading:hover{
+
+    color:#fbbf24;
 
 }
 
 /*==============================
-TEXT SELECTION
+ICON EFFECT
 ==============================*/
 
-::selection{
+.stat-icon,
+.hours-icon{
 
-    background:#8b5cf6;
+    transition:
 
-    color:#ffffff;
+    transform .35s ease,
+
+    color .35s ease;
+
+}
+
+.category-card:hover .stat-icon,
+.hours-card:hover .hours-icon{
+
+    transform:scale(1.12);
+
+}
+
+/*==============================
+TEXT EFFECT
+==============================*/
+
+.category-info h3,
+.na-book-title,
+.hours-card h3{
+
+    transition:color .35s ease;
+
+}
+
+.category-card:hover h3,
+.na-book-item:hover h3{
+
+    color:#fbbf24;
+
+}
+
+/*==============================
+SECTION SPACING
+==============================*/
+
+.stats-section,
+.categories-section,
+.na-section,
+.hours-section{
+
+    scroll-margin-top:90px;
 
 }
 
@@ -3038,7 +2236,7 @@ SCROLLBAR
 
 ::-webkit-scrollbar-thumb{
 
-    border-radius:20px;
+    border-radius:30px;
 
     background:
 
@@ -3063,86 +2261,121 @@ SCROLLBAR
 }
 
 /*==============================
-BODY FIX
+TEXT SELECTION
+==============================*/
+
+::selection{
+
+    background:#8b5cf6;
+
+    color:#fff;
+
+}
+
+/*==============================
+FOCUS STYLE
+==============================*/
+
+button:focus,
+a:focus{
+
+    outline:none;
+
+}
+
+/*==============================
+SHADOW GLOW
+==============================*/
+
+.category-card:hover,
+.na-book-item:hover,
+.stat-cardhome:hover,
+.hours-card:hover{
+
+    box-shadow:
+
+    0 25px 60px rgba(139,92,246,.18);
+
+}
+
+/*==============================
+SMOOTH RENDER
+==============================*/
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    -webkit-font-smoothing:antialiased;
+
+    text-rendering:optimizeLegibility;
+
+}
+
+/*==============================
+NO OVERFLOW
 ==============================*/
 
 body{
 
     overflow-x:hidden;
 
-    min-height:100vh;
-
 }
 
-/*==============================
-MAIN WRAPPER
-==============================*/
-
 .library-homepage{
-
-    position:relative;
 
     overflow:hidden;
 
 }
 
 /*==============================
-CONTAINERS
+MEDIA FIX
 ==============================*/
 
-.container,
-.na-container{
+img,
+video,
+iframe{
 
-    overflow:visible;
+    max-width:100%;
+
+    height:auto;
 
 }
 
 /*==============================
-LAZY LOADING
+LONG TEXT FIX
 ==============================*/
 
-img[loading="lazy"]{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a{
 
-    content-visibility:auto;
+    word-break:break-word;
+
+    overflow-wrap:break-word;
 
 }
 
 /*==============================
-REDUCE MOTION
+TOUCH DEVICE
 ==============================*/
 
-@media
-(prefers-reduced-motion:reduce){
-
-*{
-
-    animation:none !important;
-
-    transition:none !important;
-
-    scroll-behavior:auto !important;
-
-}
-
-}
-
-/*==============================
-TOUCH DEVICES
-==============================*/
-
-@media (hover:none){
+@media(hover:none){
 
 .category-card:hover,
 .na-book-item:hover,
-.hours-card:hover,
-.stat-cardhome:hover{
-
-    transform:none;
-
-}
-
-.category-card:hover img,
-.na-book-item:hover img{
+.stat-cardhome:hover,
+.hours-card:hover{
 
     transform:none;
 
@@ -3156,48 +2389,446 @@ TOUCH DEVICES
 
 }
 
+/* ===========================================================
+   AXLIB PREMIUM HOME CSS
+   PART 5
+   FINAL RESPONSIVE OPTIMIZATION
+   Desktop • Laptop • Tablet • Mobile • 4K
+===========================================================*/
+
 /*==============================
-PRINT MODE
+LARGE DESKTOP (1600px+)
 ==============================*/
 
-@media print{
+@media (min-width:1600px){
+
+.container,
+.na-container{
+
+    max-width:1550px;
+
+}
+
+.hero-content{
+
+    max-width:1000px;
+
+}
+
+.hero-title{
+
+    font-size:5.6rem;
+
+}
+
+.hero-subtitle{
+
+    max-width:900px;
+
+    font-size:1.35rem;
+
+}
+
+.section-title,
+.na-heading{
+
+    font-size:3.6rem;
+
+}
+
+.stats-grid,
+.categories-grid,
+.na-grid-container{
+
+    gap:40px;
+
+}
+
+.hours-grid{
+
+    gap:40px;
+
+}
+
+}
+
+/*==============================
+DESKTOP
+==============================*/
+
+@media (max-width:1400px){
+
+.container,
+.na-container{
+
+    width:94%;
+
+}
+
+.hero-title{
+
+    font-size:4.5rem;
+
+}
+
+}
+
+/*==============================
+LAPTOP
+==============================*/
+
+@media (max-width:1200px){
+
+.container,
+.na-container{
+
+    width:95%;
+
+}
+
+.hero-section{
+
+    padding:100px 0 80px;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+}
+
+.categories-grid,
+.na-grid-container{
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+}
+
+.hours-grid{
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+}
+
+}
+
+/*==============================
+TABLET
+==============================*/
+
+@media (max-width:992px){
+
+.container,
+.na-container{
+
+    width:95%;
+
+}
 
 .hero-section{
 
     min-height:auto;
 
-    background:none !important;
+}
+
+.hero-title{
+
+    font-size:3.4rem;
 
 }
 
-.btn{
+.hero-subtitle{
 
-    display:none;
+    font-size:1rem;
 
 }
 
-.category-card,
-.na-book-item,
-.hours-card,
-.stat-cardhome{
+.stats-grid{
 
-    box-shadow:none;
+    grid-template-columns:
+    repeat(2,1fr);
 
-    border:1px solid #ccc;
+}
+
+.categories-grid,
+.na-grid-container{
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+}
+
+.hours-grid{
+
+    grid-template-columns:1fr;
 
 }
 
 }
 
 /*==============================
-FINAL UNIVERSAL FIX
+MOBILE
+==============================*/
+
+@media (max-width:768px){
+
+html{
+
+    font-size:15px;
+
+}
+
+.container,
+.na-container{
+
+    width:94%;
+
+}
+
+.hero-section{
+
+    padding:85px 0 65px;
+
+}
+
+.hero-content{
+
+    text-align:center;
+
+}
+
+.hero-title{
+
+    font-size:2.7rem;
+
+}
+
+.hero-subtitle{
+
+    font-size:1rem;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+    width:100%;
+
+}
+
+.btn{
+
+    width:100%;
+
+    max-width:320px;
+
+}
+
+.stats-grid,
+.categories-grid,
+.na-grid-container,
+.hours-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.category-img-container{
+
+    height:230px;
+
+}
+
+.na-cover-wrapper{
+
+    height:290px;
+
+}
+
+}
+
+/*==============================
+SMALL MOBILE
+==============================*/
+
+@media (max-width:480px){
+
+html{
+
+    font-size:14px;
+
+}
+
+.hero-section{
+
+    padding:70px 0 55px;
+
+}
+
+.hero-title{
+
+    font-size:2.2rem;
+
+}
+
+.hero-subtitle{
+
+    font-size:.95rem;
+
+}
+
+.section-title,
+.na-heading{
+
+    font-size:2rem;
+
+}
+
+.section-subtitle,
+.na-subheading{
+
+    font-size:.95rem;
+
+}
+
+.btn{
+
+    width:100%;
+
+}
+
+.category-img-container{
+
+    height:200px;
+
+}
+
+.na-cover-wrapper{
+
+    height:250px;
+
+}
+
+.hours-card{
+
+    padding:25px 18px;
+
+}
+
+}
+
+/*==============================
+EXTRA SMALL
+==============================*/
+
+@media (max-width:360px){
+
+.hero-title{
+
+    font-size:1.9rem;
+
+}
+
+.hero-subtitle{
+
+    font-size:.9rem;
+
+}
+
+.btn{
+
+    padding:14px 18px;
+
+}
+
+.category-img-container{
+
+    height:180px;
+
+}
+
+.na-cover-wrapper{
+
+    height:220px;
+
+}
+
+}
+
+/*==============================
+LANDSCAPE
+==============================*/
+
+@media (max-height:500px) and (orientation:landscape){
+
+.hero-section{
+
+    min-height:auto;
+
+    padding:60px 0;
+
+}
+
+.hero-title{
+
+    font-size:2.5rem;
+
+}
+
+}
+
+/*==============================
+IMAGE FIX
+==============================*/
+
+img{
+
+    width:100%;
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+}
+
+/*==============================
+VIDEO FIX
+==============================*/
+
+video{
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+/*==============================
+IFRAME FIX
+==============================*/
+
+iframe{
+
+    max-width:100%;
+
+}
+
+/*==============================
+GLOBAL TRANSITION
 ==============================*/
 
 *{
 
     transition:
 
-    background-color .3s ease,
+    background .3s ease,
 
     color .3s ease,
 
@@ -3205,12 +2836,34 @@ FINAL UNIVERSAL FIX
 
     transform .3s ease,
 
-    box-shadow .3s ease,
-
-    opacity .3s ease;
+    box-shadow .3s ease;
 
 }
 
 /*==============================
-THE END
+OVERFLOW FIX
 ==============================*/
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+.library-homepage{
+
+    overflow:hidden;
+
+}
+
+.container,
+.na-container{
+
+    overflow:visible;
+
+}
+
+/*==============================
+END
+==============================*/
+

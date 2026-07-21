@@ -34,7 +34,7 @@ export default function LibrarianRequests() {
 
       setRequests(res.data.requests || []);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       setRequests([]);
     }
   };
@@ -426,12 +426,18 @@ export default function LibrarianRequests() {
                         <td className="text-center">
                           <div className="d-flex justify-content-center gap-2">
 
-    <button
-      className="btn btn-success btn-sm rounded-pill px-3"
-      onClick={() => approveRequest(req._id)}
-    >
-      &#9989; Approve
-    </button>
+                            <button
+                              className="btn btn-success btn-sm rounded-pill px-3"
+                              style={{
+                                fontWeight: "600",
+                              }}
+                              onClick={() =>
+                                approveRequest(req._id)
+                              }
+                            >
+                              <FaCheckCircle className="me-1" />
+                              Approve
+                            </button>
 
                             <button
                               className="btn btn-danger btn-sm rounded-pill px-3"
