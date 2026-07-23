@@ -1,10 +1,9 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, useLayoutEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, HashRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import './App.css';
 import Userlayout from "./layout/userlayout";
 import AdminLayout from "./layout/adminlayout";
-import ScrollToTop from "./components/ScrollToTop";
 
 // Lazy load all page components
 const Login = lazy(() => import("./pages/user/login"));
@@ -40,60 +39,75 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token && location.pathname === "/") {
-      try {
-        const decoded = jwtDecode(token);
-        if (decoded.role === "admin" || decoded.role === "librarian") {
-          navigate("/admin");
-        } else if (decoded.role === "user") {
-          navigate("/");
-        }
-      } catch (err) {
-        // console.error("Token decode failed", err);
-        localStorage.removeItem("authToken");
-      }
-    }
-  }, [location.pathname]);
+  useLayoutEffect(() => {
+  // Browser scroll restoration disable
+  if ("scrollRestoration" in window.history) {
+    window.history.scrollRestoration = "manual";
+  }
 
-  return (
-    <Suspense fallback={<Preloader />}>
-      <Routes>
-        <Route path="/">
-          <Route path='/admin-login' element={<AdminLogin/>}/>
-        </Route>
-        
-        <Route path="/" element={<Userlayout/>}>
-          <Route index element={<Home/>}/>
-          <Route path='/books' element={<Books/>}/>
-          <Route path='/bookdetails/:id' element={<BookDetails/>}/>
-          <Route path='/category' element={<AllCategories/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/aboutus" element={<AboutUs/>}/>
-          <Route path="/contactus" element={<ContactUs/>}/>
-          <Route path="/forgetPassword" element={<ForgotPassword/>}/>
-          <Route path="/verifyotp" element={<VerifyOTP/>}/>
-          <Route path="/resetpass" element={<ResetPassword/>}/>
-        </Route>
-        
-        <Route path='/admin' element={<AdminLayout/>}>
-          <Route index element={<AdminDashboard/>}/>
-          <Route path='addbook' element={<AddBookForm/>}/>
-          <Route path='viewbook' element={<ViewBooks/>}/>
-          <Route path='addlibrarian' element={<AddLibrarian/>}/>
-          <Route path='issuerequest' element={<LibrarianRequests/>}/>
-          <Route path='returnrequest' element={<ReturnRequest/>}/>
-          <Route path='issued' element={<BooksBorrowed/>}/>
-        </Route>
-        
-        <Route path='/user' element={<Userlayout/>}>
-          <Route index element={<ProfilePage/>}/>         
-        </Route>
-      </Routes>
-    </Suspense>
-  )
-}
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "instant",
+  });
+}, [location.pathname]);
+
+  useEffect(() => {
+  const token = localStorage.getItem("authToken");
+
+  if (!token) return;
+
+  try {
+    const decoded = jwtDecode(token);
+
+    if (
+      (decoded.role === "admin" || decoded.role === "librarian") &&
+      location.pathname === "/"
+    ) {
+      navigate("/admin", { replace: true });
+    }
+  } catch (err) {
+    localStorage.removeItem("authToken");
+  }
+}, [navigate, location.pathname]);
+
+    return (
+      <Suspense fallback={<Preloader />}>
+        <Routes>
+          <Route path="/">
+            <Route path='/admin-login' element={<AdminLogin/>}/>
+          </Route>
+          
+          <Route path="/" element={<Userlayout/>}>
+            <Route index element={<Home/>}/>
+            <Route path='/books' element={<Books/>}/>
+            <Route path='/bookdetails/:id' element={<BookDetails/>}/>
+            <Route path='/category' element={<AllCategories/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/aboutus" element={<AboutUs/>}/>
+            <Route path="/contactus" element={<ContactUs/>}/>
+            <Route path="/forgetPassword" element={<ForgotPassword/>}/>
+            <Route path="/verifyotp" element={<VerifyOTP/>}/>
+            <Route path="/resetpass" element={<ResetPassword/>}/>
+          </Route>
+          
+          <Route path='/admin' element={<AdminLayout/>}>
+            <Route index element={<AdminDashboard/>}/>
+            <Route path='addbook' element={<AddBookForm/>}/>
+            <Route path='viewbook' element={<ViewBooks/>}/>
+            <Route path='addlibrarian' element={<AddLibrarian/>}/>
+            <Route path='issuerequest' element={<LibrarianRequests/>}/>
+            <Route path='returnrequest' element={<ReturnRequest/>}/>
+            <Route path='issued' element={<BooksBorrowed/>}/>
+          </Route>
+          
+          <Route path='/user' element={<Userlayout/>}>
+            <Route index element={<ProfilePage/>}/>         
+          </Route>
+        </Routes>
+      </Suspense>
+    )
+  }
 
 export default App;

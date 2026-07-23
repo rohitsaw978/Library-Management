@@ -64,10 +64,10 @@ export default function ViewAllCategories() {
 
         {/* Sidebar */}
         <div className="col-md-3 p-4 sidebar">
-          <h4 className="text-center mb-4"><h2>
+          <div className="text-center mb-4"><h2>
             <FaBook style={{ marginRight: "8px", color: "#4F46E5" }} />
             Categories
-          </h2></h4>
+          </h2></div>
 
           <div className="category-scroll">
             <div

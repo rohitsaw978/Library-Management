@@ -76,7 +76,7 @@ const ContactUs = () => {
               <h3>Visit Us</h3>
 
               <p>
-                Guru Nanak College,
+                Advance Experience Library,
                 <br />
                 Dhanbad, Jharkhand - 826001
               </p>
@@ -91,9 +91,7 @@ const ContactUs = () => {
               <h3>Email Us</h3>
 
               <p>
-                library@college.edu
-                <br />
-                support@college.edu
+                support@axlib.edu
               </p>
             </div>
 

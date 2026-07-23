@@ -19,7 +19,7 @@ body,
     width:100%;
     min-height:100%;
     background:#04091d;
-    overflow-x:hidden;
+    overflow-x:visible;
 }
 
 body{

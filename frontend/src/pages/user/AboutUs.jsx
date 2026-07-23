@@ -9,7 +9,7 @@ const AboutUs = () => {
     
       <section className="about-hero-section">
         <div className="about-container">
-          <h1 className="about-hero-title">About Our College Library</h1>
+          <h1 className="about-hero-title">About Our Library</h1>
           <p className="about-hero-subtitle">Discover the heart of academic excellence at our institution</p>
         </div>
       </section>
@@ -21,7 +21,7 @@ const AboutUs = () => {
             <div className="about-mission-text">
               <h2 className="about-section-title">Our Mission</h2>
               <p className="about-mission-paragraph">
-                The College Library is dedicated to supporting the academic and research needs of our students and faculty. 
+                The Library is dedicated to supporting the academic and research needs of our students and faculty. 
                 We strive to provide equitable access to information resources, foster information literacy, and create 
                 an environment conducive to learning and intellectual growth.
               </p>
@@ -46,7 +46,7 @@ const AboutUs = () => {
               <div className="about-timeline-year">1965</div>
               <div className="about-timeline-content">
                 <h3 className="about-timeline-event">Foundation</h3>
-                <p className="about-timeline-description">The college library was established with a modest collection of 2,000 books to serve the newly founded institution.</p>
+                <p className="about-timeline-description">The library was established with a modest collection of 2,000 books to serve the newly founded institution.</p>
               </div>
             </div>
             <div className="about-timeline-item">

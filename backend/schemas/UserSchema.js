@@ -1,22 +1,42 @@
 const {Schema} = require("mongoose");
 
 const UserSchema = new Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { 
-      type: String, 
-      enum: ["admin", "librarian", "user"], 
-      default: "user" 
-    },
-    stream: { 
-      type: String, 
-      required: function() { return this.role === "user"; } 
+  name: {
+    type: String,
+    required: true,
   },
-  year: { 
-      type: Number, 
-      required: function() { return this.role === "user"; } 
-  }
-})
 
-module.exports = {UserSchema};
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+
+  password: {
+    type: String,
+    default: "",
+  },
+
+  role: {
+    type: String,
+    enum: ["admin", "librarian", "user"],
+    default: "user",
+  },
+
+  stream: {
+    type: String,
+    default: "",
+  },
+
+  year: {
+    type: Number,
+    default: null,
+  },
+
+  isGoogleUser: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+module.exports = { UserSchema };

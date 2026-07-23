@@ -48,24 +48,25 @@ const googleLogin = useGoogleLogin({
     try {
       const response = await axios.post(
         `${Server_URL}users/google`,
-        tokenResponse
+        {
+          access_token: tokenResponse.access_token,
+        }
       );
 
       localStorage.setItem("authToken", response.data.token);
       localStorage.setItem("role", response.data.user.role);
+      localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
+      );
 
       showSuccessToast("Google Login Successful!");
       navigate("/");
     } catch (error) {
       console.error(error);
-      showErrorToast("Google Login Failed");
     }
   },
-
-  onError: () => {
-    showErrorToast("Google Login Failed");
-  },
-});  
+});
 
 
   const onSubmit = async (data) => {

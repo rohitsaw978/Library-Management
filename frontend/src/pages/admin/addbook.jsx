@@ -146,26 +146,29 @@ const AddBookForm = () => {
               {/* Header */}
 
               <div
-                className="text-center py-4"
-                style={{
-                  background:
-                    "linear-gradient(90deg,#9333ea,#2563eb)",
-                }}
-              >
-                <h2 className="text-white fw-bold mb-2 d-flex justify-content-center align-items-center gap-2">
-                  <FaBookMedical size={34} color="#ffffff" />
-                  <span>Add New Book</span>
-                </h2>
+  className="text-center py-4"
+  style={{
+    background: "linear-gradient(90deg,#9333ea,#2563eb)",
+  }}
+>
+  <h2
+    className="text-white fw-bold d-flex justify-content-center align-items-center gap-2 mb-1"
+    style={{ lineHeight: 1.2 }}
+  >
+    <FaBookMedical size={34} />
+    <span>Add New Book</span>
+  </h2>
 
-                <p
-                  className="mb-0"
-                  style={{
-                    color: "rgba(255,255,255,.8)",
-                  }}
-                >
-                  <br />Add a new book into your library
-                </p>
-              </div>
+  <p
+    className="mb-0"
+    style={{
+      color: "rgba(255,255,255,.8)",
+      lineHeight: 1.3,
+    }}
+  >
+    Add a new book into your library
+  </p>
+</div>
 
               {/* Body */}
 
@@ -241,10 +244,17 @@ const AddBookForm = () => {
                         })}
                       >
                         <option value="">Select Category</option>
-                        <option value="Fiction">Fiction</option>
-                        <option value="Non-fiction">Non-fiction</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Management">Management</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Arts & Humanities">Arts & Humanities</option>
                         <option value="Science">Science</option>
-                        <option value="History">History</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Language & Literature">Language & Literature</option>
+                        <option value="General Knowledge">General Knowledge</option>
+                        <option value="Research & Journals">Research & Journals</option>
+                        <option value="Novels & Fiction">Novels & Fiction</option>
+                        <option value="Others">Others</option>
                       </select>
 
                       {errors.category && (
@@ -390,13 +400,13 @@ const AddBookForm = () => {
                         }}
                       >
                         <i className="bi bi-plus-circle-fill fs-5"></i>
-                        <button
+                        {/* <button
                           type="submit"
                           className="btn w-100 text-white fw-bold d-flex align-items-center justify-content-center gap-2"
-                        >
+                        > */}
                           <FaPlusCircle size={18} color="#ffffff" />
                           <span>Add Book</span>
-                        </button>
+                        {/* </button> */}
                       </button>
                     </div>
 

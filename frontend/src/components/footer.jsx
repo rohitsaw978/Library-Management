@@ -34,7 +34,7 @@ const Footer = () => {
             <h3 className="footer-heading">About Us</h3>
 
             <p className="footer-about-text">
-              The College Library serves as the academic hub of our
+              The Library serves as the academic hub of our
               institution, providing resources and services to support
               learning, teaching, and research for students and faculty.
             </p>
@@ -155,14 +155,14 @@ const Footer = () => {
               <li className="contact-item">
                 <FiMapPin className="contact-icon" />
                 <span>
-                  Guru Nanak College, Bank More,
+                  Advance Experence Library,
                   Dhanbad, Jharkhand - 826001
                 </span>
               </li>
 
               <li className="contact-item">
                 <FiMail className="contact-icon" />
-                <span>library@college.edu</span>
+                <span>library@axlib.edu</span>
               </li>
 
               <li className="contact-item">
@@ -191,7 +191,7 @@ const Footer = () => {
         <div className="footer-bottom">
 
           <div className="footer-copyright">
-            © {new Date().getFullYear()} College Library. All Rights Reserved.
+            © {new Date().getFullYear()} AXlib Library. All Rights Reserved.
           </div>
 
           <div className="footer-legal">

@@ -29,21 +29,24 @@ function ProfilePage() {
       setIssuedRequests(books.filter(b => b.status === "Requested"));
       setReturnRequests(books.filter(b => b.status === "Requested Return"));
     } catch (error) {
-      // console.error("Error fetching issued books:", error.message);
+      console.error("Error fetching issued books:", error.message);
     }
   };
   async function fetchProfile() {
-    try {
-      const response = await axios.get(`${Server_URL}users/profile`, {
-        headers: { Authorization: `Bearer ${getAuthToken()}` },
-      });
+  try {
 
-      const { user } = response.data;
-      setUser(user);
-    } catch (error) {
-      // console.error("Error fetching profile:", error);
-    }
+    const response = await axios.get(`${Server_URL}users/profile`, {
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+
+    const { user } = response.data;
+    setUser(user);
+  } catch (error) {
+    console.error("PROFILE ERROR:", error.response || error);
   }
+}
 
   useEffect(() => {
     fetchProfile();
@@ -60,7 +63,7 @@ function ProfilePage() {
       showSuccessToast(response.data.message);
       fetchIssuedBooks();
     } catch (error) {
-      // console.error("Error returning book:", error);
+      console.error("Error returning book:", error);
       showErrorToast(error.response?.data?.message || "Something went wrong!");
     }
   }

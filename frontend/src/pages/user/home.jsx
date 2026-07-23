@@ -55,7 +55,7 @@ export default function Home() {
         setNewArrivals(data.newArrivals || []);
       }
     } catch (error) {
-      // console.error("Home API Error:", error);
+      console.error("Home API Error:", error);
 
       setStats({
         totalCategories: 0,

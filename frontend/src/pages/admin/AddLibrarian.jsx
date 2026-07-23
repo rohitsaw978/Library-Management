@@ -148,7 +148,7 @@ export default function AddLibrarian() {
                       "rgba(255,255,255,.85)"
                   }}
                 >
-                  Register a new librarian
+                  <br />Register a new librarian
                 </p>
 
               </div>

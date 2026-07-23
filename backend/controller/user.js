@@ -54,6 +54,14 @@ userController.login = async (req,res)=>{
         if (!user) {
             return res.status(400).json({ message: "Invalid email or password" });
           }
+
+          if (user.isGoogleUser) {
+  return res.status(400).json({
+    success: false,
+    message: "This account was created with Google. Please sign in with Google.",
+  });
+}
+
           const isMatch = await bcrypt.compare(password, user.password);
           if (!isMatch) {
             return res.status(400).json({ message: "Invalid email or password" });
@@ -77,7 +85,8 @@ userController.googleLogin = async (req, res) => {
   try {
     const { access_token } = req.body;
 
-    const googleRes = await axios.get(
+    // Google se user ki information lo
+    const googleResponse = await axios.get(
       "https://www.googleapis.com/oauth2/v3/userinfo",
       {
         headers: {
@@ -86,44 +95,47 @@ userController.googleLogin = async (req, res) => {
       }
     );
 
-    const { email, name, picture } = googleRes.data;
+    const { name, email, picture } = googleResponse.data;
 
+    // User already exist?
     let user = await UserModel.findOne({ email });
 
     if (!user) {
-      user = new UserModel({
+      // Naya Google user create karo
+      user = await UserModel.create({
         name,
         email,
         password: "",
-        stream: "",
-        year: "",
         role: "user",
+        stream: "",
+        year: null,
+        isGoogleUser: true,
       });
-
-      await user.save();
     }
 
+    // JWT Token
     const payload = {
-      id: user._id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-    };
+  id: user._id,
+  email: user.email,
+  name: user.name,
+  role: user.role,
+};
 
-    const token = jwt.sign(payload, JWT_SECRET, {
-      expiresIn: "24h",
-    });
+const token = jwt.sign(payload, JWT_SECRET, {
+  expiresIn: "24h",
+});
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       token,
       user,
       picture,
     });
-  } catch (error) {
-    console.error("Google Login Error:", error.response?.data || error.message);
 
-    res.status(500).json({
+  } catch (err) {
+    console.error("Google Login Error:", err.response?.data || err.message);
+
+    return res.status(500).json({
       success: false,
       message: "Google Login Failed",
     });
@@ -143,9 +155,9 @@ userController.getUsers = async (req,res) => {
 userController.profile =async (req,res) => {
     try {
         const {id} = req.userInfo;
-    const user = await UserModel.findById(id).select("-password");;
+    const user = await UserModel.findById(id).select("-password");
     if(!user){
-        return res.status(404).json({error:true,message:"no such user"})
+        return res.status(404).json({error:true,message:"no such user"});
     }
     res.json({error:false,message:"user fetched successfully",user});
     } catch (error) {
@@ -166,7 +178,7 @@ userController.addContact = async(req,res) => {
   try {
     const newContact = new ContactModel({ name, email, subject, message });
     await newContact.save();
-    // console.log('📩 Contact saved to DB:', newContact);
+    // console.log(' Contact saved to DB:', newContact);
 
     res.status(200).json({ success: true, message: 'Your message has been sent! We will get back to you soon.' });
   } catch (error) {
